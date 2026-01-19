@@ -1,19 +1,17 @@
 export {};
 /* 3. Создать функцию, которая принимает 2 числа и возвращает их сумму. Полностью типизировать параметры, 
 значение, возвращаемое функцией. */
-function calc(a: number, b: number): number {
+function calcSumm(a: number, b: number): number {
   return a + b;
 }
 
-console.log(calc(42, 58));
+console.log(calcSumm(42, 58));
 
 /* 4. Создать переменную status, которая может быть только: "loading", "success", "error". */
-let status: "loading" | "success" | "error";
-status = "success";
+let status: "loading" | "success" | "error" = "success";
 
 /* 5. Создать переменную textFormat, которая может быть только: 'uppercase', 'lowercase', 'capitalize'". */
-let textFormat: 'uppercase' | 'lowercase' | 'capitalize';
-textFormat = 'capitalize';
+let textFormat: 'uppercase' | 'lowercase' | 'capitalize' = "capitalize";
 
 /* 6. Создать интерфейс, который описывает юзера. Поля на ваш выбор. Одно поле должно быть опциональным. */
 interface IUser {
@@ -23,21 +21,21 @@ interface IUser {
   age?: number;
 }
 
-let userM: IUser = {
+const userMax: IUser = {
   name: 'Max',
   surname: 'Sokolov',
   email: 'max@google.com',
   age: 25,
 }
 
-let userB: IUser = {
+const userBoris: IUser = {
   name: 'Boris',
   surname: 'Ivanov',
   email: 'boris@google.com',
 }
 
-console.log(userM);
-console.log(userB);
+console.log(userMax);
+console.log(userBoris);
 
 /* 7. Создать интерфейс, который расширяется интерфейсом User с задания №6 и имеет свои дополнительные поля */ 
 interface IProgrammer extends IUser {
@@ -46,7 +44,7 @@ interface IProgrammer extends IUser {
   skills: string[];
 }
 
-let mikle: IProgrammer = {
+const progMikki: IProgrammer = {
   name: 'Mikki',
   surname: 'Mouse',
   email: 'mouse@google.com',
@@ -55,7 +53,7 @@ let mikle: IProgrammer = {
   skills: ["TypeScript", "React", "Node.js"],
 }
 
-let donald: IProgrammer = {
+const progDonald: IProgrammer = {
   name: 'Donald',
   surname: 'Duck',
   email: 'donald@google.com',
@@ -64,22 +62,20 @@ let donald: IProgrammer = {
   skills: ["TypeScript", "Node.js"],
 }
 
-console.log(mikle);
-console.log(donald);
+console.log(progMikki);
+console.log(progDonald);
 
 /* 8. Создать функцию, которая принимает строку и вариант,  как именно форматировать строку (задание №5) и 
 на основе этого возвращает форматированную строку. */
 function formatString(inputString: string, textFormat: 'uppercase' | 'lowercase' | 'capitalize'): string {
   if (textFormat === 'uppercase') {
     return inputString.toUpperCase();
-  }
-
-  if (textFormat === 'lowercase') {
+  } else if (textFormat === 'lowercase') {
     return inputString.toLowerCase();
+  } else {
+    const lowerString = inputString.toLowerCase();
+    return lowerString[0].toUpperCase() + lowerString.slice(1);
   }
-  
-  let lowerString = inputString.toLowerCase();
-  return lowerString[0].toUpperCase() + lowerString.slice(1);
 }
 
 console.log(formatString('вЕчеР', 'uppercase'));
@@ -88,12 +84,11 @@ console.log(formatString('нОчь', 'capitalize'));
 
 /* 9. Создать функцию, которая принимает строку и символ, возвращает строку без переданного символа. 
 (есть специальные методы для этого, гуглим) */
-function deleteLetter(inputString: string, letter: string): string {
-  return inputString.replaceAll(letter, '');
+function removeSymbol(text: string, letter: string): string {
+  return text.replaceAll(letter, '');
 }
 
-console.log(deleteLetter('Вдали бушует злой камыш', 'ш'));
-
+console.log(removeSymbol('Вдали бушует злой камыш', 'ш'));
 
 /* 10. Создать массив объектов на основе интерфейса с задания №6. Отфильтровать его по одному из параметров */
 let arrayUsers: IUser[] = [
