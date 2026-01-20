@@ -1,11 +1,11 @@
 export {};
 /* 3. Создать функцию, которая принимает 2 числа и возвращает их сумму. Полностью типизировать параметры, 
 значение, возвращаемое функцией. */
-function calcSumm(a: number, b: number): number {
+function sum(a: number, b: number): number {
   return a + b;
 }
 
-console.log(calcSumm(42, 58));
+console.log(sum(42, 58));
 
 /* 4. Создать переменную status, которая может быть только: "loading", "success", "error". */
 let status: "loading" | "success" | "error" = "success";
@@ -67,20 +67,20 @@ console.log(progDonald);
 
 /* 8. Создать функцию, которая принимает строку и вариант,  как именно форматировать строку (задание №5) и 
 на основе этого возвращает форматированную строку. */
-function formatString(inputString: string, textFormat: 'uppercase' | 'lowercase' | 'capitalize'): string {
-  if (textFormat === 'uppercase') {
-    return inputString.toUpperCase();
-  } else if (textFormat === 'lowercase') {
-    return inputString.toLowerCase();
+function formatText(inputText: string, caseOfText: 'uppercase' | 'lowercase' | 'capitalize'): string {
+  if (caseOfText === 'uppercase') {
+    return inputText.toUpperCase();
+  } else if (caseOfText === 'lowercase') {
+    return inputText.toLowerCase();
   } else {
-    const lowerString = inputString.toLowerCase();
-    return lowerString[0].toUpperCase() + lowerString.slice(1);
+    const lowerText = inputText.toLowerCase();
+    return lowerText[0].toUpperCase() + lowerText.slice(1);
   }
 }
 
-console.log(formatString('вЕчеР', 'uppercase'));
-console.log(formatString('УТро', 'lowercase'));
-console.log(formatString('нОчь', 'capitalize'));
+console.log(formatText('вЕчеР', 'uppercase'));
+console.log(formatText('УТро', 'lowercase'));
+console.log(formatText('нОчь', 'capitalize'));
 
 /* 9. Создать функцию, которая принимает строку и символ, возвращает строку без переданного символа. 
 (есть специальные методы для этого, гуглим) */
@@ -91,7 +91,7 @@ function removeSymbol(text: string, letter: string): string {
 console.log(removeSymbol('Вдали бушует злой камыш', 'ш'));
 
 /* 10. Создать массив объектов на основе интерфейса с задания №6. Отфильтровать его по одному из параметров */
-let arrayUsers: IUser[] = [
+const users: IUser[] = [
   {
     name: 'Tom',
     surname: 'Dikson',
@@ -122,8 +122,8 @@ let arrayUsers: IUser[] = [
   }
 ]
 
-let usersWithAge = arrayUsers.filter(user => user.age);
+const usersWithAge = users.filter(user => user.age);
 console.log(usersWithAge);
 
-let usersWithRuDomen = arrayUsers.filter(user => user.email.includes('.ru'));
+const usersWithRuDomen = users.filter(user => user.email.includes('.ru'));
 console.log(usersWithRuDomen);
