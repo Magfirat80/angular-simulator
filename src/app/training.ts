@@ -67,13 +67,13 @@ console.log(progDonald);
 
 /* 8. Создать функцию, которая принимает строку и вариант,  как именно форматировать строку (задание №5) и 
 на основе этого возвращает форматированную строку. */
-function formatText(inputText: string, caseOfText: 'uppercase' | 'lowercase' | 'capitalize'): string {
-  if (caseOfText === 'uppercase') {
+function formatText(inputText: string, format: 'uppercase' | 'lowercase' | 'capitalize'): string {
+  if (format === 'uppercase') {
     return inputText.toUpperCase();
-  } else if (caseOfText === 'lowercase') {
+  } else if (format === 'lowercase') {
     return inputText.toLowerCase();
   } else {
-    const lowerText = inputText.toLowerCase();
+    const lowerText:string = inputText.toLowerCase();
     return lowerText[0].toUpperCase() + lowerText.slice(1);
   }
 }
@@ -84,8 +84,8 @@ console.log(formatText('нОчь', 'capitalize'));
 
 /* 9. Создать функцию, которая принимает строку и символ, возвращает строку без переданного символа. 
 (есть специальные методы для этого, гуглим) */
-function removeSymbol(text: string, letter: string): string {
-  return text.replaceAll(letter, '');
+function removeSymbol(text: string, symbol: string): string {
+  return text.replaceAll(symbol, '');
 }
 
 console.log(removeSymbol('Вдали бушует злой камыш', 'ш'));
@@ -122,8 +122,8 @@ const users: IUser[] = [
   }
 ]
 
-const usersWithAge = users.filter(user => user.age);
+const usersWithAge: IUser[] = users.filter((user: IUser) => user.age);
 console.log(usersWithAge);
 
-const usersWithRuDomen = users.filter(user => user.email.includes('.ru'));
+const usersWithRuDomen: IUser[] = users.filter((user: IUser) => user.email.includes('.ru'));
 console.log(usersWithRuDomen);
