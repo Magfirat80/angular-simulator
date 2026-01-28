@@ -1,1 +1,51 @@
-<h1 style="display: flex; justify-content: center; font-family: sans-serif;">NGX SIMULATOR</h1>
+<section class="banner">
+  <header class="header flex content-center">
+    <div class="header-content container flex">
+      <div class="logo">
+          <img src="/images/company-logo.svg" alt="Логотип горы">
+          <div class="company-name">{{ companyName }}</div>
+      </div>
+      <nav class="navigation-line flex align-items-center fs-18">
+        <a href="">Главная</a>
+        <a href="">Про гида</a>
+        <a href="">Программа тура</a>
+        <a href="">Стоимость</a>
+        <a href="">Блок</a>
+        <a href="">Контакты</a>
+        <button class="button-header flex content-center align-items-center">Консультация</button>
+      </nav>
+    </div>
+  </header>
+  <div class="main-title flex content-center">
+    <h1 class="main-title-content">
+      Насладись прогулкой в горах <br> с командой единомышленников
+    </h1>
+  </div>
+  <div class="tour-wrapper flex content-center">
+    <div class="tour-search container flex align-items-center">
+      <form class="form-tour flex">
+
+        <div class="field-form fs-16">
+          <select>
+            <option value="">Локация для тура</option>
+          </select>
+          <span class="label-field-form fs-14">выберите из списка</span>
+        </div>
+        <div class="field-form fs-16">
+          <input type="text" required placeholder="Дата похода">
+          <img src="/images/calendar_input.svg" alt="calendar">
+          <span class="label-field-form fs-14">укажите диапазон</span>
+        </div>
+        <div class="field-form fs-16" >
+          <select>
+            <option value="">Участники</option>
+          </select>
+          <span class="label-field-form fs-14">минимум 4 человека</span>
+        </div>
+        <div>
+          <button class="button-search-tour fs-16 bold" type="submit">Найти программу</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
