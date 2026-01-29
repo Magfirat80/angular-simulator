@@ -15,7 +15,7 @@ class Collection<T> {
   }
 
   clearElements(): void {
-    this.arr.length = 0;
+    this.arr = [];
   }
 
   deleteElement(index: number): void {
@@ -33,15 +33,6 @@ const numbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const carBrandsCollection = new Collection<string>(carBrands);
 const numbersCollection = new Collection<number>(numbers);
 
-console.log(carBrandsCollection.getAllElements());
-
-console.log(numbersCollection.getElement(9));
-
-numbersCollection.clearElements()
-console.log(numbersCollection.getAllElements());
-
-carBrandsCollection.deleteElement(3)
-console.log(carBrandsCollection.getAllElements());
-
-carBrandsCollection.replaceElement(0, 'VAZ')
-console.log(carBrandsCollection.getAllElements());
+numbersCollection.clearElements();
+carBrandsCollection.deleteElement(3);
+carBrandsCollection.replaceElement(0, 'VAZ');

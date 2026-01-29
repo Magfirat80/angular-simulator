@@ -10,31 +10,27 @@ import './collection'
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  
   companyName: string = 'румтибет';
 
   public isMainColor(color: Color): boolean {
-    if (color === Color.RED || color === Color.GREEN || color === Color.BLUE) {
-      return true;
-    } else {
-      return false;
-    }
+    const mainColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
+    return mainColors.includes(color);
   }
 
-  public saveLastVisit(): void {
-    localStorage.setItem('dateLastVisit', new Date().toString());
+  public saveLastVisitDate(): void {
+    localStorage.setItem('last-visit-date', new Date().toString());
   }
 
-  public saveCountEntries(): void {
-    const savedEntriesCount: string | null = localStorage.getItem('entryCount');
-    let count: number;
-    savedEntriesCount ? count = Number(savedEntriesCount) : count = 0;
-    count++;
-    localStorage.setItem('entryCount', String(count));
+  public saveEntriesCount(): void {
+    let entriesCount: number = Number(localStorage.getItem('entries-count')) || 0;
+    entriesCount++;
+    localStorage.setItem('entries-count', String(entriesCount));
   }
 
   constructor() {
   console.log(this.isMainColor(Color.YELLOW));
-  this.saveLastVisit();
-  this.saveCountEntries();
+  this.saveLastVisitDate();
+  this.saveEntriesCount();
   }
 }
