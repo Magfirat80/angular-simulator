@@ -1,0 +1,137 @@
+.banner {
+  background-image: url('/images/bg-mountains.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 985px;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background-position: center;
+}
+
+.header {
+  height: 72px;
+  width: 100%;
+  color: var(--primary-color);
+  gap: 212px;
+
+  &-content {
+    position: relative;
+  }
+
+  .logo {
+    width: 132px;
+  }
+
+  .company-name {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 6px;
+  }
+
+  .navigation-line {
+    justify-content: space-between;
+    gap: 24px;
+    font-weight: 600;
+    a {
+      text-decoration: none;
+      color: var(--primary-color);
+    }
+      
+    .button-header {
+      margin-left: 25px;
+      width: 157px;
+      height: 44px;
+      background-color: #1A3E3E;
+      border-radius: 4px;
+      color: var(--primary-color);
+    }
+  }
+}
+
+.main-title {
+  width: 100%;
+  position: absolute;
+  bottom: 284px;
+  height: 150px;
+
+  &-content {
+    width: 1180px;
+    color: var(--primary-color);
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 150%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+}
+
+.tour-wrapper {
+  height: 161px;
+  color: var(--primary-color);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 82px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+
+  .tour-search {
+    background: #FFFFFF33;
+    justify-content: space-around;
+    gap: 24px;
+  }
+}
+
+.form-tour {
+  justify-content: space-between;
+  margin-left: 42px;
+  margin-right: 42px;
+  gap: 24px;
+
+  .field-form {
+    width: 270px;
+    height: 52px;
+    border-radius: 8px;
+    background-color: transparent;
+    border: 1px solid #E1E3E4;
+    overflow: hidden;
+    
+    select {
+      width: 270px;
+      height: 52px;
+      background-color: transparent;
+      color: var(--primary-color);
+      padding: 0 16px;
+    }
+    
+    input {
+      width: 210px;
+      height: 52px;
+      background-color: transparent;
+      border: none;
+      padding: 0 16px;
+    }
+
+    input::placeholder {
+      color: var(--primary-color);
+    }
+  }
+
+  .label-field-form {
+    margin-left: 10px;
+  }
+
+  .button-search-tour {
+    width: 213px;
+    height: 52px;
+    border-radius: 8px;
+    border: 1px solid #FDFDFD;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 1.2%;
+  }
+}
