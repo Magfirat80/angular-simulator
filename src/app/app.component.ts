@@ -29,7 +29,7 @@ export class AppComponent {
   }
 
   constructor() {
-  console.log(this.isMainColor(Color.YELLOW));
+  this.isMainColor(Color.YELLOW);
   this.saveLastVisitDate();
   this.saveEntriesCount();
   }
