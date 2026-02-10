@@ -5,8 +5,6 @@ function sum(a: number, b: number): number {
   return a + b;
 }
 
-console.log(sum(42, 58));
-
 /* 4. Создать переменную status, которая может быть только: "loading", "success", "error". */
 let status: "loading" | "success" | "error" = "success";
 
@@ -34,9 +32,6 @@ const userBoris: IUser = {
   email: 'boris@google.com',
 }
 
-console.log(userMax);
-console.log(userBoris);
-
 /* 7. Создать интерфейс, который расширяется интерфейсом User с задания №6 и имеет свои дополнительные поля */ 
 interface IProgrammer extends IUser {
   position: string;
@@ -62,9 +57,6 @@ const progDonald: IProgrammer = {
   skills: ["TypeScript", "Node.js"],
 }
 
-console.log(progMikki);
-console.log(progDonald);
-
 /* 8. Создать функцию, которая принимает строку и вариант,  как именно форматировать строку (задание №5) и 
 на основе этого возвращает форматированную строку. */
 function formatText(inputText: string, format: 'uppercase' | 'lowercase' | 'capitalize'): string {
@@ -78,17 +70,11 @@ function formatText(inputText: string, format: 'uppercase' | 'lowercase' | 'capi
   }
 }
 
-console.log(formatText('вЕчеР', 'uppercase'));
-console.log(formatText('УТро', 'lowercase'));
-console.log(formatText('нОчь', 'capitalize'));
-
 /* 9. Создать функцию, которая принимает строку и символ, возвращает строку без переданного символа. 
 (есть специальные методы для этого, гуглим) */
 function removeSymbol(text: string, symbol: string): string {
   return text.replaceAll(symbol, '');
 }
-
-console.log(removeSymbol('Вдали бушует злой камыш', 'ш'));
 
 /* 10. Создать массив объектов на основе интерфейса с задания №6. Отфильтровать его по одному из параметров */
 const users: IUser[] = [
@@ -123,7 +109,5 @@ const users: IUser[] = [
 ]
 
 const usersWithAge: IUser[] = users.filter((user: IUser) => user.age);
-console.log(usersWithAge);
 
 const usersWithRuDomen: IUser[] = users.filter((user: IUser) => user.email.includes('.ru'));
-console.log(usersWithRuDomen);

@@ -1,3 +1,10 @@
+@mixin text-parameters($size, $weight: 400, $lh: 150%, $color: var(--inverse-color)) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lh;
+  color: $color;
+}
+
 .banner {
   background-image: url('/images/bg-mountains.png');
   background-repeat: no-repeat;
@@ -35,19 +42,27 @@
     justify-content: space-between;
     gap: 24px;
     font-weight: 600;
+    cursor: pointer;
+
     a {
       text-decoration: none;
       color: var(--primary-color);
     }
-      
-    .button-header {
-      margin-left: 25px;
-      width: 157px;
-      height: 44px;
-      background-color: #1A3E3E;
-      border-radius: 4px;
-      color: var(--primary-color);
-    }
+  }
+}
+
+.display-date-and-time {
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.click-counter {
+  margin-top: 10px;
+  
+  p {
+    font-size: 25px;
+    margin-right: 5px;
   }
 }
 
@@ -59,10 +74,9 @@
 
   &-content {
     width: 1180px;
-    color: var(--primary-color);
-    font-weight: 400;
-    font-size: 50px;
-    line-height: 150%;
+
+    @include text-parameters(50px, 400, 150%, var(--primary-color));
+    
     letter-spacing: 0.02em;
     text-transform: uppercase;
   }
@@ -86,28 +100,64 @@
   }
 }
 
+.live-input {
+  margin: 745px auto auto auto;
+  height: 52px;
+
+  div {
+    justify-content: left;
+    background-color: #abdaf1;
+    color: var(--inverse-color);
+    padding: 2px;
+    align-items: center;
+    border-radius: 8px;
+  
+    input {
+      display: flex;
+      width: 270px;
+      height: 52px;
+      padding: 2px;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+
+    .live-output {
+      width: 200px;
+      word-break: break-all;
+      background-color: #abdaf1;
+      height: 52px;
+      overflow-y: auto;
+    }
+  }
+}
+
 .form-tour {
   justify-content: space-between;
   margin-left: 42px;
   margin-right: 42px;
   gap: 24px;
 
-  .field-form {
+  .selection-field {
     width: 270px;
     height: 52px;
     border-radius: 8px;
     background-color: transparent;
     border: 1px solid #E1E3E4;
-    overflow: hidden;
-    
+    position: relative;
+  
     select {
       width: 270px;
       height: 52px;
       background-color: transparent;
       color: var(--primary-color);
       padding: 0 16px;
+
+      option {
+        background-color: transparent;
+        color: var(--inverse-color);
+      }
     }
-    
+
     input {
       width: 210px;
       height: 52px;
@@ -119,19 +169,201 @@
     input::placeholder {
       color: var(--primary-color);
     }
+
+    .label-selection-field {
+      margin-left: 10px;
+    }
+  }
+}
+
+.section-about-trip {
+  flex-direction: row;
+}
+
+.about-trip {
+  flex-direction: row;
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+  .left-side-block {
+    position: relative;
+    width: 480px;
+    height: 526px;
+    
+    &-img {
+    width: 350px;
+    height: 400px;
+    position: relative;
+    
+      .mountain {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 1;
+      }
+
+      .home {
+        position: absolute;
+        left: 130px;
+        top: 126px;
+        z-index: 2;
+      }
+    }
   }
 
-  .label-field-form {
-    margin-left: 10px;
+  .right-side-block {
+    flex-direction: column;
+    width: 580px;
+    height: 398px;
+    margin: 64px 0px 64px auto;
+
+    .block-description {
+      @include text-parameters(18px, 400, 150%, var(--inverse-color));
+      
+      margin-top: 40px;
+      height: 162px;
+    }
+  }
+}
+
+.block-header {
+  @include text-parameters(24px, 400, 20px, #F2BE22);
+}
+
+.block-subheader {
+  @include text-parameters(32px, 800, 120%, var(--inverse-color));
+
+  margin-top: 8px;
+}
+
+.section-best-programs {
+  width: 100%;
+  height: 771px;
+  background-color: #F3F5F4;
+  flex-direction: row;
+  gap: 90px;
+  
+  .left-side-block {
+    flex-direction: column;
+    width: 580px;
+    height: 591px;
+
+    .block-description {
+      @include text-parameters(18px, 400, 150%, var(--inverse-color));
+      
+      margin-top: 40px;
+      height: 81px;
+    }
+
+    .active-service {
+      background-color: #dc8aeb67;
+      border: dashed 1px brown;
+    }
+    
+    .about {
+      height: 64px;
+      margin-top: 40px;
+      flex-direction: row;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .service-icon {
+      width: 66px;
+    }
+    
+    .text {
+      width: 514px;
+      transition: background-color 0.6s ease, border 0.6s ease;
+    }
+
+    .thumbs-up-icon {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      top: 5px;
+      right: -50px;
+      z-index: 10;
+      pointer-events: none;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .text-header {
+      @include text-parameters(18px, 700, 20px);
+
+      letter-spacing: 1.2%;
+    }
+
+    .text-description {
+      @include text-parameters(14px, 400, 20px);
+
+      letter-spacing: 0%;
+    }
   }
 
-  .button-search-tour {
-    width: 213px;
-    height: 52px;
-    border-radius: 8px;
-    border: 1px solid #FDFDFD;
-    font-weight: 700;
-    line-height: 20px;
-    letter-spacing: 1.2%;
+  .right-side-block {
+    width: 510px;
+    height: 510px;
+
+    &-img {
+      width: 250px;
+      height: 250px;
+      flex-direction: column;
+      flex-wrap: wrap;
+      height: 520px;
+      gap: 10px;
+    }
+  }
+}
+
+.download-block-wrapper {
+  
+  .download-block {
+    margin-inline: auto;
+    margin-block-start: 50vh;
+    transform: translateY(-50%);
+    width: 685px;
+    height: 152px;
+    background-color: #D9D9D9;
+    flex-direction: row;
+    position: relative;
+    border-radius: 15px;
+
+    .download-icon {
+      width: 51px;
+      height: 51px;
+      position: absolute;
+      left: 47px;
+      pointer-events: none;
+      animation: rotation 2s linear infinite;
+    }
+    
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+
+    .download-demo {
+      position: absolute;
+      left: 168px;
+      height: 100%;
+      width: 517px;
+    }
   }
 }
