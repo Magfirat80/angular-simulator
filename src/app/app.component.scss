@@ -300,13 +300,13 @@
       }
     }
 
-    .text-header {
+    .title {
       @include text-parameters(18px, 700, 20px);
 
       letter-spacing: 1.2%;
     }
 
-    .text-description {
+    .description {
       @include text-parameters(14px, 400, 20px);
 
       letter-spacing: 0%;

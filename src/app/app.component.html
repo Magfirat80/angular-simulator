@@ -74,13 +74,13 @@
             <select name="group-size" id="group-size" [(ngModel)] = "selectedGroup">
               <option value="" disabled selected>Участники</option>
               @for (group of groups; track group.id) {
-                <option [value]="group.participantsNumber" >{{ group.participantsNumber }}</option>
+                <option [value]="group.participantsCount" >{{ group.participantsCount }}</option>
               }
             </select>
             <span class="label-selection-field fs-14">выберите из списка</span>
           </div>
           <div>
-            <button [disabled]="selectedTour === '' || selectedDate === '' || selectedGroup === ''"
+            <button [disabled]="!selectedTour || !selectedDate || !selectedGroup"
               class="search-tour-button fs-16 bold"
               name="search-tour-button"
               id="search-tour-button"
@@ -129,11 +129,11 @@
         @for (service of services; track service.id) {
           <div [id]="'service-' + service.id" class="about flex" (click)="selectService(service.id)">
             <div class="service-icon">
-              <img [src]="service.icon" [alt]="service.alt">
+              <img [src]="'/images/'+service.icon+'.svg'" [alt]="service.icon">
             </div>
             <div class="text" [class.active-service]="service.id === selectedServiceId">
-              <p class="text-header">{{ service.textHeader }}</p>
-              <p class="text-description">{{ service.textDescription }}</p>
+              <p class="title">{{ service.title }}</p>
+              <p class="description">{{ service.description }}</p>
               @if (service.id === selectedServiceId) {
                 <img class="thumbs-up-icon" src="/images/thumbs-up-icon.svg" alt="thumbs-up">
               }
@@ -153,7 +153,3 @@
     </div>
   </section>
 }
-
-
-
-

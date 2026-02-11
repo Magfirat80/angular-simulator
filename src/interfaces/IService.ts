@@ -1,7 +1,6 @@
 export interface IService {
   id: number;
-  textHeader: string;
-  textDescription: string;
-  icon: string;
-  alt: string
+  title: string;
+  description: string;
+  icon: string
 }
