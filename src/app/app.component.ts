@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import './training'
 import { Color } from '../enums/Color';
 import './collection'
-import { IService } from '../interfaces/IService';
+import { IAdvantage } from '../interfaces/IAdvantage';
 import { FormsModule } from '@angular/forms';
 import { IParticipantsCount } from '/0_ang/pr/angular-simulator/src/interfaces/IParticipantsCount';
 import { ITourLocation } from '../interfaces/ITourLocation';
@@ -20,10 +20,10 @@ export class AppComponent {
   selectedTour: string = '';
   selectedGroup: string = '';
   selectedDate: string = '';
-  selectedServiceId: number = 2;
+  selectedAdvantageId: number = 2;
   currentDateAndTime: string = new Date().toLocaleString();
-  clickCounter: number = 0;
-  switchFlag: boolean = true;
+  counter: number = 0;
+  currentWidget:  'counter' | 'date' = 'counter';
   liveInput: string = '';
   isLoading: boolean = true;
 
@@ -81,7 +81,7 @@ export class AppComponent {
     },
   ];
 
-  services: IService[] = [
+  advantages: IAdvantage[] = [
     {
       id: 1,
       icon: 'gid-icon',
@@ -108,7 +108,7 @@ export class AppComponent {
     this.saveEntriesCount();
     
     setInterval(() => {
-      this.currentDateAndTime = new Date().toLocaleString();;
+      this.currentDateAndTime = new Date().toLocaleString();
     }, 1000);
     
     setTimeout(() => {
@@ -131,19 +131,19 @@ export class AppComponent {
     localStorage.setItem('entries-count', String(entriesCount));
   }
 
-  selectService(serviceId: number): void {
-    this.selectedServiceId = serviceId;
+  selectAdvantage(advantageId: number): void {
+    this.selectedAdvantageId = advantageId;
   }
 
   increaseCount(): void {
-    this.clickCounter++;
+    this.counter++;
   }
   
   reduceCount(): void {
-    this.clickCounter--;
+    this.counter--;
   }
 
-  switchTask(): void {
-    this.switchFlag = !this.switchFlag;
+  switchWidget(widget: 'counter' | 'date'): void {
+    this.currentWidget = widget;
   }
 }

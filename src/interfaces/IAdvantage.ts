@@ -1,6 +1,6 @@
-export interface IService {
+export interface IAdvantage {
   id: number;
   title: string;
   description: string;
-  icon: string
+  icon: string;
 }

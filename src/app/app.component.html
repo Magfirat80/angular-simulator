@@ -16,35 +16,38 @@
           <div class="company-name">{{ companyName }}</div>
         </div>
         <nav class="navigation-line flex ai-center fs-18">
-          <a>Главная</a>
-          <a>Про гида</a>
-          <a>Программа тура</a>
-          <a>Стоимость</a>
-          <a>Блок</a>
-          <a>Контакты</a>
-          <button class="header-button flex jc-center ai-center" id="header-button">Консультация</button>
+          <a id="main-page">Главная</a>
+          <a id="about-gid">Про гида</a>
+          <a id="tour-program">Программа тура</a>
+          <a id="tour-cost">Стоимость</a>
+          <a id="block">Блок</a>
+          <a id="contacts">Контакты</a>
+          <button class="header-button flex jc-center ai-center" id="consultation-button">Консультация</button>
         </nav>
       </div>
     </header>
     <div class="switcher flex jc-center fs-18">
       <div class="container flex jc-right">
-        <button name="switch-button" id="switch-button" (click)="switchTask()">
-          {{ switchFlag ? 'Покажи счетчик' : 'Покажи таймер' }}
+        <button [disabled]="currentWidget === 'counter'" name="show-counter-button" id="show-counter-button" (click)="switchWidget('counter')">
+          Покажи счетчик
+        </button>
+        <button [disabled]="currentWidget === 'date'" name="show-timer-button" id="show-timer-button" (click)="switchWidget('date')">
+          Покажи таймер
         </button>
       </div>
     </div>
-    @if (switchFlag) {
-      <div class="display-date-and-time flex jc-center fs-18">
-        <div class="container flex jc-right">
-          Текущие дата и время: {{ currentDateAndTime }}
+    @if (this.currentWidget === 'counter') {
+      <div class="flex jc-center fs-18">
+        <div class="click-counter container flex jc-right">
+          <p>{{ counter }}</p>
+          <button name="plus-button" id="plus-button" (click)="increaseCount()">+</button>
+          <button [disabled]="counter < 1" name="minus-button" id="minus-button" (click)="reduceCount()">-</button>
         </div>
       </div>
     } @else {
-      <div class="flex jc-center fs-18">
-        <div class="click-counter container flex jc-right">
-          <p>{{ clickCounter }}</p>
-          <button name="plus-button" id="plus-button" (click)="increaseCount()">+</button>
-          <button [disabled]="clickCounter < 1" name="minus-button" id="minus-button" (click)="reduceCount()">-</button>
+      <div class="display-date-and-time flex jc-center fs-18">
+        <div class="container flex jc-right">
+          {{ currentDateAndTime }}
         </div>
       </div>
     }
@@ -80,11 +83,13 @@
             <span class="label-selection-field fs-14">выберите из списка</span>
           </div>
           <div>
-            <button [disabled]="!selectedTour || !selectedDate || !selectedGroup"
+            <button
+              [disabled]="!selectedTour || !selectedDate || !selectedGroup"
               class="search-tour-button fs-16 bold"
               name="search-tour-button"
               id="search-tour-button"
-              type="submit">
+              type="submit"
+            >
               Найти программу
             </button>
           </div>
@@ -126,15 +131,15 @@
         <p class="block-header">наше предложение</p>
         <p class="block-subheader">Лучшие программы для тебя</p>
         <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
-        @for (service of services; track service.id) {
-          <div [id]="'service-' + service.id" class="about flex" (click)="selectService(service.id)">
-            <div class="service-icon">
-              <img [src]="'/images/'+service.icon+'.svg'" [alt]="service.icon">
+        @for (advantage of advantages; track advantage.id) {
+          <div class="about flex" (click)="selectAdvantage(advantage.id)">
+            <div class="advantage-icon">
+              <img [src]="'/images/' + advantage.icon + '.svg'" [alt]="advantage.icon">
             </div>
-            <div class="text" [class.active-service]="service.id === selectedServiceId">
-              <p class="title">{{ service.title }}</p>
-              <p class="description">{{ service.description }}</p>
-              @if (service.id === selectedServiceId) {
+            <div class="text" [class.active-advantage]="advantage.id === selectedAdvantageId">
+              <p class="title">{{ advantage.title }}</p>
+              <p class="description">{{ advantage.description }}</p>
+              @if (advantage.id === selectedAdvantageId) {
                 <img class="thumbs-up-icon" src="/images/thumbs-up-icon.svg" alt="thumbs-up">
               }
             </div>
