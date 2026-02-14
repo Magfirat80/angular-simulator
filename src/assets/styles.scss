@@ -1,10 +1,12 @@
 @use './fonts';
 @use './normalize';
+@use './buttons';
 
 * {
   font-family: 'Nunito Sans';
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .container {
@@ -17,6 +19,7 @@
   --primary-color: #FDFDFD;
   --inverse-color: #18121E;
   --secondary-color: #F2BE22;
+  --third-color: #1A3E3E;
 }
 
 .fs-14 {
@@ -41,10 +44,14 @@
   display: flex;
 }
 
-.content-center {
+.jc-center {
   justify-content: center;
 }
 
-.align-items-center {
+.jc-right {
+  justify-content: right;
+}
+
+.ai-center {
   align-items: center;
 }

@@ -1,36 +1,149 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import './training'
 import { Color } from '../enums/Color';
 import './collection'
+import { IAdvantage } from '../interfaces/IAdvantage';
+import { FormsModule } from '@angular/forms';
+import { IParticipantsCount } from '/0_ang/pr/angular-simulator/src/interfaces/IParticipantsCount';
+import { ITourLocation } from '../interfaces/ITourLocation';
+import { Data } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   
   companyName: string = 'румтибет';
+  selectedTour: string = '';
+  selectedGroup: string = '';
+  selectedDate: string = '';
+  selectedAdvantageId: number = 2;
+  currentDateAndTime: string = new Date().toLocaleString();
+  counter: number = 0;
+  currentWidget:  'counter' | 'date' = 'counter';
+  liveInput: string = '';
+  isLoading: boolean = true;
 
-  public isMainColor(color: Color): boolean {
+  locations: ITourLocation[] = [
+    {
+      id: 1,
+      tourLocation: 'Восхождение на Эльбрус'
+    },
+    {
+      id: 2,
+      tourLocation: 'Кольцо Эльбруса'
+    },
+    {
+      id: 3,
+      tourLocation: 'Поход к Белухе'
+    },
+    {
+      id: 4,
+      tourLocation: 'Шавлинские озёра'
+    },
+    {
+      id: 5,
+      tourLocation: 'Уральский Барс'
+    },
+    {
+      id: 6,
+      tourLocation: 'Треккинг в Хибинах'
+    },
+    {
+      id: 7,
+      tourLocation: 'Долина вулканов'
+    },
+  ];
+
+  groups: IParticipantsCount[] = [
+    {
+      id: 1,
+      participantsCount: '1-4 человека'
+    },
+    {
+      id: 2,
+      participantsCount: '5-8 человек'
+    },
+    {
+      id: 3,
+      participantsCount: '9-12 человек'
+    },
+    {
+      id: 4,
+      participantsCount: '13-18 человек'
+    },
+    {
+      id: 5,
+      participantsCount: '19 человек и более'
+    },
+  ];
+
+  advantages: IAdvantage[] = [
+    {
+      id: 1,
+      icon: 'gid-icon',
+      title: 'Опытный гид',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.'
+    },
+    {
+      id: 2,
+      icon: 'hike-icon',
+      title: 'Безопасный поход',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.'
+    },
+    {
+      id: 3,
+      icon: 'prices-icon',
+      title: 'Лояльные цены',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.'
+    },
+  ];
+
+  constructor() {
+    this.isMainColor(Color.YELLOW);
+    this.saveLastVisitDate();
+    this.saveEntriesCount();
+    
+    setInterval(() => {
+      this.currentDateAndTime = new Date().toLocaleString();
+    }, 1000);
+    
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 3000);
+  }
+
+  private isMainColor(color: Color): boolean {
     const mainColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
     return mainColors.includes(color);
   }
 
-  public saveLastVisitDate(): void {
+  private saveLastVisitDate(): void {
     localStorage.setItem('last-visit-date', new Date().toString());
   }
 
-  public saveEntriesCount(): void {
+  private saveEntriesCount(): void {
     let entriesCount: number = Number(localStorage.getItem('entries-count')) || 0;
     entriesCount++;
     localStorage.setItem('entries-count', String(entriesCount));
   }
 
-  constructor() {
-  this.isMainColor(Color.YELLOW);
-  this.saveLastVisitDate();
-  this.saveEntriesCount();
+  selectAdvantage(advantageId: number): void {
+    this.selectedAdvantageId = advantageId;
+  }
+
+  increaseCount(): void {
+    this.counter++;
+  }
+  
+  reduceCount(): void {
+    this.counter--;
+  }
+
+  switchWidget(widget: 'counter' | 'date'): void {
+    this.currentWidget = widget;
   }
 }

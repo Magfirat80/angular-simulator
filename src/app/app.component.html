@@ -1,51 +1,160 @@
-<section class="banner">
-  <header class="header flex content-center">
-    <div class="header-content container flex">
-      <div class="logo">
+@if (isLoading) {
+  <div class="download-block-wrapper flex">
+    <div class="download-block flex ai-center jc-center">
+      <img src="/images/download-icon.png" alt="download-icon" class="download-icon">
+      <div class="download-demo flex ai-center">
+        Загрузка страницы...
+      </div>
+    </div>
+  </div>
+} @else {
+  <section class="banner">
+    <header class="header flex jc-center">
+      <div class="header-content container flex">
+        <div class="logo">
           <img src="/images/company-logo.svg" alt="Логотип горы">
           <div class="company-name">{{ companyName }}</div>
+        </div>
+        <nav class="navigation-line flex ai-center fs-18">
+          <a id="main-page">Главная</a>
+          <a id="about-gid">Про гида</a>
+          <a id="tour-program">Программа тура</a>
+          <a id="tour-cost">Стоимость</a>
+          <a id="block">Блок</a>
+          <a id="contacts">Контакты</a>
+          <button class="header-button flex jc-center ai-center" id="consultation-button">Консультация</button>
+        </nav>
       </div>
-      <nav class="navigation-line flex align-items-center fs-18">
-        <a>Главная</a>
-        <a>Про гида</a>
-        <a>Программа тура</a>
-        <a>Стоимость</a>
-        <a>Блок</a>
-        <a>Контакты</a>
-        <button class="button-header flex content-center align-items-center">Консультация</button>
-      </nav>
+    </header>
+    <div class="switcher flex jc-center fs-18">
+      <div class="container flex jc-right">
+        <button [disabled]="currentWidget === 'counter'" name="show-counter-button" id="show-counter-button" (click)="switchWidget('counter')">
+          Покажи счетчик
+        </button>
+        <button [disabled]="currentWidget === 'date'" name="show-timer-button" id="show-timer-button" (click)="switchWidget('date')">
+          Покажи таймер
+        </button>
+      </div>
     </div>
-  </header>
-  <div class="main-title flex content-center">
-    <h1 class="main-title-content">
-      Насладись прогулкой в горах <br> с командой единомышленников
-    </h1>
-  </div>
-  <div class="tour-wrapper flex content-center">
-    <div class="tour-search container flex align-items-center">
-      <form class="form-tour flex">
+    @if (this.currentWidget === 'counter') {
+      <div class="flex jc-center fs-18">
+        <div class="click-counter container flex jc-right">
+          <p>{{ counter }}</p>
+          <button name="plus-button" id="plus-button" (click)="increaseCount()">+</button>
+          <button [disabled]="counter < 1" name="minus-button" id="minus-button" (click)="reduceCount()">-</button>
+        </div>
+      </div>
+    } @else {
+      <div class="display-date-and-time flex jc-center fs-18">
+        <div class="container flex jc-right">
+          {{ currentDateAndTime }}
+        </div>
+      </div>
+    }
+    <div class="main-title flex jc-center">
+      <h1 class="main-title-content">
+        Насладись прогулкой в горах <br> с командой единомышленников
+      </h1>
+    </div>
+    <div class="tour-wrapper flex jc-center">
+      <div class="tour-search container flex ai-center">
+        <form class="form-tour flex">
+          <div class="selection-field fs-16">
+            <select name="tour-location" id="tour-location" [(ngModel)]="selectedTour">
+              <option value="" disabled selected>Локация для тура</option>
+              @for (location of locations; track location.id) {
+                <option [ngValue]="location.tourLocation">{{ location.tourLocation }}</option>
+              }
+            </select>
+            <span class="label-selection-field fs-14">выберите из списка</span>
+          </div>
+          <div class="selection-field fs-16">
+            <input type="text" name="tour-date" id="tour-date" [(ngModel)] = "selectedDate" required placeholder="Дата похода">
+            <img src="/images/calendar-logo.svg" alt="calendar">
+            <span class="label-selection-field fs-14">укажите дату</span>
+          </div>
+          <div class="selection-field fs-16" >
+            <select name="group-size" id="group-size" [(ngModel)] = "selectedGroup">
+              <option value="" disabled selected>Участники</option>
+              @for (group of groups; track group.id) {
+                <option [value]="group.participantsCount" >{{ group.participantsCount }}</option>
+              }
+            </select>
+            <span class="label-selection-field fs-14">выберите из списка</span>
+          </div>
+          <div>
+            <button
+              [disabled]="!selectedTour || !selectedDate || !selectedGroup"
+              class="search-tour-button fs-16 bold"
+              name="search-tour-button"
+              id="search-tour-button"
+              type="submit"
+            >
+              Найти программу
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="live-input container flex fs-20">
+      <div class="flex">
+        <input [(ngModel)]="liveInput" type="text" name="live-input" id="live-input" placeholder="Введите что-нибудь ...">
+        <div class="live-output flex">
+          {{ liveInput }}
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="field-form fs-16">
-          <select>
-            <option value="">Локация для тура</option>
-          </select>
-          <span class="label-field-form fs-14">выберите из списка</span>
+  <section>
+    <div class="section-about-trip flex jc-center">
+      <div class="container about-trip">
+        <div class="left-side-block">
+          <div class="left-side-block-img">
+            <img class="mountain" src="/images/mountain.png" alt="mountain">
+            <img class="home" src="/images/home.png" alt="home">
+          </div>
         </div>
-        <div class="field-form fs-16">
-          <input type="text" required placeholder="Дата похода">
-          <img src="/images/calendar-logo.svg" alt="calendar">
-          <span class="label-field-form fs-14">укажите диапазон</span>
+        <div class="right-side-block flex">
+          <p class="block-header">о нашем походе</p>
+          <p class="block-subheader">Исследуйте все горные массивы мира вместе с нами</p>
+          <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
+          <button class="tour-program-button flex jc-center ai-center" id="tour-program-button">Программа тура</button>
         </div>
-        <div class="field-form fs-16" >
-          <select>
-            <option value="">Участники</option>
-          </select>
-          <span class="label-field-form fs-14">минимум 4 человека</span>
-        </div>
-        <div>
-          <button class="button-search-tour fs-16 bold" type="submit">Найти программу</button>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section>
+    <div class="section-best-programs flex jc-center ai-center">
+      <div class="left-side-block flex">
+        <p class="block-header">наше предложение</p>
+        <p class="block-subheader">Лучшие программы для тебя</p>
+        <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
+        @for (advantage of advantages; track advantage.id) {
+          <div class="about flex" (click)="selectAdvantage(advantage.id)">
+            <div class="advantage-icon">
+              <img [src]="'/images/' + advantage.icon + '.svg'" [alt]="advantage.icon">
+            </div>
+            <div class="text" [class.active-advantage]="advantage.id === selectedAdvantageId">
+              <p class="title">{{ advantage.title }}</p>
+              <p class="description">{{ advantage.description }}</p>
+              @if (advantage.id === selectedAdvantageId) {
+                <img class="thumbs-up-icon" src="/images/thumbs-up-icon.svg" alt="thumbs-up">
+              }
+            </div>
+          </div>
+        }
+        <button class="cost-of-programs-button" id="cost-of-programs-button">Стоимость программ</button>
+      </div>
+      <div class="right-side-block">
+        <div class="right-side-block-img flex">
+            <img class="lake" src="/images/lake.png" alt="lake">
+            <img class="snowmobile" src="/images/snowmobile.png" alt="snowmobile">
+            <img class="gorge" src="/images/gorge.png" alt="gorge">
+            <img class="creek" src="/images/creek.png" alt="creek">
+          </div>
+      </div>
+    </div>
+  </section>
+}
