@@ -113,29 +113,29 @@ export class AppComponent {
 
   maps: IDestinationMap[] = [
     {
-      id: 1,
-      backgroundName: 'destination-lake',
       estimation: '4.9',
-      destinationName: 'Озеро возле гор',
-      destinationDescription: 'романтическое приключение',
-      destinationCost: 480
+      name: 'Озеро возле гор',
+      description: 'романтическое приключение',
+      cost: 480
     },
     {
-      id: 2,
-      backgroundName: 'destination-night',
       estimation: '4.5',
-      destinationName: 'Ночь в горах',
-      destinationDescription: 'в компании друзей',
-      destinationCost: 500
+      name: 'Ночь в горах',
+      description: 'в компании друзей',
+      cost: 500
     },
     {
-      id: 3,
-      backgroundName: 'destination-sport',
       estimation: '5.0',
-      destinationName: 'Спорт в горах',
-      destinationDescription: 'для тех, кто заботится о себе',
-      destinationCost: 230
+      name: 'Спорт в горах',
+      description: 'для тех, кто заботится о себе',
+      cost: 230
     },
+ ];
+
+ private mapBackgrounds: string[] = [
+  'destination-lake',
+  'destination-night',
+  'destination-sport',
  ];
 
  articles: IArticle[] = [
@@ -191,21 +191,21 @@ export class AppComponent {
   }
 
   private saveLastVisitDate(): void {
-    this.localStorageService.setValueStorage('last-visit-date', new Date().toString());
+    this.localStorageService.setValue('last-visit-date', new Date().toString());
   }
 
   private saveEntriesCount(): void {
-    let entriesCount: number = Number(this.localStorageService.getValueStorage('entries-count')) || 0;
+    let entriesCount: number = Number(this.localStorageService.getValue('entries-count')) || 0;
     entriesCount++;
-    this.localStorageService.setValueStorage('entries-count', String(entriesCount));
+    this.localStorageService.setValue('entries-count', String(entriesCount));
   }
 
   private removeValue(key: string): void {
-    this.localStorageService.removeValueStorage(key);
+    this.localStorageService.removeValue(key);
   }
 
   private clearAllValues(): void {
-    this.localStorageService.clearStorage();
+    this.localStorageService.clear();
   }
 
   selectAdvantage(advantageId: number): void {
@@ -222,5 +222,9 @@ export class AppComponent {
 
   switchWidget(widget: 'counter' | 'date'): void {
     this.currentWidget = widget;
+  }
+
+  getMapBackgrounds(index: number): string {
+    return this.mapBackgrounds[index];
   }
 }

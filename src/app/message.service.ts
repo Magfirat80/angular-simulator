@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { IMessage } from '../interfaces/IMessage';
 import { filter } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class MessageService {
   
   messages: IMessage[] = [];
@@ -18,4 +20,5 @@ export class MessageService {
   closeMessage(message: IMessage): void {
     this.messages = this.messages.filter((m: IMessage) => m !== message);
   }
+
 }

@@ -1,7 +1,7 @@
 @if (isLoading) {
   <div class="download-block-wrapper flex">
     <div class="download-block flex ai-center jc-center">
-      <img src="/images/download-icon.png" alt="download-icon" class="download-icon">
+      <img src="/images/download-icon.svg" alt="download-icon" class="download-icon">
       <div class="download-demo flex ai-center">
         Загрузка страницы...
       </div>
@@ -122,7 +122,7 @@
           <button
             class="tour-program-button flex jc-center ai-center"
             id="tour-program-button"
-            (click)="messageService.addMessage({ messageType: message.Info, messageContent: 'Информация о программе в разработке!!!' })">
+            (click)="messageService.addMessage({ type: message.INFO, content: 'Информация о программе в разработке!!!' })">
             Программа тура
           </button>
         </div>
@@ -153,7 +153,7 @@
         <button
           class="cost-of-programs-button"
           id="cost-of-programs-button"
-          (click)="messageService.addMessage({ messageType: message.Success, messageContent: 'Цены снижены!!!' })">
+          (click)="messageService.addMessage({ type: message.SUCCESS, content: 'Цены снижены!!!' })">
           Стоимость программ
         </button>
       </div>
@@ -175,20 +175,20 @@
         <p class="block-subheader">Популярные направления</p>
       </div>
       <div class="middle-block flex">
-        @for (map of maps; track map.id) {
+        @for (map of maps; track $index) {
           <div class="wrapper-map">
-            <img [src]="'/images/' + map.backgroundName + '.png'" alt="map.backgroundName">
+            <img [src]="'/images/' + getMapBackgrounds($index) + '.png'" alt="map.backgroundName">
             <div class="rating flex ai-center jc-center">
-              <img src="/images/star-icon.png" alt="star-icon">
+              <img src="/images/star-icon.svg" alt="star-icon">
               <span>{{ map.estimation }}</span>
             </div>
             <div class="map-description flex ai-center">
               <div>
-                <div class="destination-name">{{ map.destinationName }}</div>
-                <div class="destination-description">{{ map.destinationDescription }}</div>
+                <div class="destination-name">{{ map.name }}</div>
+                <div class="destination-description">{{ map.description }}</div>
               </div>
               <div class="destination-cost flex jc-center ai-center">
-                {{ map.destinationCost }} $
+                {{ map.cost }} $
               </div>
             </div>
           </div>
@@ -198,7 +198,7 @@
         <button
           class="destination-rating-button"
           id="destination-rating-button"
-          (click)="messageService.addMessage({ messageType: message.Warn, messageContent: 'Оцените погодные условия перед путешествием!!!' })">
+          (click)="messageService.addMessage({ type: message.WARN, content: 'Оцените погодные условия перед путешествием!!!' })">
           Рейтинг направлений
         </button>
       </div>
@@ -231,28 +231,13 @@
       <button
         class="other-materials-button"
         id="other-materials-button"
-        (click)="messageService.addMessage({ messageType: message.Error, messageContent: 'Ошибка!!!' })">
+        (click)="messageService.addMessage({ type: message.ERROR, content: 'Ошибка!!!' })">
         Другие материалы
       </button>
     </div>
   </div>
 </section>
 }
-
-<ng-template #messageTemplate let-msg="currentMessage">
-  <div class="message-window flex ai-center">
-    <img class="letter-icon" src="/images/letter-icon.png" alt="letter-icon">
-    <div class="message-body flex">
-      <span class="message-type">{{ msg.messageType }}</span>
-      <span class="message-content">{{ msg.messageContent }}</span>
-    </div>
-    <img
-    class="close-icon"
-    src="/images/close-icon.png"
-    alt="close-icon"
-    (click)="messageService.closeMessage(msg)">
-  </div>
-</ng-template>
 
 <div class="message-container flex">
   @for (message of messageService.messages; track $index) {
@@ -262,3 +247,19 @@
     </ng-container>
   }
 </div>
+
+<ng-template #messageTemplate let-msg="currentMessage">
+  <div class="message-window flex ai-center">
+    <img class="letter-icon" src="/images/letter-icon.svg" alt="letter-icon">
+    <div class="message-body flex">
+      <span class="message-type">{{ msg.type }}</span>
+      <span class="message-content">{{ msg.content }}</span>
+    </div>
+    <img
+      class="close-icon"
+      src="/images/close-icon.svg"
+      alt="close-icon"
+      (click)="messageService.closeMessage(msg)"
+    >
+  </div>
+</ng-template>
