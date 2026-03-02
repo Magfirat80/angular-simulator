@@ -3,4 +3,5 @@ export interface IDestinationMap {
   name: string;
   description: string;
   cost: number;
+  poster: string;
 }

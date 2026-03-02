@@ -177,7 +177,7 @@
       <div class="middle-block flex">
         @for (map of maps; track $index) {
           <div class="wrapper-map">
-            <img [src]="'/images/' + getMapBackgrounds($index) + '.png'" alt="map.backgroundName">
+            <img [src]="'/images/' + map.poster + '.png'" alt="map.backgroundName">
             <div class="rating flex ai-center jc-center">
               <img src="/images/star-icon.svg" alt="star-icon">
               <span>{{ map.estimation }}</span>

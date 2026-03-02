@@ -22,6 +22,10 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class AppComponent {
   
+  messageService: MessageService = inject(MessageService);
+  localStorageService: LocalStorageService = inject(LocalStorageService);
+
+  message: typeof Message = Message;
   companyName: string = 'румтибет';
   selectedTour: string = '';
   selectedGroup: string = '';
@@ -32,9 +36,6 @@ export class AppComponent {
   currentWidget:  'counter' | 'date' = 'counter';
   liveInput!: string;
   isLoading: boolean = true;
-  messageService: MessageService = inject(MessageService);
-  message: typeof Message = Message;
-  localStorageService: LocalStorageService = inject(LocalStorageService);
 
   locations: ITourLocation[] = [
     {
@@ -116,26 +117,23 @@ export class AppComponent {
       estimation: '4.9',
       name: 'Озеро возле гор',
       description: 'романтическое приключение',
-      cost: 480
+      cost: 480,
+      poster: 'destination-lake'
     },
     {
       estimation: '4.5',
       name: 'Ночь в горах',
       description: 'в компании друзей',
-      cost: 500
+      cost: 500,
+      poster: 'destination-night'
     },
     {
       estimation: '5.0',
       name: 'Спорт в горах',
       description: 'для тех, кто заботится о себе',
-      cost: 230
+      cost: 230,
+      poster: 'destination-sport'
     },
- ];
-
- private mapBackgrounds: string[] = [
-  'destination-lake',
-  'destination-night',
-  'destination-sport',
  ];
 
  articles: IArticle[] = [
@@ -173,8 +171,6 @@ export class AppComponent {
     this.isMainColor(Color.YELLOW);
     this.saveLastVisitDate();
     this.saveEntriesCount();
-    this.removeValue('entries-count');
-    this.clearAllValues();
 
     setInterval(() => {
       this.currentDateAndTime = new Date().toLocaleString();
@@ -200,14 +196,6 @@ export class AppComponent {
     this.localStorageService.setValue('entries-count', String(entriesCount));
   }
 
-  private removeValue(key: string): void {
-    this.localStorageService.removeValue(key);
-  }
-
-  private clearAllValues(): void {
-    this.localStorageService.clear();
-  }
-
   selectAdvantage(advantageId: number): void {
     this.selectedAdvantageId = advantageId;
   }
@@ -222,9 +210,5 @@ export class AppComponent {
 
   switchWidget(widget: 'counter' | 'date'): void {
     this.currentWidget = widget;
-  }
-
-  getMapBackgrounds(index: number): string {
-    return this.mapBackgrounds[index];
   }
 }
