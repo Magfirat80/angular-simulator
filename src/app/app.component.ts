@@ -1,30 +1,40 @@
-import { Component, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import './training'
 import { Color } from '../enums/Color';
 import './collection'
 import { IAdvantage } from '../interfaces/IAdvantage';
 import { FormsModule } from '@angular/forms';
-import { IParticipantsCount } from '/0_ang/pr/angular-simulator/src/interfaces/IParticipantsCount';
+import { IParticipantsCount } from '../interfaces/IParticipantsCount';
 import { ITourLocation } from '../interfaces/ITourLocation';
-import { Data } from '@angular/router';
+import { IDestinationMap } from '../interfaces/IDestinationMap';
+import { IArticle } from '../interfaces/IArticle';
+import { MessageService } from './message.service';
+import { Message } from "../enums/Message";
+import { NgTemplateOutlet, NgComponentOutlet } from '@angular/common';
+import { LocalStorageService } from './local-storage.service';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule],
+  imports: [FormsModule, NgTemplateOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  providers: [MessageService, LocalStorageService]
 })
 export class AppComponent {
   
+  messageService: MessageService = inject(MessageService);
+  localStorageService: LocalStorageService = inject(LocalStorageService);
+
+  message: typeof Message = Message;
   companyName: string = 'румтибет';
   selectedTour: string = '';
   selectedGroup: string = '';
-  selectedDate: string = '';
+  selectedDate!: string;
   selectedAdvantageId: number = 2;
   currentDateAndTime: string = new Date().toLocaleString();
   counter: number = 0;
   currentWidget:  'counter' | 'date' = 'counter';
-  liveInput: string = '';
+  liveInput!: string;
   isLoading: boolean = true;
 
   locations: ITourLocation[] = [
@@ -102,18 +112,73 @@ export class AppComponent {
     },
   ];
 
+  maps: IDestinationMap[] = [
+    {
+      estimation: '4.9',
+      name: 'Озеро возле гор',
+      description: 'романтическое приключение',
+      cost: 480,
+      poster: 'destination-lake'
+    },
+    {
+      estimation: '4.5',
+      name: 'Ночь в горах',
+      description: 'в компании друзей',
+      cost: 500,
+      poster: 'destination-night'
+    },
+    {
+      estimation: '5.0',
+      name: 'Спорт в горах',
+      description: 'для тех, кто заботится о себе',
+      cost: 230,
+      poster: 'destination-sport'
+    },
+ ];
+
+ articles: IArticle[] = [
+  {
+    id: 1,
+    articleIllustration: 'article-Italy',
+    title: 'Красивая Италия, какая она в реальности?',
+    introduction: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+    date: '01/04/2023'
+  },
+  {
+    id: 2,
+    articleIllustration: 'article-flight',
+    title: 'Долой сомнения! Весь мир открыт для вас!',
+    introduction: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
+    date: '01/04/2023'
+  },
+  {
+    id: 3,
+    articleIllustration: 'article-travel-alone',
+    title: 'Как подготовиться к путешествию в одиночку? ',
+    introduction: 'Для современного мира базовый вектор развития предполагает.',
+    date: '01/04/2023'
+  },
+  {
+    id: 4,
+    articleIllustration: 'article-India',
+    title: 'Индия ... летим?',
+    introduction: 'Для современного мира базовый.',
+    date: '01/04/2023'
+  },
+ ];
+
   constructor() {
     this.isMainColor(Color.YELLOW);
     this.saveLastVisitDate();
     this.saveEntriesCount();
-    
+
     setInterval(() => {
       this.currentDateAndTime = new Date().toLocaleString();
     }, 1000);
     
     setTimeout(() => {
       this.isLoading = false;
-    }, 3000);
+    }, 2000);
   }
 
   private isMainColor(color: Color): boolean {
@@ -122,13 +187,13 @@ export class AppComponent {
   }
 
   private saveLastVisitDate(): void {
-    localStorage.setItem('last-visit-date', new Date().toString());
+    this.localStorageService.setValue('last-visit-date', new Date().toString());
   }
 
   private saveEntriesCount(): void {
-    let entriesCount: number = Number(localStorage.getItem('entries-count')) || 0;
+    let entriesCount: number = Number(this.localStorageService.getValue('entries-count')) || 0;
     entriesCount++;
-    localStorage.setItem('entries-count', String(entriesCount));
+    this.localStorageService.setValue('entries-count', String(entriesCount));
   }
 
   selectAdvantage(advantageId: number): void {

@@ -1,7 +1,7 @@
 @if (isLoading) {
   <div class="download-block-wrapper flex">
     <div class="download-block flex ai-center jc-center">
-      <img src="/images/download-icon.png" alt="download-icon" class="download-icon">
+      <img src="/images/download-icon.svg" alt="download-icon" class="download-icon">
       <div class="download-demo flex ai-center">
         Загрузка страницы...
       </div>
@@ -107,7 +107,7 @@
   </section>
 
   <section>
-    <div class="section-about-trip flex jc-center">
+    <div class="wrapper-about-trip flex jc-center">
       <div class="container about-trip">
         <div class="left-side-block">
           <div class="left-side-block-img">
@@ -119,14 +119,19 @@
           <p class="block-header">о нашем походе</p>
           <p class="block-subheader">Исследуйте все горные массивы мира вместе с нами</p>
           <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
-          <button class="tour-program-button flex jc-center ai-center" id="tour-program-button">Программа тура</button>
+          <button
+            class="tour-program-button flex jc-center ai-center"
+            id="tour-program-button"
+            (click)="messageService.addMessage({ type: message.INFO, content: 'Информация о программе в разработке!!!' })">
+            Программа тура
+          </button>
         </div>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="section-best-programs flex jc-center ai-center">
+    <div class="wrapper-best-programs flex jc-center ai-center">
       <div class="left-side-block flex">
         <p class="block-header">наше предложение</p>
         <p class="block-subheader">Лучшие программы для тебя</p>
@@ -145,7 +150,12 @@
             </div>
           </div>
         }
-        <button class="cost-of-programs-button" id="cost-of-programs-button">Стоимость программ</button>
+        <button
+          class="cost-of-programs-button"
+          id="cost-of-programs-button"
+          (click)="messageService.addMessage({ type: message.SUCCESS, content: 'Цены снижены!!!' })">
+          Стоимость программ
+        </button>
       </div>
       <div class="right-side-block">
         <div class="right-side-block-img flex">
@@ -157,4 +167,99 @@
       </div>
     </div>
   </section>
+
+  <section>
+    <div class="wrapper-popular-destinations flex jc-center ai-center">
+      <div class="upper-block flex jc-center ai-center">
+        <p class="block-header">по версии отдыхающих</p>
+        <p class="block-subheader">Популярные направления</p>
+      </div>
+      <div class="middle-block flex">
+        @for (map of maps; track $index) {
+          <div class="wrapper-map">
+            <img [src]="'/images/' + map.poster + '.png'" [alt]="map.poster">
+            <div class="rating flex ai-center jc-center">
+              <img src="/images/star-icon.svg" alt="star-icon">
+              <span>{{ map.estimation }}</span>
+            </div>
+            <div class="map-description flex ai-center">
+              <div>
+                <div class="destination-name">{{ map.name }}</div>
+                <div class="destination-description">{{ map.description }}</div>
+              </div>
+              <div class="destination-cost flex jc-center ai-center">
+                {{ map.cost }} $
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="lower-block flex">
+        <button
+          class="destination-rating-button"
+          id="destination-rating-button"
+          (click)="messageService.addMessage({ type: message.WARN, content: 'Оцените погодные условия перед путешествием!!!' })">
+          Рейтинг направлений
+        </button>
+      </div>
+    </div>
+</section>
+
+<section>
+  <div class="wrapper-travel-blog flex jc-center ai-center container">
+    <div class="upper-block flex jc-center ai-center">
+        <p class="block-header">делимся впечатлениями</p>
+        <p class="block-subheader">Блог о путешествиях</p>
+      </div>
+    
+    <div class="middle-block flex">
+      @for (article of articles; track article.id) {
+        <div class="wrapper-article flex">
+          <img [src]="'/images/' + article.articleIllustration + '.png'" [alt]="article.articleIllustration">
+          <div class="article-info flex">
+            <p class="title">{{ article.title }}</p>
+            <p class="introduction">{{ article.introduction }}</p>
+            <div class="article-info-lower-part flex ai-center">
+              <p class="date">{{ article.date }}</p>
+              <a>читать статью</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="lower-block flex">
+      <button
+        class="other-materials-button"
+        id="other-materials-button"
+        (click)="messageService.addMessage({ type: message.ERROR, content: 'Ошибка!!!' })">
+        Другие материалы
+      </button>
+    </div>
+  </div>
+</section>
 }
+
+<div class="message-container flex">
+  @for (message of messageService.messages; track $index) {
+    <ng-container
+      [ngTemplateOutlet]="messageTemplate"
+      [ngTemplateOutletContext]="{ currentMessage: message }">
+    </ng-container>
+  }
+</div>
+
+<ng-template #messageTemplate let-msg="currentMessage">
+  <div class="message-window flex ai-center">
+    <img class="letter-icon" src="/images/letter-icon.svg" alt="letter-icon">
+    <div class="message-body flex">
+      <span class="message-type">{{ msg.type }}</span>
+      <span class="message-content">{{ msg.content }}</span>
+    </div>
+    <img
+      class="close-icon"
+      src="/images/close-icon.svg"
+      alt="close-icon"
+      (click)="messageService.closeMessage(msg)"
+    >
+  </div>
+</ng-template>

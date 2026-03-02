@@ -177,7 +177,7 @@
   }
 }
 
-.section-about-trip {
+.wrapper-about-trip {
   flex-direction: row;
 }
 
@@ -237,7 +237,7 @@
   margin-top: 8px;
 }
 
-.section-best-programs {
+.wrapper-best-programs {
   width: 100%;
   height: 771px;
   background-color: #F3F5F4;
@@ -348,7 +348,7 @@
       position: absolute;
       left: 47px;
       pointer-events: none;
-      animation: rotation 2s linear infinite;
+      animation: rotation 1.5s linear infinite;
     }
     
     @keyframes rotation {
@@ -366,5 +366,269 @@
       height: 100%;
       width: 517px;
     }
+  }
+}
+
+.wrapper-popular-destinations {
+  width: 100%;
+  flex-direction: column;
+
+  .upper-block {
+    margin-top: 80px;
+    margin-bottom: 50px;
+    flex-direction: column;
+    width: 580px;
+    height: 66px;
+  }
+
+  .middle-block {
+    width: 1180px;
+    height: 500px;
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 50px;
+    position: relative;
+    
+    .wrapper-map {
+      position: relative;
+      width: 380px;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 20px;
+
+      img {
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      
+      .rating {
+        width: 65px;
+        height: 32px;
+        position: absolute;  
+        z-index: 2;
+        top: 50px;
+        right: 0px;
+        flex-direction: row;
+        padding: 4px 8px;
+        gap: 4px;
+        background-color: #FDFDFD66;
+        backdrop-filter: blur(4px);
+        border-radius: 4px 0 0 4px;
+      
+        img {
+          width: 24px;
+          height: 24px;
+          display: block;
+        }
+
+        span {
+          @include text-parameters(14px, 700, 18px, var(--third-color));
+        }
+      }
+
+      .map-description {
+        position: absolute;
+        width: 380px;
+        height: 90px;
+        backdrop-filter: blur(6px);
+        flex-direction: row;
+        justify-content: space-between;
+        z-index: 2;
+        bottom: 0px;
+        left: 0px;
+        background: #FFFFFF33;
+
+        .destination-name {
+          @include text-parameters(24px, 700, 120%, var(--primary-color));
+
+          width: 195;
+          height: 29;
+          top: 430px;
+          left: 32px;
+          margin: 20px auto auto 32px;
+        }
+
+        .destination-description {
+          @include text-parameters(14px, 400, 18px, var(--primary-color));
+
+          width: 195;
+          height: 18;
+          top: 459px;
+          left: 32px;
+          margin: auto auto 23px 32px;
+        }
+
+        .destination-cost {
+          width: 86px;
+          height: 40px;
+          top: 435px;
+          left: 262px;
+          border-radius: 4px;
+          background: #FFFFFF4D;
+          margin-right: 32px;
+
+          @include text-parameters(20px, 700, 24px, var(--primary-color));
+        }
+      }
+    }
+  }
+
+  .lower-block {
+    margin-bottom: 95px;
+  }
+}
+
+.wrapper-travel-blog {
+  width: 100%;
+  flex-direction: column;
+  background-color: #F3F5F4;
+
+  .upper-block {
+    margin-top: 85px;
+    margin-bottom: 40px;
+    flex-direction: column;
+    width: 580px;
+    height: 66px;
+  }
+
+  .middle-block {
+    width: 1180px;
+    height: 648px;
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 50px;
+    position: relative;
+    flex-wrap: wrap;
+
+    .wrapper-article {
+      width: 580px;
+      height: 312px;
+      width: 580px;
+      background: #FDFDFD;
+      border-radius: 10px;
+
+      img {
+        width: 230px;
+        height: 280px;
+        margin: 16px 24px 16px 16px;
+      }
+
+      .article-info {
+        width: 294px;
+        min-height: 280px;
+        margin: 16px 16px 16px auto;
+        position: relative;
+        flex-direction: column;
+
+        .title {
+          @include text-parameters(24px, 700, 32px, var(--inverse-color));
+        
+          margin-bottom: 12px;
+          cursor: pointer;
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .introduction {
+          @include text-parameters(14px, 400, 20px, var(--inverse-color));
+          width: 294px;
+          height: 116px;
+          margin-top: 24px;
+          flex-grow: 1;
+        }
+
+        .article-info-lower-part {
+          justify-content: space-between;
+          width: 100%;
+
+          .date {
+            @include text-parameters(14px, 700, 20px, var(--secondary-color));
+          }
+
+          a {
+            @include text-parameters(14px, 700, 20px, var(--third-color));
+
+            cursor: pointer;
+            text-decoration: none;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .lower-block {
+    margin-bottom: 95px;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.message-container {
+  flex-direction: column-reverse;
+  gap: 10px;
+  position: fixed;
+  width: 350px;
+  height: auto;
+  max-height: 100vh;
+  right: 5px;
+  top: 5px;
+  z-index: 10;
+}
+
+.message-window {
+  width: 350px;
+  height: 70px;
+  background-color: #0F172AD9;
+  width: 350;
+  border-radius: 10px;
+  border: 1px solid #FFFFFF;
+  animation: slideIn 0.3s ease-out forwards;
+  position: relative;
+  flex-direction: row;
+
+  .letter-icon {
+    width: 40px;
+    height: 40px;
+    margin: 15px;
+  }
+
+  .message-body {
+    flex-direction: column;
+
+    .message-type {
+      @include text-parameters(16px, 716, 20px);
+      color: #E8E9EB;
+      margin-top: 15px
+    }
+
+    .message-content {
+      @include text-parameters(14px, 400, 20px);
+      color: #E8E9EB;
+      margin-bottom: 15px;
+    }
+  }
+
+  .close-icon {
+    width: 20px;
+    height: 20px;
+    margin: 7px 7px auto auto;
   }
 }
