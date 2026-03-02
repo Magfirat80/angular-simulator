@@ -177,7 +177,7 @@
       <div class="middle-block flex">
         @for (map of maps; track $index) {
           <div class="wrapper-map">
-            <img [src]="'/images/' + map.poster + '.png'" alt="map.backgroundName">
+            <img [src]="'/images/' + map.poster + '.png'" [alt]="map.poster">
             <div class="rating flex ai-center jc-center">
               <img src="/images/star-icon.svg" alt="star-icon">
               <span>{{ map.estimation }}</span>
@@ -215,7 +215,7 @@
     <div class="middle-block flex">
       @for (article of articles; track article.id) {
         <div class="wrapper-article flex">
-          <img [src]="'/images/' + article.articleIllustration + '.png'" alt="articleIllustration">
+          <img [src]="'/images/' + article.articleIllustration + '.png'" [alt]="article.articleIllustration">
           <div class="article-info flex">
             <p class="title">{{ article.title }}</p>
             <p class="introduction">{{ article.introduction }}</p>
