@@ -1,0 +1,177 @@
+@import './../styles/mixins.scss';
+
+.footer {
+  width: 100%;
+  height: 587px;
+  flex-direction: column;
+  background-color: #F3F5F4;
+  position: relative;
+
+  .travel-newsletters {
+    background-color: var(--primary-color);
+    width: 1180px;
+    height: 196px;
+    border-radius: 6px;
+    position: absolute;
+    top: -98px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    justify-content: space-evenly ;
+
+    .left-side {
+      margin-top: 40px;
+      flex-direction: column;
+      width: 380px;
+      height: 90px;
+        
+      .block-header {
+        @include text-parameters(18px, 400, 20px, var(--secondary-color));
+
+        display: block;
+      }
+
+      .block-subheader {
+        margin-top: 8px;
+        
+        @include text-parameters(26px, 800, 120%, var(--inverse-color));
+        display: block;
+      }
+    }
+      
+    .right-side {
+      margin-top: 40px;
+      flex-direction: column;
+      width: 536px;
+
+      &-input {
+        width: 536px;
+        height: 72px;
+        position: relative;
+
+        .input-block {
+          width: 280px;
+          height: 72px;
+
+          &-header {
+            @include text-parameters(16px, 600, 20px, var(--inverse-color));
+            margin-bottom: 8px;
+          }
+
+          &-field {
+            width: 280px;
+            height: 44px;
+            background-color: #F3F5F4;
+            border: none;
+            border-radius: 4px;
+            padding-right: 16px;
+            padding-left: 16px;
+            
+            @include text-parameters(14px, 300, 20px, var(--inverse-color));
+          }
+        }
+      }
+
+      &-agreement {
+        margin-top: 8px;
+        width: 536px;
+        height: 36px;
+        cursor: pointer;
+
+        @include text-parameters(14px, 600, 18px, var(--inverse-color));
+      }
+    }
+  }
+
+  .top-of-footer {
+    background-color: var(--third-color);
+    width: 100%;
+    height: 521px;
+
+    .title {
+      @include text-parameters(20px, 700, 24px, #F3F5F4);
+    }
+    
+    &-content {
+      margin-top: 178px;
+      margin-left: auto;
+      margin-right: auto;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .left-part {
+        width: 480px;
+        height: 263px;
+
+        .subtitle {
+          @include text-parameters(14px, 400, 20px, #FFFFFF);
+          
+          word-break: break-all;
+          margin-top: 17px;
+          margin-bottom: 80px;
+        }
+
+        .contacts {
+          @include text-parameters(14px, 600, 18px, #FFFFFF);
+          gap: 24px;
+          
+          span {
+            cursor: pointer;
+          }
+        }
+
+        .links-social-networks {
+          margin-top: 32px;
+          width: 176px;
+          height: 32px;
+          justify-content: space-between;
+          cursor: pointer;
+        }
+      }
+
+      .middle-part {
+        width: 280px;
+        height: 232px;
+        
+        &-nav {
+          width: 280px;
+          height: 188px;
+          margin-top: 20px;
+          
+          li {  
+            @include text-parameters(14px, 400, 18px, var(--primary-color));
+          
+            list-style: none;
+            background-image: url("/images/marker-nav-icon.svg");
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-size: 5.87px auto;
+            margin-bottom: 16px;
+            padding-left: 14px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      right-part {
+        width: 280px;
+        height: 200px;
+      }
+    }
+  }
+
+  .bottom-of-footer {
+    background-color: var(--inverse-color);
+    height: 66px;
+
+    @include text-parameters(14px, 600, 18px, #FFFFFF);
+
+    div {
+      justify-content: space-between;
+
+      .right-side {
+        cursor: pointer;
+      }
+    }
+  }
+}

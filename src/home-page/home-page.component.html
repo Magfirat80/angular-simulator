@@ -1,0 +1,211 @@
+<section class="banner">
+    <div class="main-title flex jc-center">
+      <h1 class="main-title-content">
+        Насладись прогулкой в горах <br> с командой единомышленников
+      </h1>
+    </div>
+    <div class="tour-wrapper flex jc-center">
+      <div class="tour-search container flex ai-center">
+        <form class="form-tour flex">
+          <div class="selection-field fs-16">
+            <select name="tour-location" id="tour-location" [(ngModel)]="selectedTour">
+              <option value="" disabled selected>Локация для тура</option>
+              @for (location of locations; track location.id) {
+                <option [ngValue]="location.tourLocation">{{ location.tourLocation }}</option>
+              }
+            </select>
+            <span class="label-selection-field fs-14">выберите из списка</span>
+          </div>
+          <div class="selection-field fs-16">
+            <input type="text" name="tour-date" id="tour-date" [(ngModel)] = "selectedDate" required placeholder="Дата похода">
+            <img src="/images/calendar-logo.svg" alt="calendar">
+            <span class="label-selection-field fs-14">укажите дату</span>
+          </div>
+          <div class="selection-field fs-16" >
+            <select name="group-size" id="group-size" [(ngModel)] = "selectedGroup">
+              <option value="" disabled selected>Участники</option>
+              @for (group of groups; track group.id) {
+                <option [value]="group.participantsCount" >{{ group.participantsCount }}</option>
+              }
+            </select>
+            <span class="label-selection-field fs-14">выберите из списка</span>
+          </div>
+          <div>
+            <button
+              [disabled]="!selectedTour || !selectedDate || !selectedGroup"
+              class="search-tour-button fs-16 bold"
+              name="search-tour-button"
+              id="search-tour-button"
+              type="submit"
+            >
+              Найти программу
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="live-input container flex fs-20">
+      <div class="flex">
+        <input [(ngModel)]="liveInput" type="text" name="live-input" id="live-input" placeholder="Введите что-нибудь ...">
+        <div class="live-output flex">
+          {{ liveInput }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrapper-about-trip flex jc-center">
+      <div class="container about-trip">
+        <div class="left-side-block">
+          <div class="left-side-block-img">
+            <img class="mountain" src="/images/mountain.png" alt="mountain">
+            <img class="home" src="/images/home.png" alt="home">
+          </div>
+        </div>
+        <div class="right-side-block flex">
+          <p class="block-header">о нашем походе</p>
+          <p class="block-subheader">Исследуйте все горные массивы мира вместе с нами</p>
+          <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
+          <button
+            class="tour-program-button flex jc-center ai-center"
+            id="tour-program-button"
+            (click)="messageService.showInfo('Информация о программе в разработке!!!')">
+            Программа тура
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrapper-best-programs flex jc-center ai-center">
+      <div class="left-side-block flex">
+        <p class="block-header">наше предложение</p>
+        <p class="block-subheader">Лучшие программы для тебя</p>
+        <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
+        @for (advantage of advantages; track advantage.id) {
+          <div class="about flex" (click)="selectAdvantage(advantage.id)">
+            <div class="advantage-icon">
+              <img [src]="'/images/' + advantage.icon + '.svg'" [alt]="advantage.icon">
+            </div>
+            <div class="text" [class.active-advantage]="advantage.id === selectedAdvantageId">
+              <p class="title">{{ advantage.title }}</p>
+              <p class="description">{{ advantage.description }}</p>
+              @if (advantage.id === selectedAdvantageId) {
+                <img class="thumbs-up-icon" src="/images/thumbs-up-icon.svg" alt="thumbs-up">
+              }
+            </div>
+          </div>
+        }
+        <button
+          class="cost-of-programs-button"
+          id="cost-of-programs-button"
+          (click)="messageService.showSuccess('Цены снижены!!!')">
+          Стоимость программ
+        </button>
+      </div>
+      <div class="right-side-block">
+        <div class="right-side-block-img flex">
+            <img class="lake" src="/images/lake.png" alt="lake">
+            <img class="snowmobile" src="/images/snowmobile.png" alt="snowmobile">
+            <img class="gorge" src="/images/gorge.png" alt="gorge">
+            <img class="creek" src="/images/creek.png" alt="creek">
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrapper-popular-destinations flex jc-center ai-center">
+      <div class="upper-block flex jc-center ai-center">
+        <p class="block-header">по версии отдыхающих</p>
+        <p class="block-subheader">Популярные направления</p>
+      </div>
+      <div class="middle-block flex">
+        @for (map of maps; track $index) {
+          <div class="wrapper-map">
+            <img [src]="'/images/' + map.poster + '.png'" [alt]="map.poster">
+            <div class="rating flex ai-center jc-center">
+              <img src="/images/star-icon.svg" alt="star-icon">
+              <span>{{ map.estimation }}</span>
+            </div>
+            <div class="map-description flex ai-center">
+              <div>
+                <div class="destination-name">{{ map.name }}</div>
+                <div class="destination-description">{{ map.description }}</div>
+              </div>
+              <div class="destination-cost flex jc-center ai-center">
+                {{ map.cost }} $
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="lower-block flex">
+        <button
+          class="destination-rating-button"
+          id="destination-rating-button"
+          (click)="messageService.showWarn('Оцените погодные условия перед путешествием!!!')">
+          Рейтинг направлений
+        </button>
+      </div>
+    </div>
+</section>
+
+<section>
+  <div class="wrapper-travel-blog flex jc-center ai-center container">
+    <div class="upper-block flex jc-center ai-center">
+      <p class="block-header">делимся впечатлениями</p>
+      <p class="block-subheader">Блог о путешествиях</p>
+    </div>
+    <div class="middle-block flex">
+      @for (article of articles; track article.id) {
+        <div class="wrapper-article flex">
+          <img [src]="'/images/' + article.articleIllustration + '.png'" [alt]="article.articleIllustration">
+          <div class="article-info flex">
+            <p class="title">{{ article.title }}</p>
+            <p class="introduction">{{ article.introduction }}</p>
+            <div class="article-info-lower-part flex ai-center">
+              <p class="date">{{ article.date }}</p>
+              <a>читать статью</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="lower-block flex">
+      <button
+        class="other-materials-button"
+        id="other-materials-button"
+        (click)="messageService.showError('Ошибка!!!')">
+        Другие материалы
+      </button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrapper-impressions-blog flex ai-center container">
+    <div class="upper-block flex jc-center ai-center">
+      <p class="block-header">фото-отчет</p>
+      <p class="block-subheader">Делимся впечатлениями</p>
+    </div>
+    <div class="middle-block flex">
+      <img src="/images/impressions-balloons.png" alt="impressions-balloons" width="580px" height="250px">
+      <img src="/images/impressions-map-light.png" alt="impressions-map-light" width="280px" height="250px">
+      <img src="/images/impressions-burj.png" alt="impressions-burj" width="280px" height="250px">
+      <img src="/images/impressions-coast.png" alt="impressions-coast" width="280px" height="250px">
+      <img src="/images/impressions-сanyon.png" alt="impressions-сanyon" width="580px" height="250px">
+      <img src="/images/impressions-map-dark.png" alt="impressions-map-dark" width="280px" height="250px">
+    </div>
+    <div class="lower-block flex">
+      <button
+        class="our-interest-button"
+        id="our-interest-button"
+        (click)="messageService.showSuccess('Все ОК!!!')">
+        Наш pinterest
+      </button>
+    </div>
+  </div>
+</section>

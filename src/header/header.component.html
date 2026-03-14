@@ -1,0 +1,76 @@
+<header class="header flex ai-center">
+    <div class="header-content container flex">
+      <div class="logo">
+        <img src="/images/company-logo.svg" alt="Логотип горы">
+        <div class="company-name">{{ companyName }}</div>
+      </div>
+      <nav class="navigation-line flex ai-center fs-18">
+        <ul class="navigation-list">
+          @for (item of navList; track item.id) {
+            <li>
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="navigation-link--active"
+                [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+                class="navigation-link"
+              >
+                {{ item.navItem }}
+              </a>
+            </li>
+          }
+        </ul>
+      </nav>
+      <button class="header-button flex jc-center ai-center" id="consultation-button">Консультация</button>
+    </div>
+    
+    <div class="switcher-wrapper container fs-18">
+      <div class="switcher-controls flex jc-right">
+        <button
+          [disabled]="currentWidget === 'counter'"
+          name="show-counter-button"
+          id="show-counter-button"
+          (click)="switchWidget('counter')"
+        >
+          Покажи счетчик
+        </button>
+        <button
+          [disabled]="currentWidget === 'date'"
+          name="show-timer-button"
+          id="show-timer-button"
+          (click)="switchWidget('date')"
+        >
+          Покажи таймер
+        </button>
+      </div>
+      <div class="widget-display flex jc-right">
+        @if (this.currentWidget === 'counter') {
+          <div class="counter-group flex ai-center">
+            <span class="counter-value">{{ counter }}</span>
+            <div class="counter-buttons flex">
+              <button
+                class="counter-button flex jc-center ai-center"
+                name="plus-button"
+                id="plus-button"
+                (click)="increaseCount()"
+              >
+                +
+              </button>
+              <button
+                class="counter-button flex jc-center ai-center"
+                name="minus-button"
+                id="minus-button"
+                [disabled]="counter < 1"
+                (click)="reduceCount()"
+              >
+                -
+              </button>
+            </div>
+          </div>
+        } @else {
+          <div class="display-date-and-time flex ai-center">
+            <span class="date-text">{{ currentDateAndTime }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </header>

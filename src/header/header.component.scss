@@ -1,0 +1,113 @@
+@import './../styles/mixins.scss';
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  height: 140px;
+  color: var(--primary-color);
+  background: #18121E80;
+  box-shadow: 0px 2px 4px 0px #00000040;
+  flex-direction: column;
+  justify-content: flex-start;
+  
+  &-content {
+    height: 72px;
+    margin-top: 24px;
+
+    button {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+
+  .logo {
+    width: 138px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .company-name {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    text-align: center;
+  }
+
+  .navigation-line {
+    justify-content: space-between;
+    gap: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 130px;
+    margin-left: 130px;
+  }
+
+  .navigation-list {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navigation-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    line-height: 25px;
+    text-decoration: none;
+    list-style-type: none;
+    cursor: pointer;
+
+    &--active {
+      color: #ffcc00;
+      font-weight: bold;
+    }
+
+  }
+  
+  .switcher-wrapper {
+    justify-content: end;
+    margin-top: 8px;
+    height: 25px;
+  }
+
+  .switcher-controls {
+    margin-bottom: 15px;
+    gap: 10px;
+  }
+
+  .widget-display {
+    height: 25px;
+  }
+
+  .counter-group {
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 5px 5px 15px;
+  }
+
+  .counter-value {
+    font-size: 18px;
+    min-width: 30px;
+    text-align: center;
+  }
+
+  .counter-buttons {
+    gap: 8px;
+  }
+
+  .display-date-and-time {
+    text-align: right;
+
+    .date-text {
+      margin-top: auto;
+      margin-bottom: auto;
+      padding: 5px 5px 5px 15px;
+    }
+  }
+}

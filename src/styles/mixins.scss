@@ -1,0 +1,6 @@
+@mixin text-parameters($size, $weight: 400, $lh: 150%, $color: var(--inverse-color)) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lh;
+  color: $color;
+}

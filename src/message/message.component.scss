@@ -1,0 +1,65 @@
+@import './../styles/mixins.scss';
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.message-container {
+  
+  flex-direction: column-reverse;
+  gap: 10px;
+  position: fixed;
+  width: 350px;
+  height: auto;
+  max-height: 100vh;
+  right: 5px;
+  top: 5px;
+  z-index: 1000;
+}
+
+.message-window {
+  width: 350px;
+  height: 70px;
+  background-color: #0F172AD9;
+  width: 350;
+  border-radius: 10px;
+  border: 1px solid #FFFFFF;
+  animation: slideIn 0.3s ease-out forwards;
+  position: relative;
+  flex-direction: row;
+
+  .letter-icon {
+    width: 40px;
+    height: 40px;
+    margin: 15px;
+  }
+
+  .message-body {
+    flex-direction: column;
+
+    .message-type {
+      @include text-parameters(16px, 716, 20px);
+      color: #E8E9EB;
+      margin-top: 15px
+    }
+
+    .message-content {
+      @include text-parameters(14px, 400, 20px);
+      color: #E8E9EB;
+      margin-bottom: 15px;
+    }
+  }
+
+  .close-icon {
+    width: 20px;
+    height: 20px;
+    margin: 7px 7px auto auto;
+  }
+}

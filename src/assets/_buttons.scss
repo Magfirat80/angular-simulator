@@ -10,7 +10,7 @@
   @include button-parameters(157px, 44px, 4px);
 
   color: var(--primary-color);
-  margin-left: 25px;
+  margin-right: 0px;
 }
 
 .search-tour-button {
@@ -26,15 +26,34 @@
   opacity: 0.7;
 }
 
-.tour-program-button, .cost-of-programs-button, .destination-rating-button, .other-materials-button {
+.tour-program-button, .cost-of-programs-button, .destination-rating-button, 
+.other-materials-button, .our-interest-button {
   color: var(--primary-color);
   opacity: 1;
-  gap: 10px;
   padding-top: 16px;
   padding-right: 36px;
   padding-bottom: 16px;
   padding-left: 36px;
+  
+}
+
+.tour-program-button, .cost-of-programs-button {
   margin-top: 40px;
+}
+
+.destination-rating-button, .other-materials-button, .our-interest-button {
+  margin-top: 50px;
+}
+
+.subscribe-news-button {
+  @include button-parameters(240px, 44px, 4px);
+
+  color: var(--primary-color);
+  opacity: 1;
+  padding-top: 12px;
+  padding-right: 24px;
+  padding-bottom: 12px;
+  padding-left: 24px;
 }
 
 .tour-program-button {
@@ -53,11 +72,23 @@
   @include button-parameters(220px, 52px, 4px);
 }
 
-#minus-button, #plus-button {
+.our-interest-button {
+  @include button-parameters(178px, 52px, 4px);
+}
+
+.subscribe-news-button {
+  @include button-parameters(240px, 44px, 4px);
+
+  position: absolute;
+  right: 0px;
+  bottom: 0px  ;
+}
+
+.counter-button {
   cursor: pointer;
-  width: 30px;
-  height: 30px;
-  font-size: 25px;
+  width: 25px;
+  height: 25px;
+  font-size: 18px;
 }
 
 #minus-button:disabled {
@@ -69,9 +100,8 @@
 
 #show-counter-button, #show-timer-button {
   cursor: pointer;
-  width: 180px;
-  height: 45px;
-  font-size: 20px;
-  margin-bottom: 15px;
+  width: 160px;
+  height: 25px;
+  font-size: 18px;
   border-radius: 8px;
 }
