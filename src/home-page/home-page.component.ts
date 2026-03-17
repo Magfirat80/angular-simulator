@@ -5,7 +5,6 @@ import { IDestinationMap } from '../interfaces/IDestinationMap';
 import { IParticipantsCount } from '../interfaces/IParticipantsCount';
 import { IArticle } from '../interfaces/IArticle';
 import { FormsModule } from '@angular/forms';
-import { Message } from '../enums/Message';
 import { MessageService } from '../app/message.service';
 
 @Component({
@@ -23,7 +22,6 @@ export class HomePageComponent {
   selectedDate!: string;
   liveInput!: string;
   selectedAdvantageId: number = 2;
-  message: typeof Message = Message;
 
   locations: ITourLocation[] = [
     {

@@ -22,19 +22,19 @@ export class MessageService {
     }, 5000);
   }
 
-  showWarn(content: string) {
+  showWarn(content: string): void {
     this.addMessage(Message.WARN, content);
   }
 
-  showError(content: string) {
+  showError(content: string): void {
     this.addMessage(Message.ERROR, content);
   }
 
-  showSuccess(content: string) {
+  showSuccess(content: string): void {
     this.addMessage(Message.SUCCESS, content);
   }
 
-  showInfo(content: string) {
+  showInfo(content: string): void {
     this.addMessage(Message.INFO, content);
   }
 
