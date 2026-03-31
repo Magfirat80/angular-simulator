@@ -1,15 +1,5 @@
-@if (isLoading) {
-  <div class="download-block-wrapper flex">
-    <div class="download-block flex ai-center jc-center">
-      <img src="/images/download-icon.svg" alt="download-icon" class="download-icon">
-      <div class="download-demo flex ai-center">
-        Загрузка страницы...
-      </div>
-    </div>
-  </div>
-} @else {
-  <app-header></app-header>
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
-  <app-message></app-message>
-}
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+<app-message></app-message>
+<app-loader></app-loader>
