@@ -3,21 +3,18 @@ import './training'
 import { Color } from '../enums/Color';
 import './collection'
 import { FormsModule } from '@angular/forms';
-import { MessageService } from './message.service';
 import { LocalStorageService } from './local-storage.service';
 import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from "../footer/footer.component";
-import { HeaderComponent } from "../header/header.component";
-import { MessageComponent } from "../message/message.component";
-import { LoaderService } from './loader.service';
+import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../header/header.component';
+import { MessageComponent } from '../message/message.component';
 import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-root',
   imports: [FormsModule, RouterOutlet, FooterComponent, HeaderComponent, MessageComponent, LoaderComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  providers: [MessageService, LocalStorageService, LoaderService]
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   

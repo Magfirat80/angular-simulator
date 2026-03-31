@@ -32,7 +32,6 @@ export class HeaderComponent {
   ];
 
   constructor() {
-      
     setInterval(() => {
       this.currentDateAndTime = new Date().toLocaleString();
     }, 1000);

@@ -1,8 +1,12 @@
 @import './../styles/mixins.scss';
 
-.users-page {
+.wrapper-users-page {
   width: 100%;
   min-height: 100vh;
+}
+
+.users-page {
+  width: 1460px;
   flex-direction: row;
   gap: 50px 70px;
   flex-wrap: wrap;

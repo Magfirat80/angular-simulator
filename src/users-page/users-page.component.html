@@ -1,77 +1,78 @@
-<div class="users-page flex jc-center">
-  @for (user of users$ | async; track user.id) {
-    <div class="user-card">
-      <div class="header">
-        <p class="name">{{ user.name }}</p>
-        <p class="user-name">{{ user.username }}</p>
-      </div>
-      
-      <div class="body">
-        <section>
-          <h2>Контакты</h2>
-          <div class="row">
-            <span>Эл. почта</span>
-            <b>{{ user.email }}</b>
-          </div>
-          <div class="row">
-            <span>Телефон:</span>
-            <b>{{ user.phone }}</b>
-          </div>
-          <div class="row">
-            <span>Веб-сайт:</span>
-            <b>{{ user.website }}</b>
-          </div>
-        </section>
-        
-        <section>
-          <div class="address-info">
-            <h2>АДРЕС ПРОЖИВАНИЯ</h2>
+<div class="wrapper-users-page flex jc-center">
+  <div class="users-page flex jc-center">
+    @for (user of users$ | async; track user.id) {
+      <div class="user-card">
+        <div class="header">
+          <p class="name">{{ user.name }}</p>
+          <p class="user-name">{{ user.username }}</p>
+        </div>
+        <div class="body">
+          <section>
+            <h2>Контакты</h2>
             <div class="row">
-              <span>Город:</span>
-              <b>{{ user.address.city }}</b>
+              <span>Эл. почта</span>
+              <b>{{ user.email }}</b>
             </div>
             <div class="row">
-              <span>Улица:</span>
-              <b>{{ user.address.street }}</b>
+              <span>Телефон:</span>
+              <b>{{ user.phone }}</b>
             </div>
             <div class="row">
-              <span>Офис:</span>
-              <b>{{ user.address.suite }}</b>
+              <span>Веб-сайт:</span>
+              <b>{{ user.website }}</b>
             </div>
-            <div class="row">
-              <span>Индекс:</span>
-              <b>{{ user.address.zipcode }}</b>
-            </div>
-            <div class="row row--coordinates">
-              <span>Координаты:</span>
-              <div class="coordinates">
-                <b>{{ user.address.geo.lat }}</b>
-                <b>{{ user.address.geo.lng }}</b>
+          </section>
+          
+          <section>
+            <div class="address-info">
+              <h2>АДРЕС ПРОЖИВАНИЯ</h2>
+              <div class="row">
+                <span>Город:</span>
+                <b>{{ user.address.city }}</b>
+              </div>
+              <div class="row">
+                <span>Улица:</span>
+                <b>{{ user.address.street }}</b>
+              </div>
+              <div class="row">
+                <span>Офис:</span>
+                <b>{{ user.address.suite }}</b>
+              </div>
+              <div class="row">
+                <span>Индекс:</span>
+                <b>{{ user.address.zipcode }}</b>
+              </div>
+              <div class="row row--coordinates">
+                <span>Координаты:</span>
+                <div class="coordinates">
+                  <b>{{ user.address.geo.lat }}</b>
+                  <b>{{ user.address.geo.lng }}</b>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section>
-          <div class="work-info">
-            <h2>МЕСТО РАБОТЫ</h2>
-            <div class="row">
-              <span>Компания:</span>
-              <b>{{ user.company.name }}</b>
+          <section>
+            <div class="work-info">
+              <h2>МЕСТО РАБОТЫ</h2>
+              <div class="row">
+                <span>Компания:</span>
+                <b>{{ user.company.name }}</b>
+              </div>
+              <div class="row">
+                <span>Миссия:</span>
+                <i>{{ user.company.catchPhrase }}</i>
+              </div>
+              <div class="row">
+                <span>Специализация:</span>
+                <b>{{ user.company.bs }}</b>
+              </div>
             </div>
-            <div class="row">
-              <span>Миссия:</span>
-              <i>{{ user.company.catchPhrase }}</i>
-            </div>
-            <div class="row">
-              <span>Специализация:</span>
-              <b>{{ user.company.bs }}</b>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>   
-  } @empty {
-    <div class="empty-state flex jc-center ai-center">Нет пользователей для отображения</div>
-  }
+          </section>
+        </div>
+      </div>   
+    } @empty {
+      <div class="empty-state flex jc-center ai-center">Нет пользователей для отображения</div>
+    }
+  </div>
 </div>

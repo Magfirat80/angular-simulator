@@ -3,7 +3,6 @@ import { UserService } from '../app/user.service';
 import { tap } from 'rxjs';
 import type { IUser } from '../interfaces/IUser';
 import { AsyncPipe } from '@angular/common';
-import { MessageService } from '../app/message.service';
 
 @Component({
   selector: 'app-users-page',

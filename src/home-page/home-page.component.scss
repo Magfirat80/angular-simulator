@@ -15,10 +15,9 @@
   height: 150px;
 
   &-content {
-    width: 1180px;
-
     @include text-parameters(50px, 400, 150%, var(--primary-color));
     
+    width: 1180px;
     letter-spacing: 0.02em;
     text-transform: uppercase;
   }
@@ -363,6 +362,8 @@
         }
 
         .destination-cost {
+          @include text-parameters(20px, 700, 24px, var(--primary-color));
+
           width: 86px;
           height: 40px;
           top: 435px;
@@ -370,8 +371,6 @@
           border-radius: 4px;
           background: #FFFFFF4D;
           margin-right: 32px;
-
-          @include text-parameters(20px, 700, 24px, var(--primary-color));
         }
       }
     }
@@ -438,6 +437,7 @@
 
         .introduction {
           @include text-parameters(14px, 400, 20px, var(--inverse-color));
+          
           width: 294px;
           height: 116px;
           margin-top: 24px;

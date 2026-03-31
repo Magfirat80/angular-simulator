@@ -31,11 +31,11 @@
         display: block;
       }
 
-      .block-subheader {
-        margin-top: 8px;
-        
+      .block-subheader {   
         @include text-parameters(26px, 800, 120%, var(--inverse-color));
+
         display: block;
+        margin-top: 8px;
       }
     }
       
@@ -55,10 +55,13 @@
 
           &-header {
             @include text-parameters(16px, 600, 20px, var(--inverse-color));
+
             margin-bottom: 8px;
           }
 
           &-field {
+            @include text-parameters(14px, 300, 20px, var(--inverse-color));
+            
             width: 280px;
             height: 44px;
             background-color: #F3F5F4;
@@ -66,19 +69,17 @@
             border-radius: 4px;
             padding-right: 16px;
             padding-left: 16px;
-            
-            @include text-parameters(14px, 300, 20px, var(--inverse-color));
           }
         }
       }
 
       &-agreement {
+        @include text-parameters(14px, 600, 18px, var(--inverse-color));
+
         margin-top: 8px;
         width: 536px;
         height: 36px;
         cursor: pointer;
-
-        @include text-parameters(14px, 600, 18px, var(--inverse-color));
       }
     }
   }
@@ -113,6 +114,7 @@
 
         .contacts {
           @include text-parameters(14px, 600, 18px, #FFFFFF);
+
           gap: 24px;
           
           a {
@@ -161,11 +163,11 @@
   }
 
   .bottom-of-footer {
+    @include text-parameters(14px, 600, 18px, #FFFFFF);
+    
     background-color: var(--inverse-color);
     height: 66px;
-
-    @include text-parameters(14px, 600, 18px, #FFFFFF);
-
+    
     div {
       justify-content: space-between;
 
