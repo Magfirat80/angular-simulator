@@ -12,7 +12,6 @@
 }
 
 .message-container {
-  
   flex-direction: column-reverse;
   gap: 10px;
   position: fixed;
@@ -21,7 +20,7 @@
   max-height: 100vh;
   right: 5px;
   top: 5px;
-  z-index: 1000;
+  z-index: 9999;
 }
 
 .message-window {
@@ -46,12 +45,14 @@
 
     .message-type {
       @include text-parameters(16px, 716, 20px);
+      
       color: #E8E9EB;
       margin-top: 15px
     }
 
     .message-content {
       @include text-parameters(14px, 400, 20px);
+
       color: #E8E9EB;
       margin-bottom: 15px;
     }

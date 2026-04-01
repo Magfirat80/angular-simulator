@@ -1,5 +1,5 @@
 <div class="message-container flex">
-  @for (message of messageService.getMessages(); track $index) {
+  @for (message of messageService.messages$ | async; track $index) {
     <ng-container
       [ngTemplateOutlet]="messageTemplate"
       [ngTemplateOutletContext]="{ currentMessage: message }">

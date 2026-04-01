@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { INavigation } from '../interfaces/INavigation';
 import { RouterLink, RouterModule } from "@angular/router";
+import { MessageService } from '../app/message.service';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,8 @@ import { RouterLink, RouterModule } from "@angular/router";
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+
+  messageService: MessageService = inject(MessageService);
 
   companyName: string = 'румтибет';
   currentWidget:  'counter' | 'date' = 'counter';
@@ -29,7 +32,6 @@ export class HeaderComponent {
   ];
 
   constructor() {
-      
     setInterval(() => {
       this.currentDateAndTime = new Date().toLocaleString();
     }, 1000);
