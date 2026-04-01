@@ -29,7 +29,6 @@ export class UserService {
     this.loaderService.showSpinner();
     return this.userApiService.getUsers()
       .pipe(
-        timeout(3000),
         catchError(() => {
           this.messageService.showError('Ошибка! Не получены сведения о пользователях!');
           return of([]);
