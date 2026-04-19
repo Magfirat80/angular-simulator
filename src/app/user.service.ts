@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { UserApiService } from './user-api.service';
-import { BehaviorSubject, catchError, finalize, of, Observable, timeout } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, of, Observable } from 'rxjs';
 import { IUser } from '../interfaces/IUser';
 import { MessageService } from './message.service';
 import { LoaderService } from './loader.service';
@@ -17,17 +17,26 @@ export class UserService {
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]); 
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
 
-  setUsers(user: IUser[]): void {
-    this.usersSubject.next(user);
+  setUsers(users: IUser[]): void {
+    this.usersSubject.next(users);
+    localStorage.setItem('users', JSON.stringify(users));
   }
-  
+
   getUsers(): IUser[] {
     return this.usersSubject.getValue();
   }
   
   loadUsers(): Observable<IUser[]> {
-    this.loaderService.showSpinner();
-    return this.userApiService.getUsers()
+    const usersFromStorage: string | null = localStorage.getItem('users');
+    
+    if (usersFromStorage) {
+      const usersFromStorageParsed: IUser[] = JSON.parse(usersFromStorage);
+      
+      this.usersSubject.next(usersFromStorageParsed);
+      return of(usersFromStorageParsed)
+    } else {
+      this.loaderService.showSpinner();
+      return this.userApiService.getUsers()
       .pipe(
         catchError(() => {
           this.messageService.showError('Ошибка! Не получены сведения о пользователях!');
@@ -35,6 +44,22 @@ export class UserService {
         }),
         finalize(() => this.loaderService.hideSpinner()),
       );
+    }
+  }
+
+  deleteUser(userId: number): void {
+    const currentUsers: IUser[] = this.getUsers();
+    const updatedUsers: IUser[] = currentUsers.filter((user: IUser) => user.id !== userId);
+    
+    this.setUsers(updatedUsers); 
+    this.messageService.showSuccess('Пользователь удален!!!');
+  }
+
+  createUser(user: IUser): void {
+    const currentUsers: IUser[] = this.getUsers();
+    const updatedUsers: IUser[] = [... currentUsers, user];
+
+    this.setUsers(updatedUsers);
   }
 
 }
