@@ -31,15 +31,15 @@ export class UsersPageComponent implements OnInit {
     )
   );
   
-  onFilterUsers(value: string): void {
-    this.filterSubject.next(value);
-  }
-  
   ngOnInit(): void {
     this.userService.loadUsers()
       .pipe(
         tap((user: IUser[]) => this.userService.setUsers(user))
       ).subscribe();
+  }
+
+  onFilterUsers(value: string): void {
+    this.filterSubject.next(value);
   }
 
   onDeleteUser(userId: number): void {

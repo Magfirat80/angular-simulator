@@ -4,6 +4,7 @@ import { BehaviorSubject, catchError, finalize, of, Observable } from 'rxjs';
 import { IUser } from '../interfaces/IUser';
 import { MessageService } from './message.service';
 import { LoaderService } from './loader.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +14,14 @@ export class UserService {
   private userApiService: UserApiService = inject(UserApiService);
   private messageService: MessageService = inject(MessageService);
   private loaderService: LoaderService = inject(LoaderService);
-  
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
+   
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]); 
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
 
   setUsers(users: IUser[]): void {
     this.usersSubject.next(users);
-    localStorage.setItem('users', JSON.stringify(users));
+    this.localStorageService.setValue('users', JSON.stringify(users));
   }
 
   getUsers(): IUser[] {
@@ -27,23 +29,20 @@ export class UserService {
   }
   
   loadUsers(): Observable<IUser[]> {
-    const usersFromStorage: string | null = localStorage.getItem('users');
+    const usersFromStorage: IUser[] | null = this.localStorageService.getValue('users');
     
     if (usersFromStorage) {
-      const usersFromStorageParsed: IUser[] = JSON.parse(usersFromStorage);
-      
-      this.usersSubject.next(usersFromStorageParsed);
-      return of(usersFromStorageParsed)
+      return of(usersFromStorage);
     } else {
       this.loaderService.showSpinner();
       return this.userApiService.getUsers()
-      .pipe(
-        catchError(() => {
-          this.messageService.showError('Ошибка! Не получены сведения о пользователях!');
-          return of([]);
-        }),
-        finalize(() => this.loaderService.hideSpinner()),
-      );
+        .pipe(
+          catchError(() => {
+            this.messageService.showError('Ошибка! Не получены сведения о пользователях!');
+            return of([]);
+          }),
+          finalize(() => this.loaderService.hideSpinner()),
+        );
     }
   }
 
@@ -57,7 +56,7 @@ export class UserService {
 
   createUser(user: IUser): void {
     const currentUsers: IUser[] = this.getUsers();
-    const updatedUsers: IUser[] = [... currentUsers, user];
+    const updatedUsers: IUser[] = [...currentUsers, user];
 
     this.setUsers(updatedUsers);
   }

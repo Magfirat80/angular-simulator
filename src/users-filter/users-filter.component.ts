@@ -15,17 +15,17 @@ export class UsersFilterComponent implements OnInit {
   
   inputField: FormControl<string> = new FormControl<string>('', { nonNullable: true });
 
-  @Output() usersFilteringRequested: EventEmitter<string> = new EventEmitter<string>();
+  @Output() usersFiltering: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit(): void {
     this.inputField.valueChanges
-    .pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      map((valueMap: string) => valueMap.toLowerCase().trim()),
-      tap((valueTap: string) => this.usersFilteringRequested.emit(valueTap)),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        map((value: string) => value.toLowerCase().trim()),
+        tap((value: string) => this.usersFiltering.emit(value)),
+        takeUntilDestroyed(this.destroyRef)
+      ).subscribe();
   }
 
 }

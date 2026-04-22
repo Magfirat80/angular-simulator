@@ -11,10 +11,10 @@ export class UserCardComponent {
 
   @Input() user!: IUser;
 
-  @Output() deleteRequested: EventEmitter<number> = new EventEmitter<number>();
+  @Output() userDelete: EventEmitter<number> = new EventEmitter<number>();
 
   onDeleteClick(id: number): void {
-    this.deleteRequested.emit(this.user.id);
+    this.userDelete.emit(this.user.id);
   }
 
 }

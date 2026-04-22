@@ -84,15 +84,15 @@
 }
 
 .empty-state {
-    @include text-parameters(26px, 800, 29.9px, #FFFFFF);
-    
-    width: 606px;
-    height: 90px;
-    background-color: #B15757;
-    border-radius: 20px;
-    opacity: 1;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  @include text-parameters(26px, 800, 29.9px, #FFFFFF);
+  
+  width: 606px;
+  height: 90px;
+  background-color: #B15757;
+  border-radius: 20px;
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

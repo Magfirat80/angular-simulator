@@ -1,6 +1,5 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserService } from '../app/user.service';
 import type { IUser } from '../interfaces/IUser';
 
 @Component({
@@ -9,13 +8,13 @@ import type { IUser } from '../interfaces/IUser';
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss',
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent {
 
-  @Output() createRequested: EventEmitter<IUser> = new EventEmitter<IUser>();
+  @Output() userCreate: EventEmitter<IUser> = new EventEmitter<IUser>();
 
   private formBuilder: FormBuilder = inject(FormBuilder);
 
-  myForm: FormGroup = this.formBuilder.group({
+  userForm: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
@@ -41,14 +40,10 @@ export class CreateUserComponent implements OnInit {
     }),
   });
 
-  ngOnInit(): void {
-    
-  }
-
   onSubmit(): void {
-    const user: IUser = { id: Date.now(), ... this.myForm.getRawValue()};
+    const user: IUser = { id: Date.now(), ...this.userForm.getRawValue()};
 
-    this.createRequested.emit(user);
+    this.userCreate.emit(user);
   }
 
 }

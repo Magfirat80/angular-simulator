@@ -1,14 +1,14 @@
-<app-users-filter (usersFilteringRequested)="onFilterUsers($event)"></app-users-filter>
+<app-users-filter (usersFiltering)="onFilterUsers($event)"></app-users-filter>
 <div class="users-page-content flex">
   <div class="wrapper-users-modules">    
-    <app-create-user (createRequested)="onSumbit($event)"></app-create-user>
+    <app-create-user (userCreate)="onSumbit($event)"></app-create-user>
   </div>
   <div class="wrapper-users-page flex jc-center">
     <div class="users-page flex jc-center">
       @for (user of filteredUsers$ | async; track user.id) {
         <app-user-card
           [user]="user"
-          (deleteRequested)="onDeleteUser($event)">
+          (userDelete)="onDeleteUser($event)">
         </app-user-card>
       } @empty {
         <div class="empty-state flex jc-center ai-center">Нет пользователей для отображения</div>
