@@ -1,118 +1,26 @@
 @import './../styles/mixins.scss';
 
-.wrapper-users-page {
+.users-page-content {
+  align-items: flex-start;
   width: 100%;
+  gap: 20px;
+}
+
+.wrapper-users-page {
+  flex: 1;
   min-height: 100vh;
 }
 
 .users-page {
-  width: 1460px;
+  max-width: 1460px;
   flex-direction: row;
   gap: 50px 70px;
   flex-wrap: wrap;
   align-items: flex-start;
-  padding-top: 150px;
   padding-bottom: 100px;
 
   p {
     color: var(--inverse-color);
     font-size: 70px;
   }
-}
-
-.user-card {
-  width: 440px;
-  height: 630px;
-  border-top: 4px solid #D4A373;
-  box-shadow: 0px 10px 30px 0px #0000000F;
-
-  .header {
-    width: 440px;
-    height: 106px;
-    margin-bottom: 25px;
-
-    .name {
-      @include text-parameters(26px, 800, 29.9px, #1D3939);
-      
-      margin: 35px 30px 0px 30px;
-    }
-
-    .user-name {
-      @include text-parameters(15px, 700, 17.25px, #D4A373);
-
-      margin: 3px 30px 0px 30px;
-    }
-  }
-
-  .body {
-    width: 440px;
-    height: 493.7px;
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-
-  h2 {
-    @include text-parameters(12px, 800, 13.8px, #1D3939);
-    
-    text-transform: uppercase;
-  }
-
-  .row {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    margin: 10px 0;
-    font-size: 15px;
-    line-height: 1.4;
-  }
-
-  .row span {
-    color: #7a8a90;
-    flex: 0 0 auto;
-  }
-
-  .row b {
-    color: #2f4b52;
-    font-weight: 700;
-    text-align: right;
-  }
-
-  .row i {
-    color: #7a8a90;
-    font-style: italic;
-    text-align: right;
-  }
-
-  .row--coordinates {
-    align-items: center;
-  }
-
-  .coordinates {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  .chips b {
-    background: #f3f4f6;
-    border: 1px solid #e5e7eb;
-    border-radius: 4px;
-    padding: 2px 8px;
-    font-size: 13px;
-  }
-}
-
-.empty-state {
-    @include text-parameters(26px, 800, 29.9px, #FFFFFF);
-    
-    width: 606px;
-    height: 90px;
-    background-color: #B15757;
-    border-radius: 20px;
-    opacity: 1;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }

@@ -105,3 +105,41 @@
   font-size: 18px;
   border-radius: 8px;
 }
+
+.delete-user-button {
+  cursor: pointer;
+  width: 220px;
+  height: 30px;
+  font-size: 18px;
+  border-radius: 8px;
+  margin-top: 15px;
+  display: block;
+  margin-left: auto; 
+  margin-right: auto;
+  background-color: rgb(242, 194, 194);
+}
+
+.update-cards-button {
+  cursor: pointer;
+  width: 220px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 8px;
+  display: block;
+  margin-left: 30px;
+  margin-top: 160px;
+  background-color: rgb(101, 230, 172);
+  z-index: 500;
+}
+
+.create-user-button {
+  cursor: pointer;
+  width: 110px;
+  height: 40px;
+  font-size: 14px;
+  border-radius: 8px;
+  display: block;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  background-color: rgb(167, 177, 242);
+}

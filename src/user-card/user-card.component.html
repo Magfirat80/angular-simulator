@@ -1,0 +1,76 @@
+<div class="user-card">
+  <div class="header">
+    <p class="name">{{ user.name }}</p>
+    <p class="user-name">{{ user.username }}</p>
+  </div>
+  <div class="body">
+    <section>
+      <h2>Контакты</h2>
+      <div class="row">
+        <span>Эл. почта</span>
+        <b>{{ user.email }}</b>
+      </div>
+      <div class="row">
+        <span>Телефон:</span>
+        <b>{{ user.phone }}</b>
+      </div>
+      <div class="row">
+        <span>Веб-сайт:</span>
+        <b>{{ user.website || 'неизвестно' }}</b>
+      </div>
+    </section>
+    
+    <section>
+      <div class="address-info">
+        <h2>Адрес проживания</h2>
+        <div class="row">
+          <span>Город:</span>
+          <b>{{ user.address.city }}</b>
+        </div>
+        <div class="row">
+          <span>Улица:</span>
+          <b>{{ user.address.street }}</b>
+        </div>
+        <div class="row">
+          <span>Офис:</span>
+          <b>{{ user.address.suite || 'неизвестно' }}</b>
+        </div>
+        <div class="row">
+          <span>Индекс:</span>
+          <b>{{ user.address.zipcode }}</b>
+        </div>
+        <div class="row row--coordinates">
+          <span>Координаты:</span>
+          <div class="coordinates">
+            <b>{{ user.address.geo.lat }}</b>
+            <b>{{ user.address.geo.lng }}</b>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="work-info">
+        <h2>Место работы</h2>
+        <div class="row">
+          <span>Компания:</span>
+          <b>{{ user.company.name }}</b>
+        </div>
+        <div class="row">
+          <span>Миссия:</span>
+          <i>{{ user.company.catchPhrase || 'неизвестно' }}</i>
+        </div>
+        <div class="row">
+          <span>Специализация:</span>
+          <b>{{ user.company.bs || 'неизвестно' }}</b>
+        </div>
+      </div>
+    </section>
+    <button
+      class="delete-user-button"
+      id="delete-user-button"
+      (click)="onDeleteClick(user.id)">
+      Удалить пользователя
+    </button>
+  </div>
+</div>
