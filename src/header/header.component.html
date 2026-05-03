@@ -24,6 +24,26 @@
     </div>
     
     <div class="switcher-wrapper container fs-18">
+      <p-select-button
+        [options]="themeService.presets"
+        [ngModel]="themeService.theme$ | async"
+        (ngModelChange)="themeService.toggleTheme($event)"
+        optionLabel="name"
+        optionValue="value"
+        id="preset-selector"
+        class="preset-selector"
+      >
+      </p-select-button>
+      <p-toggleswitch
+        [ngModel]="themeService.isDarkMode$ | async"
+        (ngModelChange)="themeService.toggleMode($event)"
+        id="dark-mode-toggle"
+        [dt]="customStyle"
+      >
+        <ng-template #handle let-checked="checked">
+          <fa-icon class="theme-icon" [icon]="!checked ? faSun : faMoon" />  
+        </ng-template>
+      </p-toggleswitch>
       <div class="switcher-controls flex jc-right">
         <button
           [disabled]="currentWidget === 'counter'"

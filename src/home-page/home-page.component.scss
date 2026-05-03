@@ -85,6 +85,10 @@
     background-color: transparent;
     border: 1px solid #E1E3E4;
     position: relative;
+
+    fa-icon {
+      font-size: 22px;
+    }
   
     select {
       width: 270px;
@@ -211,6 +215,23 @@
 
     .advantage-icon {
       width: 66px;
+      margin-top: 10px;
+
+      fa-icon {
+        font-size: 36px;
+      }
+
+      .icon-color-1 {
+        color: rgba(85, 0, 255, 0.574);
+      }
+
+      .icon-color-2 {
+        color: #28a745;
+      }
+      
+      .icon-color-3 {
+        color: red;
+      }
     }
     
     .text {
@@ -218,26 +239,29 @@
       transition: background-color 0.6s ease, border 0.6s ease;
     }
 
-    .thumbs-up-icon {
+    .faThumbsUp-icon {
       width: 50px;
       height: 50px;
       position: absolute;
-      top: 5px;
+      top: 15px;
       right: -50px;
       z-index: 10;
       pointer-events: none;
-      animation: spin 1s linear infinite;
+      font-size: 40px;
+      color: #e6358b;
+      display: inline-block;
+      animation: spin 0.9s linear infinite;
     }
 
     @keyframes spin {
       0% {
-        transform: translateY(0);
+        transform: scaleX(-1) translateY(0);
       }
       50% {
-        transform: translateY(-15px);
+        transform: scaleX(-1) translateY(-12px);
       }
       100% {
-        transform: translateY(0);
+        transform: scaleX(-1) translateY(0);
       }
     }
 
@@ -318,10 +342,8 @@
         backdrop-filter: blur(4px);
         border-radius: 4px 0 0 4px;
       
-        img {
-          width: 24px;
-          height: 24px;
-          display: block;
+        fa-icon {
+          color: yellow
         }
 
         span {

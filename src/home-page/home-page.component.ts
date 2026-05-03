@@ -6,14 +6,22 @@ import { IParticipantsCount } from '../interfaces/IParticipantsCount';
 import { IArticle } from '../interfaces/IArticle';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from '../app/message.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPeopleGroup, faShield, faTags, faThumbsUp, IconDefinition, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule],
+  imports: [FormsModule, FontAwesomeModule, CommonModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
+
+  faThumbsUp: IconDefinition = faThumbsUp;
+  faStar: IconDefinition = faStar;
+  faCalendar: IconDefinition = faCalendar;
 
   messageService: MessageService = inject(MessageService);
   
@@ -80,19 +88,19 @@ export class HomePageComponent {
   advantages: IAdvantage[] = [
     {
       id: 1,
-      icon: 'gid-icon',
+      icon: faPeopleGroup,
       title: 'Опытный гид',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.'
     },
     {
       id: 2,
-      icon: 'hike-icon',
+      icon: faShield,
       title: 'Безопасный поход',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.'
     },
     {
       id: 3,
-      icon: 'prices-icon',
+      icon: faTags,
       title: 'Лояльные цены',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.'
     },

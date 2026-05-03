@@ -16,33 +16,37 @@ body {
     width: 300px;
     height: 100px;
     background-color: #D9D9D9;
-    flex-direction: row;
     position: relative;
     border-radius: 15px;
 
     .download-icon {
-      width: 51px;
-      height: 51px;
       position: absolute;
-      left: 47px;
-      pointer-events: none;
-      animation: rotation 1.5s linear infinite;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 51px;
+      color: #3f0a74;
+      display: inline-block;
+      animation: fa-spin 1.5s linear infinite;
     }
     
-    @keyframes rotation {
+    @keyframes fa-spin {
       0% {
-        transform: rotate(0deg);
+        transform: translateY(-50%) rotate(0deg);
       }
       100% {
-        transform: rotate(360deg);
+        transform: translateY(-50%) rotate(360deg);
       }
     }
 
     .download-demo {
       position: absolute;
-      left: 168px;
-      height: 100%;
-      width: 517px;
+      left: 108px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: #333;
+      white-space: nowrap;
     }
   }
 }
