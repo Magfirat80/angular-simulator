@@ -45,7 +45,7 @@ export class ThemeService {
     this.themeSubject.next(eventValue);
     this.localStorageService.setValue('theme', eventValue);
     
-    const selectedTheme = this.presets.find(p => p.value === eventValue);
+    const selectedTheme: IThemes | undefined = this.presets.find(p => p.value === eventValue);
     if (selectedTheme) {
       usePreset(selectedTheme.preset);
     }
