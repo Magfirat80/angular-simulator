@@ -53,23 +53,4 @@ export class HeaderComponent {
     this.currentWidget = widget;
   }
 
-  customStyle = {
-    colorScheme: {
-      light: {
-        root: {
-          handleBackground: '{surface.0}',
-          handleHoverBackground: '{surface.200}',
-          checkedHandleBackground: '{yellow.400}',
-          checkedHandleHoverBackground: '{yellow.300}'
-        }
-      },
-      dark: {
-        root: {
-          handleBackground: '{surface.0}',
-          checkedHandleBackground: '{yellow.400}'
-        }
-      }
-    }
-  };
-
 }

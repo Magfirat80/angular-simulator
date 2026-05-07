@@ -1,4 +1,4 @@
-import { DestroyRef, inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { usePreset } from '@primeuix/themes';
@@ -6,7 +6,8 @@ import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import Nora from '@primeuix/themes/nora';
 import { Theme } from '../enums/Theme';
-import type { IThemes } from '../interfaces/IThemes';
+import type { ITheme } from '../interfaces/ITheme';
+import type { ToggleSwitchDesignTokens } from '@primeuix/themes/types/toggleswitch';
 
 @Injectable({
   providedIn: 'root',
@@ -16,39 +17,57 @@ export class ThemeService {
   private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   private isDarkModeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.localStorageService.getValue('isDark') ?? false); 
-  isDarkMode$: Observable<boolean> = this.isDarkModeSubject.asObservable();
+  isDarkMode$: Observable<boolean> = this.isDarkModeSubject.asObservable().pipe(
+    tap(
+      (isDark: boolean) => (
+        document.documentElement.classList.toggle('mode-dark', isDark)
+      )
+    )
+  );
 
   private themeSubject: BehaviorSubject<Theme> = new BehaviorSubject<Theme>((this.localStorageService.getValue<Theme>('theme') as Theme) ?? Theme.AURA);
   theme$: Observable<Theme> = this.themeSubject.asObservable();
 
-  private destroyRef: DestroyRef = inject(DestroyRef);
-
-  readonly presets: IThemes[] = [
+  readonly presets: ITheme[] = [
     { name: 'aura', value: Theme.AURA, preset: Aura },
     { name: 'lara', value: Theme.LARA, preset: Lara },
     { name: 'nora', value: Theme.NORA, preset: Nora }
   ];
 
-  constructor() {
-    const isDark: boolean = this.isDarkModeSubject.getValue();
-    document.documentElement.classList.toggle('mode-dark', isDark);
-  }
-  
-  toggleMode(eventValue: boolean): void {
-    this.isDarkModeSubject.next(eventValue);
-    this.localStorageService.setValue('isDark', eventValue);
-    document.documentElement.classList.toggle('mode-dark', eventValue);
+  customStyle: Partial<ToggleSwitchDesignTokens> = {
+    colorScheme: {
+      light: {
+        root: {
+          background: '{surface.0}',
+          hoverBackground: '{surface.200}',
+          checkedBackground: '{yellow.400}',
+          checkedHoverBackground: '{yellow.300}'
+        }
+      },
+      dark: {
+        root: {
+          background: '{surface.0}',
+          checkedBackground: '{yellow.400}'
+        }
+      }
+    }
+  };
+
+  toggleMode(isDarkMode: boolean): void {
+    this.isDarkModeSubject.next(isDarkMode);
+    this.localStorageService.setValue('isDark', isDarkMode);
+    document.documentElement.classList.toggle('mode-dark', isDarkMode);
   }
 
-  toggleTheme(eventValue: Theme): void {
-    if (eventValue === null) return;
-    this.themeSubject.next(eventValue);
-    this.localStorageService.setValue('theme', eventValue);
+  toggleTheme(themeName: Theme): void {
+    this.themeSubject.next(themeName);
+    this.localStorageService.setValue('theme', themeName);
+  
+    const selectedTheme: ITheme | undefined = this.presets.find(
+      (preset: ITheme) => preset.value === themeName
+    );
     
-    const selectedTheme: IThemes | undefined = this.presets.find(p => p.value === eventValue);
-    if (selectedTheme) {
-      usePreset(selectedTheme.preset);
-    }
+    if (selectedTheme) usePreset(selectedTheme.preset);
   }
 
 }

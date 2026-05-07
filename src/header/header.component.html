@@ -27,18 +27,19 @@
       <p-select-button
         [options]="themeService.presets"
         [ngModel]="themeService.theme$ | async"
-        (ngModelChange)="themeService.toggleTheme($event)"
+        (onChange)="themeService.toggleTheme($event.value)"
         optionLabel="name"
         optionValue="value"
         id="preset-selector"
         class="preset-selector"
+        [unselectable]="true"
       >
       </p-select-button>
       <p-toggleswitch
         [ngModel]="themeService.isDarkMode$ | async"
-        (ngModelChange)="themeService.toggleMode($event)"
+        (onChange)="themeService.toggleMode($event.checked)"
         id="dark-mode-toggle"
-        [dt]="customStyle"
+        [dt]="themeService.customStyle"
       >
         <ng-template #handle let-checked="checked">
           <fa-icon class="theme-icon" [icon]="!checked ? faSun : faMoon" />  
