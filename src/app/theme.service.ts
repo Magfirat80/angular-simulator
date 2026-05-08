@@ -16,7 +16,11 @@ export class ThemeService {
   
   private localStorageService: LocalStorageService = inject(LocalStorageService);
 
-  private isDarkModeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.localStorageService.getValue('isDark') ?? false); 
+  private getIsDarkModeFromStorage(): boolean {
+    return this.localStorageService.getValue('isDark') ?? false;
+  } 
+
+  private isDarkModeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getIsDarkModeFromStorage()); 
   isDarkMode$: Observable<boolean> = this.isDarkModeSubject.asObservable().pipe(
     tap(
       (isDark: boolean) => (
@@ -25,7 +29,11 @@ export class ThemeService {
     )
   );
 
-  private themeSubject: BehaviorSubject<Theme> = new BehaviorSubject<Theme>((this.localStorageService.getValue<Theme>('theme') as Theme) ?? Theme.AURA);
+  private getValueThemeFromStorage(): Theme {
+    return (this.localStorageService.getValue<Theme>('theme') as Theme) ?? Theme.AURA;
+  }
+  
+  private themeSubject: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(this.getValueThemeFromStorage());
   theme$: Observable<Theme> = this.themeSubject.asObservable();
 
   readonly presets: ITheme[] = [
@@ -67,7 +75,9 @@ export class ThemeService {
       (preset: ITheme) => preset.value === themeName
     );
     
-    if (selectedTheme) usePreset(selectedTheme.preset);
+    if (selectedTheme) {
+      usePreset(selectedTheme.preset);  
+    }
   }
 
 }
