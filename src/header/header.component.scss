@@ -67,13 +67,25 @@
       color: #ffcc00;
       font-weight: bold;
     }
-
   }
   
   .switcher-wrapper {
     justify-content: end;
     margin-top: 8px;
     height: 25px;
+
+    p-toggleswitch {
+      margin-right: 50px;
+      display: inline-block;
+      transform: scale(2);
+      transform-origin: left center;
+
+    }
+
+    .theme-icon {
+      margin-top: 2px;
+      transform: scale(0.7);
+    }
   }
 
   .switcher-controls {
@@ -109,5 +121,9 @@
       margin-bottom: auto;
       padding: 5px 5px 5px 15px;
     }
+  }
+
+  .preset-selector {
+    margin-right: 20px;
   }
 }

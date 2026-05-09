@@ -21,7 +21,7 @@ export class UserService {
 
   setUsers(users: IUser[]): void {
     this.usersSubject.next(users);
-    this.localStorageService.setValue('users', JSON.stringify(users));
+    this.localStorageService.setValue('users', users);
   }
 
   getUsers(): IUser[] {
@@ -33,6 +33,7 @@ export class UserService {
     
     if (usersFromStorage) {
       return of(usersFromStorage);
+
     } else {
       this.loaderService.showSpinner();
       return this.userApiService.getUsers()

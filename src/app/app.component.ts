@@ -9,14 +9,18 @@ import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { MessageComponent } from '../message/message.component';
 import { LoaderComponent } from '../loader/loader.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCoffee, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, RouterOutlet, FooterComponent, HeaderComponent, MessageComponent, LoaderComponent],
+  imports: [FormsModule, RouterOutlet, FooterComponent, HeaderComponent, MessageComponent, LoaderComponent, FontAwesomeModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+
+  faCoffee: IconDefinition = faCoffee;
 
   localStorageService: LocalStorageService = inject(LocalStorageService);
 

@@ -18,7 +18,7 @@
           </div>
           <div class="selection-field fs-16">
             <input type="text" name="tour-date" id="tour-date" [(ngModel)] = "selectedDate" required placeholder="Дата похода">
-            <img src="/images/calendar-logo.svg" alt="calendar">
+            <fa-icon [icon]="faCalendar" />
             <span class="label-selection-field fs-14">укажите дату</span>
           </div>
           <div class="selection-field fs-16" >
@@ -87,13 +87,13 @@
         @for (advantage of advantages; track advantage.id) {
           <div class="about flex" (click)="selectAdvantage(advantage.id)">
             <div class="advantage-icon">
-              <img [src]="'/images/' + advantage.icon + '.svg'" [alt]="advantage.icon">
+              <fa-icon [icon]="advantage.icon" [ngClass]="'icon-color-' + advantage.id" />
             </div>
             <div class="text" [class.active-advantage]="advantage.id === selectedAdvantageId">
               <p class="title">{{ advantage.title }}</p>
               <p class="description">{{ advantage.description }}</p>
               @if (advantage.id === selectedAdvantageId) {
-                <img class="thumbs-up-icon" src="/images/thumbs-up-icon.svg" alt="thumbs-up">
+                <fa-icon [icon]="faThumbsUp" class="faThumbsUp-icon"/>
               }
             </div>
           </div>
@@ -127,7 +127,7 @@
           <div class="wrapper-map">
             <img [src]="'/images/' + map.poster + '.png'" [alt]="map.poster">
             <div class="rating flex ai-center jc-center">
-              <img src="/images/star-icon.svg" alt="star-icon">
+              <fa-icon [icon]="faStar" />
               <span>{{ map.estimation }}</span>
             </div>
             <div class="map-description flex ai-center">

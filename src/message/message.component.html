@@ -9,16 +9,11 @@
 
 <ng-template #messageTemplate let-msg="currentMessage">
   <div class="message-window flex ai-center">
-    <img class="letter-icon" src="/images/letter-icon.svg" alt="letter-icon">
+    <fa-icon [icon]="faEnvelopeOpen" class="letter-icon" />
     <div class="message-body flex">
       <span class="message-type">{{ msg.type }}</span>
       <span class="message-content">{{ msg.content }}</span>
     </div>
-    <img
-      class="close-icon"
-      src="/images/close-icon.svg"
-      alt="close-icon"
-      (click)="messageService.closeMessage(msg)"
-    >
+    <fa-icon [icon]="faCircleXmark" class="close-icon" />
   </div>
 </ng-template>
