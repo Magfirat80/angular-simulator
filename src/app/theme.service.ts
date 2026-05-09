@@ -29,11 +29,11 @@ export class ThemeService {
     )
   );
 
-  private getValueThemeFromStorage(): Theme {
+  private getThemeFromStorage(): Theme {
     return (this.localStorageService.getValue<Theme>('theme') as Theme) ?? Theme.AURA;
   }
   
-  private themeSubject: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(this.getValueThemeFromStorage());
+  private themeSubject: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(this.getThemeFromStorage());
   theme$: Observable<Theme> = this.themeSubject.asObservable();
 
   readonly presets: ITheme[] = [
