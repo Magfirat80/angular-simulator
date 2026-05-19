@@ -1,51 +1,51 @@
 <div class="create-user-form flex">
   <form [formGroup]="userForm">
     <label for="name">Name</label>
-    <input type="text" id="name" formControlName="name" required>
+    <input type="text" id="name" formControlName="name" required appAnimatedGradient [options]="gradientOptions">
 
     <label for="username">Username</label>
-    <input type="text" id="username" formControlName="username" required>
+    <input type="text" id="username" formControlName="username" required appAnimatedGradient [options]="gradientOptions">
 
     <label for="email">Email</label>
-    <input type="email" id="email" formControlName="email" required>
+    <input type="email" id="email" formControlName="email" required appAnimatedGradient [options]="gradientOptions">
 
     <label for="phone">Phone</label>
-    <input type="text" id="phone" formControlName="phone" required>
+    <input type="text" id="phone" formControlName="phone" required appAnimatedGradient [options]="gradientOptions">
 
     <label for="website">Website</label>
-    <input type="text" id="website" formControlName="website">
+    <input type="text" id="website" formControlName="website" appAnimatedGradient [options]="gradientOptions">
 
     <div formGroupName="address">
       <label for="address-city">Address city</label>
-      <input type="text" id="address-city" formControlName="city" required>
+      <input type="text" id="address-city" formControlName="city" required appAnimatedGradient [options]="gradientOptions">
 
       <label for="address-street">Address street</label>
-      <input type="text" id="address-street" formControlName="street" required>
+      <input type="text" id="address-street" formControlName="street" required appAnimatedGradient [options]="gradientOptions">
 
       <label for="address-suite">Address suite</label>
-      <input type="text" id="address-suite" formControlName="suite">
+      <input type="text" id="address-suite" formControlName="suite" appAnimatedGradient [options]="gradientOptions">
 
       <label for="address-zipcode">Address zipcode</label>
-      <input type="text" id="address-zipcode" formControlName="zipcode" required>
+      <input type="text" id="address-zipcode" formControlName="zipcode" required appAnimatedGradient [options]="gradientOptions">
     
       <div formGroupName="geo">
         <label for="address-geo-lat">Address geo lat</label>
-        <input type="text" id="address-geo-lat" formControlName="lat" required>
+        <input type="text" id="address-geo-lat" formControlName="lat" required appAnimatedGradient [options]="gradientOptions">
 
         <label for="address-geo-lng">Address geo lng</label>
-        <input type="text" id="address-geo-lng" formControlName="lng" required>
+        <input type="text" id="address-geo-lng" formControlName="lng" required appAnimatedGradient [options]="gradientOptions">
       </div>
     </div>
     
     <div formGroupName="company">
       <label for="company-name">Company name</label>
-      <input type="text" id="company-name" formControlName="name" required>
+      <input type="text" id="company-name" formControlName="name" required appAnimatedGradient [options]="gradientOptions">
 
       <label for="company-catchPhrase">Company catchPhrase</label>
-      <input type="text" id="company-catchPhrase" formControlName="catchPhrase">
+      <input type="text" id="company-catchPhrase" formControlName="catchPhrase" appAnimatedGradient [options]="gradientOptions">
 
       <label for="company-bs">Company bs</label>
-      <input type="text" id="company-bs" formControlName="bs">
+      <input type="text" id="company-bs" formControlName="bs" appAnimatedGradient [options]="gradientOptions">
     </div>
   </form>
   <button

@@ -1,14 +1,22 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import type { IUser } from '../interfaces/IUser';
+import { AppAnimatedGradientDirective } from '../app/app-animated-gradient.directive';
+import { IGradientConfiguration } from '../interfaces/IGradientConfiguration';
 
 @Component({
   selector: 'app-create-user',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AppAnimatedGradientDirective],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss',
 })
 export class CreateUserComponent {
+
+  gradientOptions: IGradientConfiguration = {
+    delay: 1000,
+    colors: ['blue', 'pink', 'black'],
+    thickness: '2px',
+  };
 
   @Output() userCreate: EventEmitter<IUser> = new EventEmitter<IUser>();
 
