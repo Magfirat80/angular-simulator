@@ -27,13 +27,8 @@ export class AppAnimatedGradientDirective {
 
   @HostBinding('style.border-image')
   get borderImage(): string | null {
-    if (!this.isActive) {
-      return null;
-    }
-
     const colorsString: string = this.options.colors?.join(', ') ?? 'blue, white, brown';
-
-    return `linear-gradient(90deg, ${colorsString}) 1`;
+    return this.isActive ? `linear-gradient(90deg, ${ colorsString }) 1` : null;
   }
 
   @HostListener('mouseenter')

@@ -1,4 +1,7 @@
-<app-users-filter (usersFiltering)="onFilterUsers($event)"></app-users-filter>
+<app-users-filter
+  [filteredCountUsers]="(filteredUsers$ | async)?.length ?? 0"  
+  (usersFiltering)="onFilterUsers($event)">
+</app-users-filter>
 <div class="users-page-content flex">
   <div class="wrapper-users-modules">    
     <app-create-user (userCreate)="onSumbit($event)"></app-create-user>

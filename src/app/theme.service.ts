@@ -59,7 +59,7 @@ export class ThemeService {
         }
       }
     }
-  };
+  }
 
   toggleMode(isDarkMode: boolean): void {
     this.isDarkModeSubject.next(isDarkMode);

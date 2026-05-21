@@ -16,4 +16,5 @@ export class AppBoldDirective {
   onLeave(): void {
     this.fontWeight = 'bold';
   }
+  
 }
