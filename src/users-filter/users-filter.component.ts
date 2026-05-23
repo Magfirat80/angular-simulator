@@ -1,8 +1,8 @@
-import { Component, DestroyRef, EventEmitter, inject, Input, Output, type OnInit } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, Output, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs';
-import { PluralPipe } from "../app/plural.pipe";
+import { PluralPipe } from "../pipes/plural.pipe";
 
 @Component({
   selector: 'app-users-filter',

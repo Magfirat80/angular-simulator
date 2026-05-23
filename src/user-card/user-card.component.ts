@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IUser } from '../interfaces/IUser';
 import { UpperCasePipe } from '@angular/common';
-import { PhoneNumberPipe } from '../app/phone-number.pipe';
-import { AppBoldDirective } from '../app/app-bold.directive';
-import { AppAnimatedGradientDirective } from '../app/app-animated-gradient.directive';
+import { PhoneNumberPipe } from '../pipes/phone-number.pipe';
+import { AppBoldDirective } from '../directives/app-bold.directive';
+import { AppAnimatedGradientDirective } from '../directives/app-animated-gradient.directive';
 import { IGradientConfiguration } from '../interfaces/IGradientConfiguration';
-import { NumberFormatMode } from '../enums/NumberFormatMode';
+import { PhoneMode } from '../enums/PhoneMode';
 
 @Component({
   selector: 'app-user-card',
@@ -14,15 +14,14 @@ import { NumberFormatMode } from '../enums/NumberFormatMode';
   styleUrl: './user-card.component.scss',
 })
 export class UserCardComponent {
-  
-  readonly numberFormatMode: NumberFormatMode = NumberFormatMode.INTERNATIONAL;
+  readonly phoneMode: PhoneMode = PhoneMode.NATIONAL;
 
   gradientOptions: IGradientConfiguration = {
     delay: 1000,
     colors: ['green', 'red', 'yellow'],
     thickness: '2px',
   };
-  
+
   @Input() user!: IUser;
   @Output() userDelete: EventEmitter<number> = new EventEmitter<number>();
 
