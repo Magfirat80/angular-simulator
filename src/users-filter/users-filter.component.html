@@ -2,8 +2,9 @@
   <input
     type="text"
     [formControl]="inputField"
-    placeholder="Автопоиск по имени пользователя"
+    placeholder="Поиск по имени пользователя"
     class="search-input"
     id="search-input"
   >
+  <span>Найдено: {{ filteredCountUsers | plural: 'карточка':'карточки':'карточек' }}</span>
 </div>

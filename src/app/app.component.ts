@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import './training'
+import './training';
 import { Color } from '../enums/Color';
-import './collection'
+import './collection';
 import { FormsModule } from '@angular/forms';
-import { LocalStorageService } from './local-storage.service';
+import { LocalStorageService } from '../services/local-storage.service';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
@@ -14,12 +14,19 @@ import { faCoffee, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, RouterOutlet, FooterComponent, HeaderComponent, MessageComponent, LoaderComponent, FontAwesomeModule],
+  imports: [
+    FormsModule,
+    RouterOutlet,
+    FooterComponent,
+    HeaderComponent,
+    MessageComponent,
+    LoaderComponent,
+    FontAwesomeModule,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-
   faCoffee: IconDefinition = faCoffee;
 
   localStorageService: LocalStorageService = inject(LocalStorageService);
@@ -44,5 +51,5 @@ export class AppComponent {
     entriesCount++;
     this.localStorageService.setValue('entries-count', String(entriesCount));
   }
-
+  
 }

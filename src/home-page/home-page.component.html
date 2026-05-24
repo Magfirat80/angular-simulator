@@ -1,58 +1,58 @@
 <section class="banner">
-    <div class="main-title flex jc-center">
-      <h1 class="main-title-content">
-        Насладись прогулкой в горах <br> с командой единомышленников
-      </h1>
-    </div>
-    <div class="tour-wrapper flex jc-center">
-      <div class="tour-search container flex ai-center">
-        <form class="form-tour flex">
-          <div class="selection-field fs-16">
-            <select name="tour-location" id="tour-location" [(ngModel)]="selectedTour">
-              <option value="" disabled selected>Локация для тура</option>
-              @for (location of locations; track location.id) {
-                <option [ngValue]="location.tourLocation">{{ location.tourLocation }}</option>
-              }
-            </select>
-            <span class="label-selection-field fs-14">выберите из списка</span>
-          </div>
-          <div class="selection-field fs-16">
-            <input type="text" name="tour-date" id="tour-date" [(ngModel)] = "selectedDate" required placeholder="Дата похода">
-            <fa-icon [icon]="faCalendar" />
-            <span class="label-selection-field fs-14">укажите дату</span>
-          </div>
-          <div class="selection-field fs-16" >
-            <select name="group-size" id="group-size" [(ngModel)] = "selectedGroup">
-              <option value="" disabled selected>Участники</option>
-              @for (group of groups; track group.id) {
-                <option [value]="group.participantsCount" >{{ group.participantsCount }}</option>
-              }
-            </select>
-            <span class="label-selection-field fs-14">выберите из списка</span>
-          </div>
-          <div>
-            <button
-              [disabled]="!selectedTour || !selectedDate || !selectedGroup"
-              class="search-tour-button fs-16 bold"
-              name="search-tour-button"
-              id="search-tour-button"
-              type="submit"
-            >
-              Найти программу
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="live-input container flex fs-20">
-      <div class="flex">
-        <input [(ngModel)]="liveInput" type="text" name="live-input" id="live-input" placeholder="Введите что-нибудь ...">
-        <div class="live-output flex">
-          {{ liveInput }}
+  <div class="main-title flex jc-center">
+    <h1 class="main-title-content">
+      Насладись прогулкой в горах <br> с командой единомышленников
+    </h1>
+  </div>
+  <div class="tour-wrapper flex jc-center">
+    <div class="tour-search container flex ai-center">
+      <form class="form-tour flex">
+        <div class="selection-field fs-16">
+          <select name="tour-location" id="tour-location" [(ngModel)]="selectedTour">
+            <option value="" disabled selected>Локация для тура</option>
+            @for (location of locations; track location.id) {
+              <option [ngValue]="location.tourLocation">{{ location.tourLocation }}</option>
+            }
+          </select>
+          <span class="label-selection-field fs-14">выберите из списка</span>
         </div>
+        <div class="selection-field fs-16">
+          <input type="text" name="tour-date" id="tour-date" [(ngModel)] = "selectedDate" required placeholder="Дата похода">
+          <fa-icon [icon]="faCalendar" />
+          <span class="label-selection-field fs-14">укажите дату</span>
+        </div>
+        <div class="selection-field fs-16" >
+          <select name="group-size" id="group-size" [(ngModel)] = "selectedGroup">
+            <option value="" disabled selected>Участники</option>
+            @for (group of groups; track group.id) {
+              <option [value]="group.participantsCount" >{{ group.participantsCount }}</option>
+            }
+          </select>
+          <span class="label-selection-field fs-14">выберите из списка</span>
+        </div>
+        <div>
+          <button
+            [disabled]="!selectedTour || !selectedDate || !selectedGroup"
+            class="search-tour-button fs-16 bold"
+            name="search-tour-button"
+            id="search-tour-button"
+            type="submit"
+          >
+            Найти программу
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="live-input container flex fs-20">
+    <div class="flex">
+      <input [(ngModel)]="liveInput" type="text" name="live-input" id="live-input" placeholder="Введите что-нибудь ...">
+      <div class="live-output flex">
+        {{ liveInput }}
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <section>
     <div class="wrapper-about-trip flex jc-center">

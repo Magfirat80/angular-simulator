@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { UserService } from '../app/user.service';
+import { UserService } from '../services/user.service';
 import { BehaviorSubject, combineLatest, map, tap, type Observable } from 'rxjs';
 import type { IUser } from '../interfaces/IUser';
 import { AsyncPipe } from '@angular/common';
@@ -14,7 +14,6 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
   styleUrl: './users-page.component.scss',
 })
 export class UsersPageComponent implements OnInit {
-
   userService: UserService = inject(UserService);
   users$: Observable<IUser[]> = this.userService.users$;
 
@@ -22,20 +21,18 @@ export class UsersPageComponent implements OnInit {
 
   filteredUsers$: Observable<IUser[]> = combineLatest([
     this.userService.users$,
-    this.filterSubject.asObservable()
+    this.filterSubject.asObservable(),
   ]).pipe(
     map(([users, filter]: [IUser[], string]) =>
-      users.filter((user: IUser) =>
-        user.name.toLowerCase().includes(filter)
-      )
-    )
+      users.filter((user: IUser) => user.name.toLowerCase().includes(filter)),
+    ),
   );
-  
+
   ngOnInit(): void {
-    this.userService.loadUsers()
-      .pipe(
-        tap((user: IUser[]) => this.userService.setUsers(user))
-      ).subscribe();
+    this.userService
+      .loadUsers()
+      .pipe(tap((user: IUser[]) => this.userService.setUsers(user)))
+      .subscribe();
   }
 
   onFilterUsers(value: string): void {
@@ -49,5 +46,5 @@ export class UsersPageComponent implements OnInit {
   onSumbit(user: IUser): void {
     this.userService.createUser(user);
   }
-  
+
 }
