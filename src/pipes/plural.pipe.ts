@@ -21,8 +21,8 @@ export class PluralPipe implements PipeTransform {
     singularGenitive: string,
     pluralGenitive: string
   ): string {
-    const lastTwoDigits = value % 100;
-    const lastDigit = value % 10;
+    const lastTwoDigits: number = value % 100;
+    const lastDigit:number = value % 10;
     
     if (value === 0 || (lastTwoDigits >= 11 && lastTwoDigits <= 14)) {
       return pluralGenitive;
