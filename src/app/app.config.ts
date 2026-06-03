@@ -6,7 +6,10 @@ import Lara from '@primeuix/themes/lara';
 import Nora from '@primeuix/themes/nora';
 import { routes } from './app.routes';
 import { Theme } from '../enums/Theme';
-import type { Preset } from '@primeuix/themes/types';
+import { Preset } from '@primeuix/themes/types';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { loggingInterceptor } from './logging.interceptor';
+import { errorInterceptor } from './error.interceptor';
 
 function applyThemeFromStorage(): Preset {
 
@@ -34,7 +37,11 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: '.mode-dark'
         }
       }
-    })
+    }),
+
+    provideHttpClient(
+      withInterceptors([loggingInterceptor, errorInterceptor])
+    )
   ]
   
 }

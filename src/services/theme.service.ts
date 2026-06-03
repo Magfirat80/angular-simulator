@@ -6,13 +6,14 @@ import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import Nora from '@primeuix/themes/nora';
 import { Theme } from '../enums/Theme';
-import type { ITheme } from '../interfaces/ITheme';
-import type { ToggleSwitchDesignTokens } from '@primeuix/themes/types/toggleswitch';
+import { ITheme } from '../interfaces/ITheme';
+import { ToggleSwitchDesignTokens } from '@primeuix/themes/types/toggleswitch';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
+  
   private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   private getIsDarkModeFromStorage(): boolean {
