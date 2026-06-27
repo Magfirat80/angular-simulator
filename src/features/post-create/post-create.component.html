@@ -1,0 +1,52 @@
+<div class="post-create-page">
+  <h1>Создание поста</h1>
+
+  <div class="form">
+    <label>Заголовок</label>
+    <input
+      pInputText
+      [(ngModel)] = "post.title"
+    >
+
+    <label>Текст поста</label>
+    <textarea 
+      rows = "6"
+      [(ngModel)] = "post.body"
+    >
+    </textarea>
+
+    <label>Теги (через запятую)</label>
+    <input
+      pInputText
+      [(ngModel)] = "post.tags"
+    >
+    
+    <label>Просмотры</label>
+    <input
+      pInputText
+      type="number"
+      [(ngModel)] = "post.views"
+    >
+
+    <label>User ID</label>
+    <input
+      pInputText
+      type="number"
+      [(ngModel)] = "post.userId"
+    >
+
+    <button
+      pButton
+      label="Создать пост"
+      (click)="createPost()"
+    >
+    </button>
+
+    <button
+      pButton
+      label="Отмена"
+      (click)="backToPosts()"
+    >
+    </button>
+  </div>
+</div>

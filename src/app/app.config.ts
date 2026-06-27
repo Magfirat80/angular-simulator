@@ -10,6 +10,7 @@ import { Preset } from '@primeuix/themes/types';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loggingInterceptor } from './logging.interceptor';
 import { errorInterceptor } from './error.interceptor';
+import { loaderInterceptor } from './loader.interceptor';
 
 function applyThemeFromStorage(): Preset {
 
@@ -40,7 +41,7 @@ export const appConfig: ApplicationConfig = {
     }),
 
     provideHttpClient(
-      withInterceptors([loggingInterceptor, errorInterceptor])
+      withInterceptors([loaderInterceptor, loggingInterceptor, errorInterceptor])
     )
   ]
   

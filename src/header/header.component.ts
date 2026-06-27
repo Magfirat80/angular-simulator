@@ -40,6 +40,7 @@ export class HeaderComponent {
   navList: INavigation[] = [
     { id: 1, navItem: 'Главная', path: '/' },
     { id: 2, navItem: 'Пользователи', path: '/users' },
+    { id: 3, navItem: 'Посты', path: '/posts' },
   ];
 
   constructor() {

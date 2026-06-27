@@ -1,0 +1,99 @@
+<div class="posts-page">
+  <h1>Posts</h1>
+
+  <div class="table-wrapper">
+    <p-context-menu
+      #cm
+      [model]="menuItems"
+    ></p-context-menu>
+    
+    @if (loading) {
+      <div class="skeleton-table">
+        @for (item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track item) {
+          <div class="skeleton-row">
+            <p-skeleton width="400px" height="2.1rem"></p-skeleton>
+            <p-skeleton width="400px" height="2.1rem"></p-skeleton>
+            <p-skeleton width="400px" height="2.1rem"></p-skeleton>
+          </div>
+        }
+      </div>
+    } @else {
+      <p-table
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first} - {last} из {totalRecords}"
+        [value]="posts"
+        dataKey="id"
+        [lazy]="true"
+        [paginator]="true"
+        [rows]="rows"
+        [rowsPerPageOptions]="[10, 20, 50]"
+        [first]="first"
+        [totalRecords]="totalRecords"
+        [scrollable]="true"
+        [contextMenu]="cm"
+        [(contextMenuSelection)]="selectedPost"
+        (onPage)="onPageChange($event)"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 300px">Title</th>
+            <th style="width: 250px">Tags</th>
+            <th style="width: 120px">Views</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-post>
+          <tr 
+            [pContextMenuRow]="post"
+            (dblclick)="onRowDoubleClick(post)"
+          >
+            <td class="cell-title">{{ post.title }}</td>
+            <td class="cell-tags">{{ post.tags.join(', ') }}</td>
+            <td class="cell-views">{{ post.views }}</td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="3">Посты не найдены</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    }
+  </div>
+  <p-button (click)="openCreatePost()"
+  >Перейти к созданию поста</p-button>
+</div>
+
+<p-dialog
+  header="Редактирование поста"
+  [(visible)]="editDialogVisible"
+  [modal]="true"
+  [style]="{ width: '600px' }"
+>
+  @if (editablePost) {
+    <div class="form">
+      <label>Заголовок</label>
+      <input pInputText [(ngModel)]="editablePost.title">
+
+      <label>Теги</label>
+      <input pInputText [(ngModel)]="editableTags">
+
+      <label>Счетчик просмотров</label>
+      <input pInputText type="number" [(ngModel)]="editablePost.views">
+    </div>
+  }
+
+  <ng-template pTemplate="footer">
+    <button 
+      pButton label="Отмена"
+      (click)="editDialogVisible = false">
+    </button>
+
+    <button
+      pButton label="Сохранить"
+      (click)="savePost()"
+      [disabled]="!editablePost">
+    </button>
+  </ng-template>
+</p-dialog>

@@ -51,5 +51,5 @@ export class AppComponent {
     entriesCount++;
     this.localStorageService.setValue('entries-count', String(entriesCount));
   }
-  
+
 }
