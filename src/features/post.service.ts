@@ -7,26 +7,26 @@ import type { IPost } from './interfaces/IPost';
 })
 export class PostService {
   
-  private api: PostApiService = inject(PostApiService);
+  private postApiService: PostApiService = inject(PostApiService);
 
   getPosts(limit: number, skip: number) {
-    return this.api.getPosts(limit, skip);
+    return this.postApiService.getPosts(limit, skip);
   }
 
   getPost(id: number) {
-    return this.api.getPostById(id);
+    return this.postApiService.getPostById(id);
   }
 
   createPost(post: Partial<IPost>) {
-    return this.api.createPost(post);
+    return this.postApiService.createPost(post);
   }
 
   updatePost(id: number, post: Partial<IPost>) {
-    return this.api.updatePost(id, post);
+    return this.postApiService.updatePost(id, post);
   }
 
   deletePost(id: number) {
-    return this.api.deletePost(id);
+    return this.postApiService.deletePost(id);
   }
 
 }

@@ -7,7 +7,7 @@
       [model]="menuItems"
     ></p-context-menu>
     
-    @if (loading) {
+    @if (isLoading) {
       <div class="skeleton-table">
         @for (item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track item) {
           <div class="skeleton-row">
@@ -64,36 +64,3 @@
   <p-button (click)="openCreatePost()"
   >Перейти к созданию поста</p-button>
 </div>
-
-<p-dialog
-  header="Редактирование поста"
-  [(visible)]="editDialogVisible"
-  [modal]="true"
-  [style]="{ width: '600px' }"
->
-  @if (editablePost) {
-    <div class="form">
-      <label>Заголовок</label>
-      <input pInputText [(ngModel)]="editablePost.title">
-
-      <label>Теги</label>
-      <input pInputText [(ngModel)]="editableTags">
-
-      <label>Счетчик просмотров</label>
-      <input pInputText type="number" [(ngModel)]="editablePost.views">
-    </div>
-  }
-
-  <ng-template pTemplate="footer">
-    <button 
-      pButton label="Отмена"
-      (click)="editDialogVisible = false">
-    </button>
-
-    <button
-      pButton label="Сохранить"
-      (click)="savePost()"
-      [disabled]="!editablePost">
-    </button>
-  </ng-template>
-</p-dialog>

@@ -1,16 +1,12 @@
-@if (post) {
-  <div class="post-detail">
-    <h1>{{ post.title }}</h1>
-    <p>{{ post.body }}</p>
-    <p>
-      <strong>Теги:</strong>
-      {{ post.tags.join(', ') }}
-    </p>
-    <p>
-      <strong>Просмотры:</strong>
-      {{ post.views }}
-    </p>
-  </div>
-} @else {
-  <p>Пост не найден</p>
-}
+<div class="post-detail">
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.body }}</p>
+  <p>
+    <strong>Теги:</strong>
+    {{ post.tags.join(', ') }}
+  </p>
+  <p>
+    <strong>Просмотры:</strong>
+    {{ post.views }}
+  </p>
+</div>

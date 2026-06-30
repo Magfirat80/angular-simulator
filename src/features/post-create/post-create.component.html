@@ -1,52 +1,60 @@
 <div class="post-create-page">
   <h1>Создание поста</h1>
 
-  <div class="form">
-    <label>Заголовок</label>
+  <form
+    class="form"
+    [formGroup]="postForm">
+
+    <label for="title">Заголовок</label>
     <input
+      id="title"
       pInputText
-      [(ngModel)] = "post.title"
+      formControlName="title"
     >
 
-    <label>Текст поста</label>
-    <textarea 
-      rows = "6"
-      [(ngModel)] = "post.body"
-    >
+    <label for="body">Текст поста</label>
+    <textarea
+      id="body"
+      rows="6"
+      formControlName="body">
     </textarea>
 
-    <label>Теги (через запятую)</label>
+    <label for="tags">Теги (через запятую)</label>
     <input
+      id="tags"
       pInputText
-      [(ngModel)] = "post.tags"
+      formControlName="tags"
     >
     
-    <label>Просмотры</label>
+    <label for="views">Просмотры</label>
     <input
+      id="views"
       pInputText
       type="number"
-      [(ngModel)] = "post.views"
+      formControlName="views"
     >
 
-    <label>User ID</label>
+    <label for="userId">User ID</label>
     <input
+      id="userId"
       pInputText
       type="number"
-      [(ngModel)] = "post.userId"
+      formControlName="userId"
     >
 
     <button
+      id="createPostBtn"
       pButton
       label="Создать пост"
-      (click)="createPost()"
-    >
+      (click)="createPost()">
     </button>
 
     <button
+      id="cancelBtn"
       pButton
       label="Отмена"
-      (click)="backToPosts()"
-    >
+      (click)="backToPosts()">
     </button>
-  </div>
+
+  </form>
 </div>
