@@ -4,8 +4,9 @@ import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angula
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { catchError, EMPTY, tap } from 'rxjs';
 import { PostService } from '../post.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-post-create',
@@ -19,6 +20,7 @@ export class PostCreateComponent {
   private fb: FormBuilder = inject(FormBuilder);
   private router: Router = inject(Router);
   private postService: PostService = inject(PostService);
+  private messageService: MessageService = inject(MessageService);
 
   postForm: FormGroup = this.fb.group({
     title: ['', Validators.required],
@@ -38,6 +40,11 @@ export class PostCreateComponent {
       this.postService.createPost(this.postForm.value).pipe(
         tap(() => {
           this.router.navigate(['/posts']);
+          this.messageService.showSuccess('Пост добавлен');
+        }),
+        catchError(() => {
+          this.messageService.showError('Ошибка создания');
+          return EMPTY;
         })
       ).subscribe();
     }

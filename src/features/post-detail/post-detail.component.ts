@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, DestroyRef } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { Component, inject, OnInit  } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IPost } from '../interfaces/IPost';
-import { tap } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-post-detail',
@@ -14,20 +12,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class PostDetailComponent implements OnInit {
 
-  private readonly route: ActivatedRoute = inject(ActivatedRoute);
-  private destroyRef: DestroyRef = inject(DestroyRef);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   post!: IPost;
 
   ngOnInit(): void {
-    this.loadPost();
-  }
-
-  loadPost(): void {
-    this.route.data.pipe(
-      tap((data: Data) => this.post = data['post']),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
+    this.post = this.route.snapshot.data['post'];
   }
 
 }

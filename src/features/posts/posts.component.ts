@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { catchError, EMPTY, take, Observable, switchMap, tap } from 'rxjs';
+import { catchError, EMPTY, take, Observable, switchMap, tap, finalize } from 'rxjs';
 import { IPost } from '../interfaces/IPost';
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { ContextMenuModule } from 'primeng/contextmenu';
@@ -13,6 +13,7 @@ import { PostEditDialogComponent } from '../post-edit-dialog/post-edit-dialog.co
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PostService } from '../post.service';
 import { AsyncPipe } from '@angular/common';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-posts',
@@ -27,14 +28,16 @@ export class PostsComponent implements OnInit {
   private postService: PostService = inject(PostService);
   private dialogService: DialogService = inject(DialogService);
   private router: Router = inject(Router);
+  private messageService: MessageService = inject(MessageService);
   
   posts$: Observable<IPost[]> = this.postService.posts$;
   totalRecords$: Observable<number> = this.postService.totalRecords$;
-  isLoading$: Observable<boolean> = this.postService.isLoading$;
+
+  isLoading: boolean = false;
 
   rows: number = 10;
   first: number = 0;
-  selectedPost: IPost | null = null;
+  selectedPost: IPost | null = null
 
   menuItems: MenuItem[] = [
     {
@@ -59,7 +62,17 @@ export class PostsComponent implements OnInit {
   }
 
   loadPosts(): void {
-    this.postService.loadPosts(this.rows, this.first)
+    this.isLoading = true;
+
+    this.postService.loadPosts(this.rows, this.first).pipe(
+      catchError(() => {
+        this.messageService.showError('Не удалось загрузить посты');
+        return EMPTY;
+      }),
+      finalize(() => {
+        this.isLoading = false;
+      })
+    ).subscribe();
   }
 
   onPageChange(event: TablePageEvent): void {
@@ -91,9 +104,13 @@ export class PostsComponent implements OnInit {
       take(1),
       switchMap((formData: Partial<IPost> | undefined) => {
         if (!formData) return EMPTY;
+        this.messageService.showSuccess('Пост обновлен');
         return this.postService.updatePost(post.id, formData);
       }),
-      catchError(() => EMPTY)
+      catchError(() => {
+        this.messageService.showError('Ошибка обновления');
+        return EMPTY;
+      })
     ).subscribe();
   }
 
@@ -105,7 +122,8 @@ export class PostsComponent implements OnInit {
     this.postService.deletePost(postId).pipe(
       tap(() => {
         this.selectedPost = null;
-        
+        this.messageService.showSuccess('Пост успешно удален');
+
         const currentPosts: IPost[] = this.postService.getCurrentPosts();
 
         if (currentPosts.length === 0 && this.first > 0) {
@@ -113,7 +131,10 @@ export class PostsComponent implements OnInit {
           this.postService.loadPosts(this.rows, this.first);
         }
       }),
-      catchError(() => EMPTY)
+      catchError(() => {
+        this.messageService.showError('Ошибка удаления');
+        return EMPTY;
+      })
     ).subscribe();
   }
 
@@ -124,15 +145,14 @@ export class PostsComponent implements OnInit {
   get pageReport(): string {
     const posts: IPost[] = this.postService.getCurrentPosts();
     const total: number = this.postService.getTotalRecords();
+    const first: number = this.first + 1;
+    const last: number = this.first + posts.length;
 
     if (total === 0) {
       return '0 - 0 из 0';
     }
 
-    const first: number = this.first + 1;
-    const last: number = this.first + posts.length;
-
-    return `${first} - ${last} из ${total}`;
+    return `${ first } - ${ last } из ${ total }`;
   }
 
 }

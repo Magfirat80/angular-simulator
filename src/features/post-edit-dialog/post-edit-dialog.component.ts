@@ -24,14 +24,20 @@ export class PostEditDialogComponent {
   });
 
   save(): void {
-    this.ref.close({
+    const formValue: any = this.postEditForm.getRawValue();
+
+    const tags: string[] = formValue.tags
+      .split(',')
+      .map((tag: string) => tag.trim())
+      .filter((tag: string) => tag.length > 0);
+
+    const updatedPost: any = {
       ...this.config.data,
-      ...this.postEditForm.getRawValue(),
-      tags: this.postEditForm.getRawValue().tags
-        .split(',')
-        .map((tag: string) => tag.trim())
-        .filter((tag: string) => tag.length > 0)
-    });
+      ...formValue,
+      tags
+    };  
+
+    this.ref.close(updatedPost);
   }
 
   close(): void {
