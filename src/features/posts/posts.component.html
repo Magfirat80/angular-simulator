@@ -1,13 +1,13 @@
 <div class="posts-page">
   <h1>Posts</h1>
-
+  <h2>Показано {{ pageReport }}</h2>
   <div class="table-wrapper">
     <p-context-menu
       #cm
       [model]="menuItems"
     ></p-context-menu>
     
-    @if (isLoading) {
+    @if (isLoading$ | async) {
       <div class="skeleton-table">
         @for (item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track item) {
           <div class="skeleton-row">
@@ -19,16 +19,16 @@
       </div>
     } @else {
       <p-table
-        [showCurrentPageReport]="true"
+        [showCurrentPageReport]="false"
         currentPageReportTemplate="{first} - {last} из {totalRecords}"
-        [value]="posts"
+        [value]="(posts$ | async)!"
         dataKey="id"
         [lazy]="true"
         [paginator]="true"
         [rows]="rows"
         [rowsPerPageOptions]="[10, 20, 50]"
         [first]="first"
-        [totalRecords]="totalRecords"
+        [totalRecords]="(totalRecords$ | async)!"
         [scrollable]="true"
         [contextMenu]="cm"
         [(contextMenuSelection)]="selectedPost"

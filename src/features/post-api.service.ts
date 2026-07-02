@@ -13,9 +13,7 @@ export class PostApiService {
   private http: HttpClient = inject(HttpClient);
 
   getPosts(limit: number, skip: number): Observable<IPostsResponse> {
-    return this.http.get<IPostsResponse>(
-      `${ this.apiUrl }?limit=${ limit }&skip=${ skip }`
-    );
+    return this.http.get<IPostsResponse>(`${ this.apiUrl }?limit=${ limit }&skip=${ skip }`);
   }
 
   getPostById(id: number): Observable<IPost> {

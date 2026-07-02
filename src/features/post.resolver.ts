@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
-import { ResolveFn, Router } from '@angular/router';
+import { ResolveFn, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { catchError, EMPTY } from 'rxjs';
 import { MessageService } from '../services/message.service';
 import { IPost } from './interfaces/IPost';
 import { PostApiService } from './post-api.service';
 
-export const postResolver: ResolveFn<IPost> = (route) => {
+export const postResolver: ResolveFn<IPost> = (route: ActivatedRouteSnapshot) => {
   const postApiService: PostApiService = inject(PostApiService);
   const messageService: MessageService = inject(MessageService);
   const router: Router = inject(Router);
