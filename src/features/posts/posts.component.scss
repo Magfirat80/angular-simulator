@@ -1,0 +1,23 @@
+.posts-page {
+  padding: 1rem;
+  margin-bottom: 100px;
+}
+
+.table-wrapper {
+  width: 100%;
+}
+
+:host ::ng-deep .p-datatable-wrapper {
+  overflow-x: auto;
+}
+
+.cell-title, .cell-tags, .cell-views {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.skeleton-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}

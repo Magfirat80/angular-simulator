@@ -1,0 +1,38 @@
+<form [formGroup]="postEditForm">
+
+  <label for="title">Заголовок</label>
+  <input
+    id="title"
+    pInputText
+    formControlName="title">
+
+  <label for="tags">Теги</label>
+  <input
+    id="tags"
+    pInputText
+    formControlName="tags">
+
+  <label for="views">Просмотры</label>
+  <input
+    id="views"
+    pInputText
+    type="number"
+    formControlName="views">
+
+</form>
+
+<div class="dialog-footer">
+  <button
+    id="closePostBtn"
+    pButton
+    label="Отмена"
+    (click)="close()">
+  </button>
+
+  <button
+    id="savePostBtn"
+    pButton
+    label="Сохранить"
+    (click)="save()">
+  </button>
+</div>

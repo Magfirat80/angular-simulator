@@ -1,0 +1,74 @@
+<div class="post-create-page">
+  <form class="form" [formGroup]="postForm">
+    <h2>Создание поста</h2>
+    <label for="title">Заголовок</label>
+    <input
+      id="title"
+      pInputText
+      formControlName="title"
+    >
+
+    <label for="body">Текст поста</label>
+    <textarea
+      id="body"
+      rows="6"
+      formControlName="body">
+    </textarea>
+
+    <label for="tags">Теги (через запятую)</label>
+    <input
+      id="tags"
+      pInputText
+      formControlName="tags"
+    >
+    
+    <label for="views">Просмотры</label>
+    <input
+      id="views"
+      pInputText
+      type="number"
+      formControlName="views"
+    >
+
+    <label for="userId">User ID</label>
+    <input
+      id="userId"
+      pInputText
+      type="number"
+      formControlName="userId"
+    >
+
+    <div formGroupName="reactions">
+      <label class="reactions-title">Reactions:</label>
+      <div class="reactions-block">
+        <label for="likes">Лайки</label>
+        <input
+        id="likes"
+        type="number"
+        formControlName="likes">
+
+        <label for="dislikes">Дизлайки</label>
+        <input
+          id="dislikes"
+          type="number"
+          formControlName="dislikes">
+      </div>
+    </div>
+
+    <button
+      id="createPostBtn"
+      pButton
+      type="submit"
+      label="Создать пост"
+      (click)="createPost()">
+    </button>
+
+    <button
+      id="cancelBtn"
+      pButton
+      type="button"
+      label="Отмена"
+      (click)="backToPosts()">
+    </button>
+  </form>
+</div>

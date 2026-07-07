@@ -1,4 +1,4 @@
-import { HttpInterceptorFn, HttpErrorResponse, HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
+import { HttpErrorResponse, HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
 import { catchError, throwError, Observable } from 'rxjs';
 import { inject } from '@angular/core';
 import { MessageService } from '../services/message.service';
