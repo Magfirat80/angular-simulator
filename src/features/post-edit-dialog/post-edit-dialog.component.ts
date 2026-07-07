@@ -3,6 +3,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { IPost } from '../interfaces/IPost';
 
 @Component({
   selector: 'app-post-edit-dialog',
@@ -24,14 +25,18 @@ export class PostEditDialogComponent {
   });
 
   save(): void {
-    const formValue: any = this.postEditForm.getRawValue();
+    const formValue: {
+      title: string,
+      tags: string,
+      views: number
+    } = this.postEditForm.getRawValue();
 
     const tags: string[] = formValue.tags
       .split(',')
       .map((tag: string) => tag.trim())
       .filter((tag: string) => tag.length > 0);
 
-    const updatedPost: any = {
+    const updatedPost:IPost = {
       ...this.config.data,
       ...formValue,
       tags
