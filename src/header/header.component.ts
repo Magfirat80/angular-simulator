@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { INavigation } from '../interfaces/INavigation';
 import { RouterLink, RouterModule } from '@angular/router';
-import { MessageService } from '../services/message.service';
 import { FormsModule } from '@angular/forms';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { ThemeService } from '../services/theme.service';
@@ -10,6 +9,7 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faSun, faMoon } from '@fortawesome/free-regular-svg-icons';
 import { CommonModule } from '@angular/common';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { AuthService } from '../features/auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -29,8 +29,10 @@ export class HeaderComponent {
   faSun: IconDefinition = faSun;
   faMoon: IconDefinition = faMoon;
 
-  messageService: MessageService = inject(MessageService);
   themeService: ThemeService = inject(ThemeService);
+  authService: AuthService = inject(AuthService);
+
+  currentUser$ = this.authService.currentUser$;
 
   companyName: string = 'румтибет';
   currentWidget: 'counter' | 'date' = 'counter';
@@ -38,7 +40,7 @@ export class HeaderComponent {
   currentDateAndTime: string = new Date().toLocaleString();
 
   navList: INavigation[] = [
-    { id: 1, navItem: 'Главная', path: '/' },
+    { id: 1, navItem: 'Главная', path: '/home' },
     { id: 2, navItem: 'Пользователи', path: '/users' },
     { id: 3, navItem: 'Посты', path: '/posts' },
   ];
@@ -59,6 +61,11 @@ export class HeaderComponent {
 
   switchWidget(widget: 'counter' | 'date'): void {
     this.currentWidget = widget;
+  }
+
+  logout(): void {
+    console.log('Logout clicked');
+    this.authService.logout();
   }
 
 }

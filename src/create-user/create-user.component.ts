@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import type { IUser } from '../interfaces/IUser';
+import { IUser } from '../interfaces/IUser';
 import { AppAnimatedGradientDirective } from '../directives/app-animated-gradient.directive';
 import { IGradientConfiguration } from '../interfaces/IGradientConfiguration';
 

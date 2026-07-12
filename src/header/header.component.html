@@ -21,6 +21,21 @@
       </ul>
     </nav>
     <button class="header-button flex jc-center ai-center" id="consultation-button">Консультация</button>
+
+    @if (currentUser$ | async; as user) {
+      <div class="user-panel flex ai-center">
+        <span>
+          {{ user.username }}
+        </span>
+        <button
+          id="user-panel-button"
+          class="user-panel-button"
+          type="button"
+          (click)="logout()">
+          Выйти
+        </button>
+      </div>
+    }
   </div>
     
   <div class="switcher-wrapper container fs-18">
