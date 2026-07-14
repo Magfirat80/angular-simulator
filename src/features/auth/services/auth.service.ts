@@ -22,63 +22,57 @@ export class AuthService {
   private readonly apiUrl: string = 'https://dummyjson.com/auth';
 
   init(): Observable<IUser | null> {
-    if (!this.getToken()) {
+    if (!this.getToken('accessToken')) {
       return of(null);
     }
 
-    return this.http.get<IUser>('https://dummyjson.com/auth/me').pipe(
-      tap((user: IUser) => {
-        this.currentUserSubject.next(user);
-      })
-    );
+    return this.http
+      .get<IUser>(`${this.apiUrl}/me`)
+      .pipe(
+        tap((user: IUser) => {
+          this.currentUserSubject.next(user);
+        })
+      );
   }
 
   login(data: ILoginRequest): Observable<IAuthResponse> {
-    return this.http.post<IAuthResponse>(`${this.apiUrl}/login`, data).pipe(
-      tap((response: IAuthResponse) => {
-        this.localStorageService.setValue('accessToken', response.accessToken);
-        this.localStorageService.setValue('refreshToken', response.refreshToken);
-        this.currentUserSubject.next(response);
-      })
-    );
+    return this.http
+      .post<IAuthResponse>(`${this.apiUrl}/login`, data)
+      .pipe(
+        tap((response: IAuthResponse) => this.saveAuth(response))
+      );
+  }
+
+  private saveAuth(auth: IAuthResponse): void {
+    this.localStorageService.setValue('auth', auth);
+    this.currentUserSubject.next(auth);
   }
 
   logout(): void {
-    this.localStorageService.removeValue('accessToken');
-    this.localStorageService.removeValue('refreshToken');
+    this.localStorageService.removeValue('auth');
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }
 
-  getToken(): string | null {
-    return this.localStorageService.getValue<string>('accessToken');
+  getToken(type: 'accessToken' | 'refreshToken'): string | null {
+    return this.localStorageService.getValue<IAuthResponse>('auth')?.[type] ?? null;
   }
 
   isAuthenticated(): boolean {
-    if (this.getToken()) {
-      return true;
-    }
-
-    return false;
-  }
-
-  getRefreshToken(): string | null {
-    return this.localStorageService.getValue<string>('refreshToken');
+    return this.currentUserSubject.value !== null;
   }
 
   refresh(): Observable<IAuthResponse> {
-    const oldRefreshToken: string | null = this.getRefreshToken();
+    const oldRefreshToken: string | null = this.getToken('refreshToken');
     if (!oldRefreshToken) {
       return throwError(() => new Error('RefreshToken отсутствует'));  
     };
 
-    return this.http.post<IAuthResponse>(`${this.apiUrl}/refresh`, { refreshToken: oldRefreshToken }).pipe(
-      tap((response: IAuthResponse) => {
-        this.localStorageService.setValue('accessToken', response.accessToken);
-        this.localStorageService.setValue('refreshToken', response.refreshToken);
-        this.currentUserSubject.next(response);
-      }),
-    );
+    return this.http
+      .post<IAuthResponse>(`${this.apiUrl}/refresh`, { refreshToken: oldRefreshToken })
+      .pipe(
+        tap((response: IAuthResponse) => this.saveAuth(response))
+      );
   };
 
 }

@@ -31,7 +31,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
-    
     providePrimeNG({
       theme: {
         preset: applyThemeFromStorage(),
@@ -40,16 +39,12 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
-
     provideHttpClient(
       withInterceptors([loggingInterceptor, authInterceptor, errorInterceptor])
     ),
-
     provideAppInitializer(() => {
-      const authService = inject(AuthService);
-
-      authService.init();
+      const authService: AuthService = inject(AuthService);
+      return authService.init();
     })
   ]
-  
 }
