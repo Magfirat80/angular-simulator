@@ -2,27 +2,26 @@ import { HttpErrorResponse, HttpInterceptorFn, HttpHandlerFn, HttpRequest } from
 import { AuthService } from '../services/auth.service';
 import { inject } from '@angular/core';
 import { catchError, switchMap, throwError } from 'rxjs';
-import { setAuthHeader } from './auth.utils';
 
-export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
+export const authInterceptor: HttpInterceptorFn = (request: HttpRequest<unknown>, next: HttpHandlerFn) => {
 
   const authService: AuthService = inject(AuthService);
   const accessToken: string | null = authService.getToken('accessToken');
 
   if (!accessToken) {
-    return next(req);
+    return next(request);
   }
 
-  const authReq: HttpRequest<unknown> = setAuthHeader(req, accessToken);
+  const authenticatedRequest: HttpRequest<unknown> = addAuthHeader(request, accessToken);
 
-  return next(authReq).pipe(
+  return next(authenticatedRequest).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
         return authService.refresh().pipe(
           switchMap(() => {
             const newToken: string | null = authService.getToken('accessToken');
-            const retryReq: HttpRequest<unknown> = setAuthHeader(req, newToken!);
-            return next(retryReq);
+            const retryRequest: HttpRequest<unknown> = addAuthHeader(request, newToken!);
+            return next(retryRequest);
           })
         );
       }
@@ -31,3 +30,12 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
   );
 
 };
+
+function addAuthHeader(request: HttpRequest<unknown>, token: string): HttpRequest<unknown> {
+  return request.clone({
+    setHeaders: {
+      Authorization: `Bearer ${ token }`
+    }
+  });
+  
+}

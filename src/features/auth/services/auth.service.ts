@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ILoginRequest } from '../interfaces/ILoginRequest';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
+import { IToken } from '../interfaces/IToken';
 import { IUser } from "../interfaces/IUser";
 
 @Injectable({
@@ -16,8 +17,8 @@ export class AuthService {
   private router: Router = inject(Router);
   private http: HttpClient = inject(HttpClient);
 
-  private currentUserSubject: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
-  currentUser$: Observable<IUser | null> = this.currentUserSubject.asObservable();
+  private currentUserSubject: BehaviorSubject<IAuthResponse | null> = new BehaviorSubject<IAuthResponse | null>(null);
+  currentUser$: Observable<IAuthResponse | null> = this.currentUserSubject.asObservable();
 
   private readonly apiUrl: string = 'https://dummyjson.com/auth';
 
@@ -26,36 +27,40 @@ export class AuthService {
       return of(null);
     }
 
-    return this.http
-      .get<IUser>(`${this.apiUrl}/me`)
-      .pipe(
-        tap((user: IUser) => {
-          this.currentUserSubject.next(user);
-        })
-      );
+    return this.http.get<IUser>(`${ this.apiUrl }/me`).pipe(
+      tap((user: IUser) => {
+        const tokens: IToken | null = this.localStorageService.getValue<IToken>('tokens');
+        
+        if (tokens) {
+          this.currentUserSubject.next({
+            ...user,
+            accessToken: tokens.accessToken,
+            refreshToken: tokens.refreshToken
+          });
+        }
+      })
+    );
   }
 
   login(data: ILoginRequest): Observable<IAuthResponse> {
-    return this.http
-      .post<IAuthResponse>(`${this.apiUrl}/login`, data)
-      .pipe(
-        tap((response: IAuthResponse) => this.saveAuth(response))
-      );
+    return this.http.post<IAuthResponse>(`${ this.apiUrl }/login`, data).pipe(
+      tap((response: IAuthResponse) => this.saveAuth(response))
+    );
   }
 
-  private saveAuth(auth: IAuthResponse): void {
-    this.localStorageService.setValue('auth', auth);
-    this.currentUserSubject.next(auth);
+  private saveAuth(response: IAuthResponse): void {
+    this.localStorageService.setValue('tokens', {accessToken: response.accessToken, refreshToken: response.refreshToken});
+    this.currentUserSubject.next(response);
   }
 
   logout(): void {
-    this.localStorageService.removeValue('auth');
+    this.localStorageService.removeValue('tokens');
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }
 
-  getToken(type: 'accessToken' | 'refreshToken'): string | null {
-    return this.localStorageService.getValue<IAuthResponse>('auth')?.[type] ?? null;
+  getToken(type: keyof IToken): string | null {
+    return this.localStorageService.getValue<IAuthResponse>('tokens')?.[type] ?? null;
   }
 
   isAuthenticated(): boolean {
@@ -65,14 +70,12 @@ export class AuthService {
   refresh(): Observable<IAuthResponse> {
     const oldRefreshToken: string | null = this.getToken('refreshToken');
     if (!oldRefreshToken) {
-      return throwError(() => new Error('RefreshToken отсутствует'));  
+      return throwError(() => new Error('RefreshToken отсутствует'));
     };
 
-    return this.http
-      .post<IAuthResponse>(`${this.apiUrl}/refresh`, { refreshToken: oldRefreshToken })
-      .pipe(
-        tap((response: IAuthResponse) => this.saveAuth(response))
-      );
+    return this.http.post<IAuthResponse>(`${ this.apiUrl }/refresh`, { refreshToken: oldRefreshToken }).pipe(
+      tap((response: IAuthResponse) => this.saveAuth(response))
+    );
   };
 
 }

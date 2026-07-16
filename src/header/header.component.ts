@@ -10,6 +10,8 @@ import { faSun, faMoon } from '@fortawesome/free-regular-svg-icons';
 import { CommonModule } from '@angular/common';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { AuthService } from '../features/auth/services/auth.service';
+import { Observable } from 'rxjs';
+import { IUser } from '../features/auth/interfaces/IUser';
 
 @Component({
   selector: 'app-header',
@@ -32,7 +34,7 @@ export class HeaderComponent {
   themeService: ThemeService = inject(ThemeService);
   authService: AuthService = inject(AuthService);
 
-  currentUser$ = this.authService.currentUser$;
+  currentUser$: Observable<IUser | null> = this.authService.currentUser$;
 
   companyName: string = 'румтибет';
   currentWidget: 'counter' | 'date' = 'counter';
@@ -64,7 +66,6 @@ export class HeaderComponent {
   }
 
   logout(): void {
-    console.log('Logout clicked');
     this.authService.logout();
   }
 
