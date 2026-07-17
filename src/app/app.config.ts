@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
@@ -10,6 +10,8 @@ import { Preset } from '@primeuix/themes/types';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loggingInterceptor } from './logging.interceptor';
 import { errorInterceptor } from './error.interceptor';
+import { authInterceptor } from '../features/auth/interceptors/auth.interceptor';
+import { AuthService } from '../features/auth/services/auth.service';
 
 function applyThemeFromStorage(): Preset {
 
@@ -29,7 +31,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
-    
     providePrimeNG({
       theme: {
         preset: applyThemeFromStorage(),
@@ -38,10 +39,12 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
-
     provideHttpClient(
-      withInterceptors([loggingInterceptor, errorInterceptor])
-    )
+      withInterceptors([loggingInterceptor, authInterceptor, errorInterceptor])
+    ),
+    provideAppInitializer(() => {
+      const authService: AuthService = inject(AuthService);
+      return authService.init();
+    })
   ]
-  
 }

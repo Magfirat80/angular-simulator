@@ -1,0 +1,19 @@
+<div class="login-page flex">
+  <form [formGroup]="loginForm" class="login-form flex">
+    <h2 class="login-title">Login</h2>
+    
+    <label for="username">Username</label>
+    <input type="text" id="username" formControlName="username" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password" required>
+
+    <button
+      type="button"
+      id="login-button"
+      (click)="submit()"
+      [disabled]="loginForm.invalid">
+      Войти
+    </button>
+  </form>
+</div>
