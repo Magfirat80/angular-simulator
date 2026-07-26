@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -7,6 +7,9 @@ import { ILoginRequest } from '../interfaces/ILoginRequest';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { IToken } from '../interfaces/IToken';
 import { IUser } from "../interfaces/IUser";
+import { MessageService } from '../../../services/message.service';
+import { AuthUserService } from './auth-user.service';
+import { IUsersResponse } from '../interfaces/IUsersResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +19,8 @@ export class AuthService {
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   private router: Router = inject(Router);
   private http: HttpClient = inject(HttpClient);
+  private authUserService: AuthUserService = inject(AuthUserService);
+  private messageService: MessageService = inject(MessageService);
 
   private currentUserSubject: BehaviorSubject<IAuthResponse | null> = new BehaviorSubject<IAuthResponse | null>(null);
   currentUser$: Observable<IAuthResponse | null> = this.currentUserSubject.asObservable();
@@ -44,7 +49,23 @@ export class AuthService {
 
   login(data: ILoginRequest): Observable<IAuthResponse> {
     return this.http.post<IAuthResponse>(`${ this.apiUrl }/login`, data).pipe(
-      tap((response: IAuthResponse) => this.saveAuth(response))
+      switchMap((response: IAuthResponse) =>
+        this.authUserService.getUsers().pipe(
+          tap((usersResponse: IUsersResponse) => {
+            const user: IUser | undefined = usersResponse.users.find(user => user.id === response.id);
+            if (!user) {
+              throw new Error('У данного пользователя отсутствуют права доступа!');
+            }
+            response.role = user.role;
+            this.saveAuth(response);
+          }),
+          switchMap(() => of(response))
+        )
+      ),
+      catchError((error: Error) => {
+        this.messageService.showError(error.message);
+        return throwError(() => error);
+      })
     );
   }
 
@@ -77,5 +98,9 @@ export class AuthService {
       tap((response: IAuthResponse) => this.saveAuth(response))
     );
   };
+
+  getCurrentUser(): IAuthResponse | null {
+    return this.currentUserSubject.value;
+  }
 
 }
