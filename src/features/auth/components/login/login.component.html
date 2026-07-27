@@ -1,12 +1,12 @@
 <div class="login-page flex">
-  <form [formGroup]="loginForm" class="login-form flex">
+  <form [formGroup]="loginForm" class="login-form flex" autocomplete="off">
     <h2 class="login-title">Login</h2>
     
     <label for="username">Username</label>
-    <input type="text" id="username" formControlName="username" required>
+    <input type="text" id="username" formControlName="username" autocomplete="username" required>
 
     <label for="password">Password</label>
-    <input type="password" id="password" formControlName="password" required>
+    <input type="password" id="password" formControlName="password" autocomplete="current-password" required>
 
     <button
       type="button"
