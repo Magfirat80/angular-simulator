@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
+import { UserRole } from '../enums/user-role.enum';
 
 export const adminGuard: CanActivateFn = () => {
 
@@ -14,7 +15,7 @@ export const adminGuard: CanActivateFn = () => {
     return router.createUrlTree(['/login']);
   }
 
-  return user.role === 'admin'
+  return user.role === UserRole.Admin
     ? true
     : router.createUrlTree(['/home']);
 
