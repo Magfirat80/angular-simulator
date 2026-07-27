@@ -19,8 +19,8 @@ export class AuthService {
   private http: HttpClient = inject(HttpClient);
   private messageService: MessageService = inject(MessageService);
 
-  private currentUserSubject: BehaviorSubject<IAuthResponse | null> = new BehaviorSubject<IAuthResponse | null>(null);
-  currentUser$: Observable<IAuthResponse | null> = this.currentUserSubject.asObservable();
+  private currentUserSubject: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
+  currentUser$: Observable<IUser | null> = this.currentUserSubject.asObservable();
 
   private readonly apiUrl: string = 'https://dummyjson.com/auth';
 
@@ -37,11 +37,7 @@ export class AuthService {
           return;
         }
 
-        this.currentUserSubject.next({
-          ...user,
-          accessToken: tokens.accessToken,
-          refreshToken: tokens.refreshToken,
-        });
+        this.currentUserSubject.next(user);
       })
     );
   }
@@ -98,7 +94,7 @@ export class AuthService {
     );
   }
 
-  getCurrentUser(): IAuthResponse | null {
+  getCurrentUser(): IUser | null {
     return this.currentUserSubject.value;
   }
 
