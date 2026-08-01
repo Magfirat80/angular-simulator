@@ -16,7 +16,7 @@ export class UsersFilterComponent implements OnInit {
   
   inputField: FormControl<string> = new FormControl<string>('', { nonNullable: true });
 
-  @Input() filteredCountUsers: number = 0;
+  @Input() filteredCountUsers = 0;
 
   @Output() usersFiltering: EventEmitter<string> = new EventEmitter<string>();
 

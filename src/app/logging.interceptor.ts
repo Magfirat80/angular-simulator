@@ -4,7 +4,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   
   const startTime: number = Date.now();
-  const requestInfo: string = `${ req.method } ${ req.urlWithParams }`;
+  const requestInfo = `${ req.method } ${ req.urlWithParams }`;
 
   return next(req).pipe(
     catchError((err: HttpErrorResponse): Observable<never> => {

@@ -10,7 +10,7 @@ export const postResolver: ResolveFn<IPost> = (route: ActivatedRouteSnapshot) =>
   const messageService: MessageService = inject(MessageService);
   const router: Router = inject(Router);
 
-  const id: number = Number(route.paramMap.get('id'));
+  const id = Number(route.paramMap.get('id'));
 
   if (!id) {
     messageService.showError('Некорректный id поста');

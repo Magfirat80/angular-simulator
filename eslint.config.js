@@ -84,7 +84,6 @@ module.exports = defineConfig([
           format: ['UPPER_CASE'],
         },
       ],
-      // 'prettier/prettier': 'error',
     },
   },
   {

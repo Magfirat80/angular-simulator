@@ -13,7 +13,7 @@ export class AppAnimatedGradientDirective {
   };
 
   private timer!: number; 
-  isActive: boolean = false;
+  isActive = false;
   
   @HostBinding('style.border-width')
   get borderWidth(): string | null {
