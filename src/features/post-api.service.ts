@@ -17,7 +17,7 @@ export class PostApiService {
   }
 
   getPostById(id: number): Observable<IPost> {
-    return this.http.get<IPost>(`${ this.apiUrl }/${ id }`)
+    return this.http.get<IPost>(`${ this.apiUrl }/${ id }`);
   }
 
   createPost(post: Partial<IPost>): Observable<IPost> {

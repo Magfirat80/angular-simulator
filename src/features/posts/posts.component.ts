@@ -37,7 +37,7 @@ export class PostsComponent implements OnInit {
 
   rows: number = 10;
   first: number = 0;
-  selectedPost: IPost | null = null
+  selectedPost: IPost | null = null;
 
   menuItems: MenuItem[] = [
     {

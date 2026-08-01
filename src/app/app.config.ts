@@ -47,4 +47,4 @@ export const appConfig: ApplicationConfig = {
       return authService.init();
     })
   ]
-}
+};

@@ -1,5 +1,5 @@
 import { Directive, HostBinding, HostListener, Input } from '@angular/core';
-import { IGradientConfiguration } from '../interfaces/IGradientConfiguration'
+import { IGradientConfiguration } from '../interfaces/IGradientConfiguration';
 
 @Directive({
   selector: '[appAnimatedGradient]',

@@ -54,103 +54,103 @@
   </div>
 </section>
 
-  <section>
-    <div class="wrapper-about-trip flex jc-center">
-      <div class="container about-trip">
-        <div class="left-side-block">
-          <div class="left-side-block-img">
-            <img class="mountain" src="/images/mountain.png" alt="mountain">
-            <img class="home" src="/images/home.png" alt="home">
-          </div>
-        </div>
-        <div class="right-side-block flex">
-          <p class="block-header">о нашем походе</p>
-          <p class="block-subheader">Исследуйте все горные массивы мира вместе с нами</p>
-          <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
-          <button
-            class="tour-program-button flex jc-center ai-center"
-            id="tour-program-button"
-            (click)="messageService.showInfo('Информация о программе в разработке!!!')">
-            Программа тура
-          </button>
+<section>
+  <div class="wrapper-about-trip flex jc-center">
+    <div class="container about-trip">
+      <div class="left-side-block">
+        <div class="left-side-block-img">
+          <img class="mountain" src="/images/mountain.png" alt="mountain">
+          <img class="home" src="/images/home.png" alt="home">
         </div>
       </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrapper-best-programs flex jc-center ai-center">
-      <div class="left-side-block flex">
-        <p class="block-header">наше предложение</p>
-        <p class="block-subheader">Лучшие программы для тебя</p>
-        <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
-        @for (advantage of advantages; track advantage.id) {
-          <div class="about flex" (click)="selectAdvantage(advantage.id)">
-            <div class="advantage-icon">
-              <fa-icon [icon]="advantage.icon" [ngClass]="'icon-color-' + advantage.id" />
-            </div>
-            <div class="text" [class.active-advantage]="advantage.id === selectedAdvantageId">
-              <p class="title">{{ advantage.title }}</p>
-              <p class="description">{{ advantage.description }}</p>
-              @if (advantage.id === selectedAdvantageId) {
-                <fa-icon [icon]="faThumbsUp" class="faThumbsUp-icon"/>
-              }
-            </div>
-          </div>
-        }
+      <div class="right-side-block flex">
+        <p class="block-header">о нашем походе</p>
+        <p class="block-subheader">Исследуйте все горные массивы мира вместе с нами</p>
+        <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
         <button
-          class="cost-of-programs-button"
-          id="cost-of-programs-button"
-          (click)="messageService.showSuccess('Цены снижены!!!')">
-          Стоимость программ
-        </button>
-      </div>
-      <div class="right-side-block">
-        <div class="right-side-block-img flex">
-            <img class="lake" src="/images/lake.png" alt="lake">
-            <img class="snowmobile" src="/images/snowmobile.png" alt="snowmobile">
-            <img class="gorge" src="/images/gorge.png" alt="gorge">
-            <img class="creek" src="/images/creek.png" alt="creek">
-          </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrapper-popular-destinations flex jc-center ai-center">
-      <div class="upper-block flex jc-center ai-center">
-        <p class="block-header">по версии отдыхающих</p>
-        <p class="block-subheader">Популярные направления</p>
-      </div>
-      <div class="middle-block flex">
-        @for (map of maps; track $index) {
-          <div class="wrapper-map">
-            <img [src]="'/images/' + map.poster + '.png'" [alt]="map.poster">
-            <div class="rating flex ai-center jc-center">
-              <fa-icon [icon]="faStar" />
-              <span>{{ map.estimation }}</span>
-            </div>
-            <div class="map-description flex ai-center">
-              <div>
-                <div class="destination-name">{{ map.name }}</div>
-                <div class="destination-description">{{ map.description }}</div>
-              </div>
-              <div class="destination-cost flex jc-center ai-center">
-                {{ map.cost }} $
-              </div>
-            </div>
-          </div>
-        }
-      </div>
-      <div class="lower-block flex">
-        <button
-          class="destination-rating-button"
-          id="destination-rating-button"
-          (click)="messageService.showWarn('Оцените погодные условия перед путешествием!!!')">
-          Рейтинг направлений
+          class="tour-program-button flex jc-center ai-center"
+          id="tour-program-button"
+          (click)="messageService.showInfo('Информация о программе в разработке!!!')">
+          Программа тура
         </button>
       </div>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrapper-best-programs flex jc-center ai-center">
+    <div class="left-side-block flex">
+      <p class="block-header">наше предложение</p>
+      <p class="block-subheader">Лучшие программы для тебя</p>
+      <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
+      @for (advantage of advantages; track advantage.id) {
+        <div class="about flex" (click)="selectAdvantage(advantage.id)">
+          <div class="advantage-icon">
+            <fa-icon [icon]="advantage.icon" [ngClass]="'icon-color-' + advantage.id" />
+          </div>
+          <div class="text" [class.active-advantage]="advantage.id === selectedAdvantageId">
+            <p class="title">{{ advantage.title }}</p>
+            <p class="description">{{ advantage.description }}</p>
+            @if (advantage.id === selectedAdvantageId) {
+              <fa-icon [icon]="faThumbsUp" class="faThumbsUp-icon"/>
+            }
+          </div>
+        </div>
+      }
+      <button
+        class="cost-of-programs-button"
+        id="cost-of-programs-button"
+        (click)="messageService.showSuccess('Цены снижены!!!')">
+        Стоимость программ
+      </button>
+    </div>
+    <div class="right-side-block">
+      <div class="right-side-block-img flex">
+          <img class="lake" src="/images/lake.png" alt="lake">
+          <img class="snowmobile" src="/images/snowmobile.png" alt="snowmobile">
+          <img class="gorge" src="/images/gorge.png" alt="gorge">
+          <img class="creek" src="/images/creek.png" alt="creek">
+        </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrapper-popular-destinations flex jc-center ai-center">
+    <div class="upper-block flex jc-center ai-center">
+      <p class="block-header">по версии отдыхающих</p>
+      <p class="block-subheader">Популярные направления</p>
+    </div>
+    <div class="middle-block flex">
+      @for (map of maps; track $index) {
+        <div class="wrapper-map">
+          <img [src]="'/images/' + map.poster + '.png'" [alt]="map.poster">
+          <div class="rating flex ai-center jc-center">
+            <fa-icon [icon]="faStar" />
+            <span>{{ map.estimation }}</span>
+          </div>
+          <div class="map-description flex ai-center">
+            <div>
+              <div class="destination-name">{{ map.name }}</div>
+              <div class="destination-description">{{ map.description }}</div>
+            </div>
+            <div class="destination-cost flex jc-center ai-center">
+              {{ map.cost }} $
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="lower-block flex">
+      <button
+        class="destination-rating-button"
+        id="destination-rating-button"
+        (click)="messageService.showWarn('Оцените погодные условия перед путешествием!!!')">
+        Рейтинг направлений
+      </button>
+    </div>
+  </div>
 </section>
 
 <section>

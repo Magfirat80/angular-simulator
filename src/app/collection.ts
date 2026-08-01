@@ -1,6 +1,6 @@
 class Collection<T> {
 
-  public arr: T[] = [];
+  arr: T[] = [];
 
   constructor(arr: T[]) {
     this.arr = arr;

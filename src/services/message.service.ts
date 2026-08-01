@@ -14,10 +14,10 @@ export class MessageService {
   private addMessage(type: Message, content: string): void {
     const newMessage: IMessage = { type, content };
     
-    this.messagesSubject.next([...this.messagesSubject.getValue(), newMessage])
+    this.messagesSubject.next([...this.messagesSubject.getValue(), newMessage]);
   
     setTimeout(() => {
-      this.closeMessage(newMessage)
+      this.closeMessage(newMessage);
     }, 5000);
   }
 
