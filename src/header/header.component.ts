@@ -36,9 +36,9 @@ export class HeaderComponent {
 
   currentUser$: Observable<IUser | null> = this.authService.currentUser$;
 
-  companyName: string = 'румтибет';
+  companyName = 'румтибет';
   currentWidget: 'counter' | 'date' = 'counter';
-  counter: number = 0;
+  counter = 0;
   currentDateAndTime: string = new Date().toLocaleString();
 
   navList: INavigation[] = [

@@ -31,11 +31,11 @@ export class HomePageComponent {
 
   messageService: MessageService = inject(MessageService);
 
-  selectedTour: string = '';
-  selectedGroup: string = '';
+  selectedTour = '';
+  selectedGroup = '';
   selectedDate!: string;
   liveInput!: string;
-  selectedAdvantageId: number = 2;
+  selectedAdvantageId = 2;
 
   locations: ITourLocation[] = [
     {

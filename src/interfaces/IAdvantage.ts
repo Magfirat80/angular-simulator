@@ -1,4 +1,4 @@
-import { IconDefinition } from "@fortawesome/free-brands-svg-icons";
+import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
 
 export interface IAdvantage {
   id: number;

@@ -2,7 +2,7 @@ import { Component, DestroyRef, EventEmitter, inject, Input, Output, OnInit } fr
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs';
-import { PluralPipe } from "../pipes/plural.pipe";
+import { PluralPipe } from '../pipes/plural.pipe';
 
 @Component({
   selector: 'app-users-filter',
@@ -16,7 +16,7 @@ export class UsersFilterComponent implements OnInit {
   
   inputField: FormControl<string> = new FormControl<string>('', { nonNullable: true });
 
-  @Input() filteredCountUsers: number = 0;
+  @Input() filteredCountUsers = 0;
 
   @Output() usersFiltering: EventEmitter<string> = new EventEmitter<string>();
 

@@ -29,7 +29,7 @@ export class LoginComponent {
       const data: ILoginRequest = this.loginForm.getRawValue();
       this.authService.login(data).pipe(
         tap(() => {
-          return this.router.navigate(['/home'])
+          return this.router.navigate(['/home']);
         }),
         catchError(() => {
           this.messageService.showError('Неправильные логин и/или пароль!');

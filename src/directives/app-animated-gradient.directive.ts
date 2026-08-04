@@ -1,5 +1,5 @@
 import { Directive, HostBinding, HostListener, Input } from '@angular/core';
-import { IGradientConfiguration } from '../interfaces/IGradientConfiguration'
+import { IGradientConfiguration } from '../interfaces/IGradientConfiguration';
 
 @Directive({
   selector: '[appAnimatedGradient]',
@@ -13,7 +13,7 @@ export class AppAnimatedGradientDirective {
   };
 
   private timer!: number; 
-  isActive: boolean = false;
+  isActive = false;
   
   @HostBinding('style.border-width')
   get borderWidth(): string | null {

@@ -51,7 +51,7 @@ export class PostCreateComponent {
   }
 
   backToPosts(): void {
-    this.router.navigate(['/posts'])
+    this.router.navigate(['/posts']);
   }
 
 }

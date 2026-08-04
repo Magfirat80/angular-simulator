@@ -27,7 +27,7 @@ export class PostService {
       catchError(() => {
         return EMPTY;
       }),
-    ).subscribe()
+    ).subscribe();
     return this.postApiService.getPosts(limit, skip);
   }
 
@@ -66,7 +66,7 @@ export class PostService {
       catchError((err: HttpErrorResponse) => {
         throw err;
       })
-    )
+    );
   }
 
   getCurrentPosts(): IPost[] {

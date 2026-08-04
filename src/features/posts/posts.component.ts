@@ -33,11 +33,11 @@ export class PostsComponent implements OnInit {
   posts$: Observable<IPost[]> = this.postService.posts$;
   totalRecords$: Observable<number> = this.postService.totalRecords$;
 
-  isLoading: boolean = false;
+  isLoading = false;
 
-  rows: number = 10;
-  first: number = 0;
-  selectedPost: IPost | null = null
+  rows = 10;
+  first = 0;
+  selectedPost: IPost | null = null;
 
   menuItems: MenuItem[] = [
     {

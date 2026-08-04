@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ILoginRequest } from '../interfaces/ILoginRequest';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { IToken } from '../interfaces/IToken';
-import { IUser } from "../interfaces/IUser";
+import { IUser } from '../interfaces/IUser';
 import { MessageService } from '../../../services/message.service';
 
 @Injectable({
