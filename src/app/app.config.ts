@@ -12,6 +12,9 @@ import { loggingInterceptor } from './logging.interceptor';
 import { errorInterceptor } from './error.interceptor';
 import { authInterceptor } from '../features/auth/interceptors/auth.interceptor';
 import { AuthService } from '../features/auth/services/auth.service';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
+import { APP_CONFIG } from '../tokens/app-config.token';
+import { IAppConfig } from '../interfaces/IAppConfig';
 
 function applyThemeFromStorage(): Preset {
 
@@ -26,9 +29,27 @@ function applyThemeFromStorage(): Preset {
   return themesMap[theme];
 }
 
+const applicationConfig: IAppConfig = {
+  companyName: 'румтибет',
+  enableLogs: true,
+  enableNotifications: true,
+  enableTheming: true,
+  sessionTimeout: 600,
+};
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
+    {
+      provide: DATE_PIPE_DEFAULT_OPTIONS,
+      useValue: {
+        dateFormat: 'dd.MM.yyyy HH:mm',
+      },
+    },
+    {
+      provide: APP_CONFIG,
+      useValue: applicationConfig,
+    },
     provideRouter(routes),
     provideZoneChangeDetection(),
     providePrimeNG({
@@ -45,6 +66,6 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => {
       const authService: AuthService = inject(AuthService);
       return authService.init();
-    })
-  ]
+    }),
+  ],
 };

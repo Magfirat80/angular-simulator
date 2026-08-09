@@ -43,8 +43,8 @@
     gap: 24px;
     font-weight: 600;
     cursor: pointer;
-    margin-right: 130px;
-    margin-left: 130px;
+    margin-right: 70px;
+    margin-left: 70px;
   }
 
   .navigation-list {
@@ -136,5 +136,9 @@
     height: 30px;
     width: 80px;
     background-color: #ffcc00;
+  }
+
+  .date-last-login {
+    margin-left: 20px;
   }
 }

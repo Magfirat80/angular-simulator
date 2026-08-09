@@ -8,6 +8,8 @@ import Nora from '@primeuix/themes/nora';
 import { Theme } from '../enums/Theme';
 import { ITheme } from '../interfaces/ITheme';
 import { ToggleSwitchDesignTokens } from '@primeuix/themes/types/toggleswitch';
+import { IAppConfig } from '../interfaces/IAppConfig';
+import { APP_CONFIG } from '../tokens/app-config.token';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +17,8 @@ import { ToggleSwitchDesignTokens } from '@primeuix/themes/types/toggleswitch';
 export class ThemeService {
   
   private localStorageService: LocalStorageService = inject(LocalStorageService);
+
+  readonly config: IAppConfig = inject(APP_CONFIG);
 
   private getIsDarkModeFromStorage(): boolean {
     return this.localStorageService.getValue('isDark') ?? false;
@@ -64,12 +68,19 @@ export class ThemeService {
   };
 
   toggleMode(isDarkMode: boolean): void {
+    if (!this.config.enableTheming) {
+      return;
+    }
+
     this.isDarkModeSubject.next(isDarkMode);
     this.localStorageService.setValue('isDark', isDarkMode);
     document.documentElement.classList.toggle('mode-dark', isDarkMode);
   }
 
   toggleTheme(themeName: Theme): void {
+    if (!this.config.enableTheming) {
+      return;
+    }
     this.themeSubject.next(themeName);
     this.localStorageService.setValue('theme', themeName);
 
