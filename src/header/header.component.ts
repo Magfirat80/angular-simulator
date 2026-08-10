@@ -12,6 +12,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { AuthService } from '../features/auth/services/auth.service';
 import { Observable } from 'rxjs';
 import { IUser } from '../features/auth/interfaces/IUser';
+import { APP_CONFIG } from '../tokens/app-config.token';
+import { IAppConfig } from '../interfaces/IAppConfig';
 
 @Component({
   selector: 'app-header',
@@ -34,12 +36,14 @@ export class HeaderComponent {
   themeService: ThemeService = inject(ThemeService);
   authService: AuthService = inject(AuthService);
 
+  readonly config: IAppConfig = inject(APP_CONFIG);
+
   currentUser$: Observable<IUser | null> = this.authService.currentUser$;
 
-  companyName = 'румтибет';
   currentWidget: 'counter' | 'date' = 'counter';
   counter = 0;
   currentDateAndTime: string = new Date().toLocaleString();
+  lastLogin: Date | null = this.authService.getLastLogin();
 
   navList: INavigation[] = [
     { id: 1, navItem: 'Главная', path: '/home' },

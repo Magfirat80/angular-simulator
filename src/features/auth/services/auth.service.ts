@@ -8,6 +8,8 @@ import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { IToken } from '../interfaces/IToken';
 import { IUser } from '../interfaces/IUser';
 import { MessageService } from '../../../services/message.service';
+import { APP_CONFIG } from '../../../tokens/app-config.token';
+import { IAppConfig } from '../../../interfaces/IAppConfig';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +20,8 @@ export class AuthService {
   private router: Router = inject(Router);
   private http: HttpClient = inject(HttpClient);
   private messageService: MessageService = inject(MessageService);
+
+  readonly config: IAppConfig = inject(APP_CONFIG);
 
   private currentUserSubject: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
   currentUser$: Observable<IUser | null> = this.currentUserSubject.asObservable();
@@ -43,12 +47,20 @@ export class AuthService {
   }
 
   login(data: ILoginRequest): Observable<IUser | null> {
-    return this.http.post<IAuthResponse>(`${ this.apiUrl }/login`, data).pipe(
+    return this.http.post<IAuthResponse>(
+      `${ this.apiUrl }/login`, 
+      {
+        ...data,
+        expiresInMins: this.config.sessionTimeout,
+      }
+    ).pipe(
       tap((response: IAuthResponse) => {
         this.saveTokens({
           accessToken: response.accessToken,
           refreshToken: response.refreshToken,
         });
+
+        this.localStorageService.setValue('lastLogin', new Date().toISOString());
       }),
       switchMap(() => this.init()),
       catchError((error: Error) => {
@@ -56,6 +68,11 @@ export class AuthService {
         return throwError(() => error);
       })
     );
+  }
+
+  getLastLogin(): Date | null {
+    const lastLogin: string | null = this.localStorageService.getValue<string>('lastLogin');
+    return lastLogin ? new Date(lastLogin) : null;
   }
 
   private saveTokens(tokens: IToken): void {
@@ -83,7 +100,12 @@ export class AuthService {
       return throwError(() => new Error('RefreshToken отсутствует'));
     };
 
-    return this.http.post<IAuthResponse>(`${ this.apiUrl }/refresh`, { refreshToken: oldRefreshToken }).pipe(
+    return this.http.post<IAuthResponse>(
+      `${ this.apiUrl }/refresh`,
+      {
+        refreshToken: oldRefreshToken,
+        expiresInMins: this.config.sessionTimeout,
+    }).pipe(
       tap((response: IAuthResponse) => {
         this.saveTokens({
           accessToken: response.accessToken,

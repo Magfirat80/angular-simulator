@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import './training';
 import { Color } from '../enums/Color';
 import './collection';
 import { FormsModule } from '@angular/forms';
