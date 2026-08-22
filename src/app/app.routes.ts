@@ -2,8 +2,23 @@ import { Routes } from '@angular/router';
 import { postResolver } from '../features/post.resolver';
 import { authGuard } from '../features/auth/guards/auth.guard';
 import { adminGuard } from '../features/auth/guards/admin.guard';
+import { ParentComponent } from '../homework-28/parent/parent.component';
+import { ChangeDetectionComponent } from '../homework-28/change-detection/change-detection.component';
+import { ChangeDetectionOnPushComponent } from '../homework-28/change-detection-on-push/change-detection-on-push.component';
 
 export const routes: Routes = [
+  {
+    path: 'parent',
+    component: ParentComponent,
+  },
+  {
+    path: 'changeDetection',
+    component: ChangeDetectionComponent,
+  },
+  {
+    path: 'changeDetectionOnPush',
+    component: ChangeDetectionOnPushComponent,
+  },
   {
     path: 'login',
     loadComponent: () => import('../features/auth/components/login/login.component').then(m => m.LoginComponent)

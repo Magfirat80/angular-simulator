@@ -1,0 +1,52 @@
+<p>change-detection works!</p>
+<div class="cd-buttons">
+  <button
+    class="change-on-click-button"
+    type="button"
+    id="change-on-click-button"
+    (click)="onClick()">
+    Сценарий 1 "onClick()"
+  </button>
+
+  <button
+    class="change-by-timeout-button"
+    type="button"
+    id="change-by-timeout-button"
+    (click)="changeByTimeout()"
+    >Сценарий 2 "changeByTimeout()"
+  </button>
+
+  <button
+    class="change-by-promise-button"
+    type="button"
+    id="change-by-promise-button"
+    (click)="changeByPromise()"
+    >Сценарий 3 "changeByPromise()"
+  </button>
+
+  <button
+    class="change-by-http-button"
+    type="button"
+    id="change-by-http-button"
+    (click)="changeByHttp()"
+    >Сценарий 4 "changeByHttp()"
+  </button>
+
+  <button
+    class="change-by-interval-button"
+    type="button"
+    id="change-by-interval-button"
+    (click)="changeByInterval()"
+    >Сценарий 5 "changeByInterval()"
+  </button>
+
+  <button
+    class="change-by-multi-metod-button"
+    type="button"
+    id="change-by-multi-metod-button"
+    (click)="changeMultiMetod()"
+    >Сценарий 6 "changeMultiMetod()"
+  </button>
+</div>
+
+<div class="count">{{ count }}</div>
