@@ -1,0 +1,7 @@
+<h2>ParentComponent работает</h2>
+
+<p>Имя пользователя: {{ user.name }}</p>
+<p>Возраст: {{ user.age }}</p>
+
+<app-child [user]="user"></app-child>
+<button (click)="changeName()">Изменить имя пользователя</button>
