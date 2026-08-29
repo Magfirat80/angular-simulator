@@ -1,7 +1,7 @@
 <section class="banner">
   <div class="main-title flex jc-center">
     <h1 class="main-title-content">
-      Насладись прогулкой в горах <br> с командой единомышленников
+      {{ 'HOME.BANNER_TITLE' | translate }}
     </h1>
   </div>
   <div class="tour-wrapper flex jc-center">
@@ -9,26 +9,33 @@
       <form class="form-tour flex">
         <div class="selection-field fs-16">
           <select name="tour-location" id="tour-location" [(ngModel)]="selectedTour">
-            <option value="" disabled selected>Локация для тура</option>
+            <option value="" disabled selected>{{ 'HOME.TOUR_LOCATION' | translate }}</option>
             @for (location of locations; track location.id) {
-              <option [ngValue]="location.tourLocation">{{ location.tourLocation }}</option>
+              <option [ngValue]="location.tourLocation">{{ location.tourLocation | translate}}</option>
             }
           </select>
-          <span class="label-selection-field fs-14">выберите из списка</span>
+          <span class="label-selection-field fs-14">{{ 'HOME.SELECT_FROM_LIST' | translate }}</span>
         </div>
         <div class="selection-field fs-16">
-          <input type="text" name="tour-date" id="tour-date" [(ngModel)] = "selectedDate" required placeholder="Дата похода">
+          <input
+            type="text"
+            name="tour-date"
+            id="tour-date"
+            [(ngModel)] = "selectedDate"
+            required
+            [placeholder]="'HOME.HIKE_DATE' | translate"
+          >
           <fa-icon [icon]="faCalendar" />
-          <span class="label-selection-field fs-14">укажите дату</span>
+          <span class="label-selection-field fs-14">{{ 'HOME.ENTER_DATE' | translate }}</span>
         </div>
         <div class="selection-field fs-16" >
           <select name="group-size" id="group-size" [(ngModel)] = "selectedGroup">
-            <option value="" disabled selected>Участники</option>
+            <option value="" disabled selected>{{ 'HOME.PARTICIPANTS' | translate }}</option>
             @for (group of groups; track group.id) {
-              <option [value]="group.participantsCount" >{{ group.participantsCount }}</option>
+              <option [value]="group.participantsCount" >{{ group.participantsCount | translate}}</option>
             }
           </select>
-          <span class="label-selection-field fs-14">выберите из списка</span>
+          <span class="label-selection-field fs-14">{{ 'HOME.SELECT_FROM_LIST' | translate }}</span>
         </div>
         <div>
           <button
@@ -38,7 +45,7 @@
             id="search-tour-button"
             type="submit"
           >
-            Найти программу
+            {{ 'HOME.FIND_PROGRAM' | translate }}
           </button>
         </div>
       </form>
@@ -46,7 +53,13 @@
   </div>
   <div class="live-input container flex fs-20">
     <div class="flex">
-      <input [(ngModel)]="liveInput" type="text" name="live-input" id="live-input" placeholder="Введите что-нибудь ...">
+      <input
+        [(ngModel)]="liveInput"
+        type="text"
+        name="live-input"
+        id="live-input"
+        [placeholder]="'HOME.ENTER_SOMETHING' | translate"
+      >
       <div class="live-output flex">
         {{ liveInput }}
       </div>
@@ -64,14 +77,14 @@
         </div>
       </div>
       <div class="right-side-block flex">
-        <p class="block-header">о нашем походе</p>
-        <p class="block-subheader">Исследуйте все горные массивы мира вместе с нами</p>
-        <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
+        <p class="block-header">{{ 'HOME.ABOUT_TRIP' | translate }}</p>
+        <p class="block-subheader">{{ 'HOME.EXPLORE_MOUNTAINS' | translate }}</p>
+        <p class="block-description">{{ 'HOME.LOREM_DESCRIPTION' | translate }}</p>
         <button
           class="tour-program-button flex jc-center ai-center"
           id="tour-program-button"
-          (click)="messageService.showInfo('Информация о программе в разработке!!!')">
-          Программа тура
+          (click)="messageService.showInfo('MESSAGES.PROGRAM_IN_DEVELOPMENT')">
+          {{ 'HOME.TOUR_PROGRAM' | translate }}
         </button>
       </div>
     </div>
@@ -81,17 +94,17 @@
 <section>
   <div class="wrapper-best-programs flex jc-center ai-center">
     <div class="left-side-block flex">
-      <p class="block-header">наше предложение</p>
-      <p class="block-subheader">Лучшие программы для тебя</p>
-      <p class="block-description">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
+      <p class="block-header">{{ 'HOME.OUR_OFFER' | translate }}</p>
+      <p class="block-subheader">{{ 'HOME.BEST_PROGRAMS' | translate }}</p>
+      <p class="block-description">{{ 'HOME.OFFER_DESCRIPTION' | translate }}</p>
       @for (advantage of advantages; track advantage.id) {
         <div class="about flex" (click)="selectAdvantage(advantage.id)">
           <div class="advantage-icon">
             <fa-icon [icon]="advantage.icon" [ngClass]="'icon-color-' + advantage.id" />
           </div>
           <div class="text" [class.active-advantage]="advantage.id === selectedAdvantageId">
-            <p class="title">{{ advantage.title }}</p>
-            <p class="description">{{ advantage.description }}</p>
+            <p class="title">{{ advantage.title | translate }}</p>
+            <p class="description">{{ advantage.description | translate}}</p>
             @if (advantage.id === selectedAdvantageId) {
               <fa-icon [icon]="faThumbsUp" class="faThumbsUp-icon"/>
             }
@@ -101,8 +114,8 @@
       <button
         class="cost-of-programs-button"
         id="cost-of-programs-button"
-        (click)="messageService.showSuccess('Цены снижены!!!')">
-        Стоимость программ
+        (click)="messageService.showSuccess('MESSAGES.PRICES_REDUCED')">
+        {{ 'HOME.PROGRAM_COST' | translate }}
       </button>
     </div>
     <div class="right-side-block">
@@ -119,8 +132,8 @@
 <section>
   <div class="wrapper-popular-destinations flex jc-center ai-center">
     <div class="upper-block flex jc-center ai-center">
-      <p class="block-header">по версии отдыхающих</p>
-      <p class="block-subheader">Популярные направления</p>
+      <p class="block-header">{{ 'HOME.POPULAR_DESTINATIONS.LABEL' | translate }}</p>
+      <p class="block-subheader">{{ 'HOME.POPULAR_DESTINATIONS.TITLE' | translate }}</p>
     </div>
     <div class="middle-block flex">
       @for (map of maps; track $index) {
@@ -132,8 +145,25 @@
           </div>
           <div class="map-description flex ai-center">
             <div>
-              <div class="destination-name">{{ map.name }}</div>
-              <div class="destination-description">{{ map.description }}</div>
+              <div class="destination-name">
+                {{
+                  (
+                    'HOME.POPULAR_DESTINATIONS.DESTINATIONS.' +
+                    ['LAKE', 'NIGHT', 'SPORT'][$index] +
+                    '.NAME'
+                  ) | translate
+                }}
+              </div>
+
+              <div class="destination-description">
+                {{
+                  (
+                    'HOME.POPULAR_DESTINATIONS.DESTINATIONS.' +
+                    ['LAKE', 'NIGHT', 'SPORT'][$index] +
+                    '.DESCRIPTION'
+                  ) | translate
+                }}
+              </div>
             </div>
             <div class="destination-cost flex jc-center ai-center">
               {{ map.cost }} $
@@ -146,8 +176,8 @@
       <button
         class="destination-rating-button"
         id="destination-rating-button"
-        (click)="messageService.showWarn('Оцените погодные условия перед путешествием!!!')">
-        Рейтинг направлений
+        (click)="messageService.showWarn('MESSAGES.WEATHER_WARNING')">
+        {{ 'HOME.POPULAR_DESTINATIONS.RATING_BUTTON' | translate }}
       </button>
     </div>
   </div>
@@ -156,19 +186,35 @@
 <section>
   <div class="wrapper-travel-blog flex jc-center ai-center container">
     <div class="upper-block flex jc-center ai-center">
-      <p class="block-header">делимся впечатлениями</p>
-      <p class="block-subheader">Блог о путешествиях</p>
+      <p class="block-header">{{ 'HOME.TRAVEL_BLOG.LABEL' | translate }}</p>
+      <p class="block-subheader">{{ 'HOME.TRAVEL_BLOG.TITLE' | translate }}</p>
     </div>
     <div class="middle-block flex">
       @for (article of articles; track article.id) {
         <div class="wrapper-article flex">
           <img [src]="'/images/' + article.articleIllustration + '.png'" [alt]="article.articleIllustration">
           <div class="article-info flex">
-            <p class="title">{{ article.title }}</p>
-            <p class="introduction">{{ article.introduction }}</p>
+            <p class="title">
+              {{
+                (
+                  'HOME.TRAVEL_BLOG.ARTICLES.' +
+                  ['ITALY', 'FLIGHT', 'TRAVEL_ALONE', 'INDIA'][$index] +
+                  '.TITLE'
+                ) | translate
+              }}
+            </p>
+            <p class="introduction">
+              {{
+                (
+                  'HOME.TRAVEL_BLOG.ARTICLES.' +
+                  ['ITALY', 'FLIGHT', 'TRAVEL_ALONE', 'INDIA'][$index] +
+                  '.INTRODUCTION'
+                ) | translate
+              }}
+            </p>
             <div class="article-info-lower-part flex ai-center">
               <p class="date">{{ article.date }}</p>
-              <a>читать статью</a>
+              <a>{{ 'HOME.TRAVEL_BLOG.READ_ARTICLE' | translate }}</a>
             </div>
           </div>
         </div>
@@ -178,8 +224,8 @@
       <button
         class="other-materials-button"
         id="other-materials-button"
-        (click)="messageService.showError('Ошибка!!!')">
-        Другие материалы
+        (click)="messageService.showError('MESSAGES.ERROR')">
+        {{ 'HOME.TRAVEL_BLOG.OTHER_MATERIALS' | translate }}
       </button>
     </div>
   </div>
@@ -188,8 +234,8 @@
 <section>
   <div class="wrapper-impressions-blog flex ai-center container">
     <div class="upper-block flex jc-center ai-center">
-      <p class="block-header">фото-отчет</p>
-      <p class="block-subheader">Делимся впечатлениями</p>
+      <p class="block-header">{{ 'HOME.IMPRESSIONS.LABEL' | translate }}</p>
+      <p class="block-subheader">{{ 'HOME.IMPRESSIONS.TITLE' | translate }}</p>
     </div>
     <div class="middle-block flex">
       <img src="/images/impressions-balloons.png" alt="impressions-balloons" width="580px" height="250px">
@@ -203,8 +249,8 @@
       <button
         class="our-interest-button"
         id="our-interest-button"
-        (click)="messageService.showSuccess('Все ОК!!!')">
-        Наш pinterest
+        (click)="messageService.showSuccess('MESSAGES.ALL_OK')">
+        {{ 'HOME.IMPRESSIONS.PINTEREST' | translate }}
       </button>
     </div>
   </div>

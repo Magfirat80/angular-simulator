@@ -2,32 +2,32 @@
   <div class="footer flex">
     <div class="travel-newsletters flex">
       <div class="left-side flex">
-        <p class="block-header">актуально</p>
-        <p class="block-subheader">Получайте полезные рассылки о путешествиях</p>
+        <p class="block-header">{{ 'FOOTER.NEWS_TITLE' | translate }}</p>
+        <p class="block-subheader">{{ 'FOOTER.NEWS_SUBTITLE' | translate }}</p>
       </div>
       <div class="right-side flex">
         <div class="right-side-input flex">
           <div class="input-block">
             <div class="input-block-header">
-              Введите email-адрес
+              {{ 'FOOTER.EMAIL_LABEL' | translate }}
             </div>
             <input class="input-block-field" type="email" placeholder="name@domain.com" required>
           </div>
-          <button class="subscribe-news-button" id="subscribe-news-button">Подписаться на новости</button>
+          <button class="subscribe-news-button" id="subscribe-news-button">{{ 'FOOTER.SUBSCRIBE' | translate }}</button>
         </div>
         <div class="right-side-agreement">
-          подписываясь на новости, вы автоматически соглашаетесь с 
-          <span class="underline">условиями обработки персональных данных</span>
-          и
-          <span class="underline">правилами рекламных рассылок</span>
+          {{ 'FOOTER.SUBSCRIBE_AGREEMENT' | translate }}
+          <span class="underline">{{ 'FOOTER.PERSONAL_DATA_POLICY' | translate }}</span>
+          {{ 'FOOTER.AND' | translate }}
+          <span class="underline">{{ 'FOOTER.ADVERTISING_RULES' | translate }}</span>
         </div>
       </div>
     </div>
     <div class="top-of-footer flex">
       <div class="top-of-footer-content flex container"> 
         <div class="left-part">
-          <div class="title">Компания «{{ config.companyName }}»</div>
-          <div class="subtitle">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney.</div>
+          <div class="title">{{ 'FOOTER.COMPANY' | translate:{ companyName: config.companyName } }}</div>
+          <div class="subtitle">{{ 'FOOTER.COMPANY_DESCRIPTION' | translate }}</div>
           <div class="contacts underline flex">
             <a href="mailto:info@domain.com">info@domain.com</a>
             <a href="tel:+71234567890">+7 (123) 456-78-90</a>
@@ -40,26 +40,26 @@
           </div>
         </div>
         <div class="middle-part">
-          <div class="title">Наши услуги</div>
+          <div class="title">{{ 'FOOTER.OUR_SERVICES' | translate }}</div>
           <nav class="middle-part-nav">
             <ul>
-              <li><fa-icon [icon]="faAngleRight" />Прогулки в горы летом</li>
-              <li><fa-icon [icon]="faAngleRight" />Зимние походы в горы</li>
-              <li><fa-icon [icon]="faAngleRight" />Посещение храмов в горах</li>
-              <li><fa-icon [icon]="faAngleRight" />Экстремальные виды туризма</li>
-              <li><fa-icon [icon]="faAngleRight" />Походы в джунглях Амазонии</li>
-              <li><fa-icon [icon]="faAngleRight" />Поездка в Африку</li>
+              <li><fa-icon [icon]="faAngleRight" />{{ 'FOOTER.SERVICES.SUMMER_HIKES' | translate }}</li>
+              <li><fa-icon [icon]="faAngleRight" />{{ 'FOOTER.SERVICES.WINTER_HIKES' | translate }}</li>
+              <li><fa-icon [icon]="faAngleRight" />{{ 'FOOTER.SERVICES.TEMPLES' | translate }}</li>
+              <li><fa-icon [icon]="faAngleRight" />{{ 'FOOTER.SERVICES.EXTREME' | translate }}</li>
+              <li><fa-icon [icon]="faAngleRight" />{{ 'FOOTER.SERVICES.AMAZON' | translate }}</li>
+              <li><fa-icon [icon]="faAngleRight" />{{ 'FOOTER.SERVICES.AFRICA' | translate }}</li>
             </ul>
           </nav>
         </div>
         <div class="right-part">
-          <div class="title">Важно для путешествий</div>
+          <div class="title">{{ 'FOOTER.TRAVEL_IMPORTANT' | translate }}</div>
           <nav class="middle-part-nav">
             <ul>
-              <li><fa-icon [icon]="faAngleRight" />Как собрать в долгий поход?</li>
-              <li><fa-icon [icon]="faAngleRight" />Жизненно важные предметы для похода</li>
-              <li><fa-icon [icon]="faAngleRight" />Медицинская страховка, гарантии безопасности</li>
-              <li><fa-icon [icon]="faAngleRight" />Если вы врач - загляните сюда</li>
+              <li><fa-icon [icon]="faAngleRight" />{{ 'FOOTER.IMPORTANT.LONG_HIKE' | translate }}</li>
+              <li><fa-icon [icon]="faAngleRight" />{{ 'FOOTER.IMPORTANT.ESSENTIAL_ITEMS' | translate }}</li>
+              <li><fa-icon [icon]="faAngleRight" />{{ 'FOOTER.IMPORTANT.INSURANCE' | translate }}</li>
+              <li><fa-icon [icon]="faAngleRight" />{{ 'FOOTER.IMPORTANT.DOCTOR' | translate }}</li>
             </ul>
           </nav>
         </div>
@@ -67,8 +67,8 @@
     </div>
     <div class="bottom-of-footer flex jc-center">
       <div class="container ai-center">
-        <div class="left-side">ИП Константинопольский К.К., 2023</div>
-        <div class="right-side underline">Политика обработки персональных данных</div>
+        <div class="left-side">{{ 'FOOTER.COPYRIGHT' | translate }}</div>
+        <div class="right-side underline">{{ 'FOOTER.PRIVACY_POLICY' | translate }}</div>
       </div>
     </div>
   </div>

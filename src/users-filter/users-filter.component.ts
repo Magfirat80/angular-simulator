@@ -3,10 +3,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs';
 import { PluralPipe } from '../pipes/plural.pipe';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-users-filter',
-  imports: [ReactiveFormsModule, PluralPipe],
+  imports: [ReactiveFormsModule, PluralPipe, TranslatePipe],
   templateUrl: './users-filter.component.html',
   styleUrl: './users-filter.component.scss',
 })

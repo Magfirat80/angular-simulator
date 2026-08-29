@@ -1,3 +1,6 @@
+import { LanguageService } from '../services/language.service';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
@@ -50,8 +53,18 @@ export const appConfig: ApplicationConfig = {
       provide: APP_CONFIG,
       useValue: applicationConfig,
     },
+    
     provideRouter(routes),
+    
     provideZoneChangeDetection(),
+    
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: './i18n/',
+        suffix: '.json',
+      }),
+    }),
+    
     providePrimeNG({
       theme: {
         preset: applyThemeFromStorage(),
@@ -60,11 +73,17 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
+
     provideHttpClient(
       withInterceptors([loggingInterceptor, authInterceptor, errorInterceptor])
     ),
+
     provideAppInitializer(() => {
       const authService: AuthService = inject(AuthService);
+      const languageService: LanguageService = inject(LanguageService);
+
+      languageService.initLanguage();
+
       return authService.init();
     }),
   ],

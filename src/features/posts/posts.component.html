@@ -1,6 +1,6 @@
 <div class="posts-page">
-  <h1>Posts</h1>
-  <h2>Показано {{ pageReport }}</h2>
+  <h1>{{ 'POSTS.TITLE' | translate }}</h1>
+  <h2>{{ 'POSTS.SHOWING' | translate }} {{ pageReport }}</h2>
   <div class="table-wrapper">
     <p-context-menu
       #cm
@@ -20,7 +20,6 @@
     } @else {
       <p-table
         [showCurrentPageReport]="false"
-        currentPageReportTemplate="{first} - {last} из {totalRecords}"
         [value]="(posts$ | async)!"
         dataKey="id"
         [lazy]="true"
@@ -36,9 +35,9 @@
       >
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 300px">Title</th>
-            <th style="width: 250px">Tags</th>
-            <th style="width: 120px">Views</th>
+            <th style="width: 300px">{{ 'POSTS.TITLE_COLUMN' | translate }}</th>
+            <th style="width: 250px">{{ 'POSTS.TAGS_COLUMN' | translate }}</th>
+            <th style="width: 120px">{{ 'POSTS.VIEWS_COLUMN' | translate }}</th>
           </tr>
         </ng-template>
 
@@ -55,12 +54,13 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="3">Посты не найдены</td>
+            <td colspan="3">{{ 'POSTS.EMPTY' | translate }}</td>
           </tr>
         </ng-template>
       </p-table>
     }
   </div>
-  <p-button (click)="openCreatePost()"
-  >Перейти к созданию поста</p-button>
+  <p-button (click)="openCreatePost()">
+    {{ 'POSTS.CREATE' | translate }}
+  </p-button>
 </div>

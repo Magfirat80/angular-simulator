@@ -6,14 +6,16 @@ import { AsyncPipe } from '@angular/common';
 import { UserCardComponent } from '../user-card/user-card.component';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-users-page',
-  imports: [AsyncPipe, UserCardComponent, CreateUserComponent, UsersFilterComponent],
+  imports: [AsyncPipe, UserCardComponent, CreateUserComponent, UsersFilterComponent, TranslatePipe],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })
 export class UsersPageComponent implements OnInit {
+  
   userService: UserService = inject(UserService);
   users$: Observable<IUser[]> = this.userService.users$;
 

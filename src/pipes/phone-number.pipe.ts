@@ -5,6 +5,7 @@ import { PhoneMode } from '../enums/PhoneMode';
   name: 'phoneNumber',
 })
 export class PhoneNumberPipe implements PipeTransform {
+  
   transform(value: string, mode: PhoneMode): string {
     if (!value) return '';
 

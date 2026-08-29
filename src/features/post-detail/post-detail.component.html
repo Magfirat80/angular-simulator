@@ -2,11 +2,11 @@
   <h1>{{ post.title }}</h1>
   <p>{{ post.body }}</p>
   <p>
-    <strong>Теги:</strong>
+    <strong>{{ 'POST_DETAIL.TAGS' | translate }}</strong>
     {{ post.tags.join(', ') }}
   </p>
   <p>
-    <strong>Просмотры:</strong>
+    <strong>{{ 'POST_DETAIL.VIEWS' | translate }}</strong>
     {{ post.views }}
   </p>
 </div>

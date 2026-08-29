@@ -5,6 +5,7 @@ import { IUser } from '../interfaces/IUser';
 import { MessageService } from './message.service';
 import { LoaderService } from './loader.service';
 import { LocalStorageService } from './local-storage.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class UserService {
   private messageService: MessageService = inject(MessageService);
   private loaderService: LoaderService = inject(LoaderService);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private translateService: TranslateService = inject(TranslateService);
 
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
@@ -37,7 +39,7 @@ export class UserService {
       this.loaderService.showSpinner();
       return this.userApiService.getUsers().pipe(
         catchError(() => {
-          this.messageService.showError('Ошибка! Не получены сведения о пользователях!');
+          this.messageService.showError(this.translateService.instant('MESSAGES.USERS_LOAD_ERROR'));
           return of([]);
         }),
         finalize(() => this.loaderService.hideSpinner()),
@@ -50,7 +52,7 @@ export class UserService {
     const updatedUsers: IUser[] = currentUsers.filter((user: IUser) => user.id !== userId);
 
     this.setUsers(updatedUsers);
-    this.messageService.showSuccess('Пользователь удален!!!');
+    this.messageService.showSuccess(this.translateService.instant('MESSAGES.USER_DELETED'));
   }
 
   createUser(user: IUser): void {

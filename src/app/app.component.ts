@@ -26,6 +26,7 @@ import { faCoffee, IconDefinition } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  
   faCoffee: IconDefinition = faCoffee;
 
   localStorageService: LocalStorageService = inject(LocalStorageService);

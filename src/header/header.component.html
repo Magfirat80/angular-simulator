@@ -1,7 +1,7 @@
 <header class="header flex ai-center">
   <div class="header-content container flex">
     <div class="logo">
-      <img src="/images/company-logo.svg" alt="Логотип горы">
+      <img src="/images/company-logo.svg" [alt]="'HEADER.LOGO_ALT' | translate">
       <div class="company-name">{{ config.companyName }}</div>
     </div>
     <nav class="navigation-line flex ai-center fs-18">
@@ -14,13 +14,13 @@
               [routerLinkActiveOptions]="{ exact: item.path === '/' }"
               class="navigation-link"
             >
-              {{ item.navItem }}
+              {{ item.navItem | translate }}
             </a>
           </li>
         }
       </ul>
     </nav>
-    <button class="header-button flex jc-center ai-center" id="consultation-button">Консультация</button>
+    <button class="header-button flex jc-center ai-center" id="consultation-button">{{ 'HEADER.CONSULTATION' | translate }}</button>
 
     @if (currentUser$ | async; as user) {
       <div class="user-panel flex ai-center">
@@ -32,19 +32,33 @@
           class="user-panel-button"
           type="button"
           (click)="logout()">
-          Выйти
+          {{ 'HEADER.LOGOUT' | translate }}
         </button>
       </div>
     }
 
     @if (lastLogin; as loginDate) {
       <div class="date-last-login flex ai-center">
-        Последний вход: {{ loginDate | date }}
+        {{ 'HEADER.LAST_LOGIN' | translate }} {{ loginDate | date }}
       </div>
     }
   </div>
     
   <div class="switcher-wrapper container fs-18">
+    <div class="language-switcher">
+      <button type="button" (click)="languageService.changeLanguage('ru')">
+        RU
+      </button>
+
+      <button type="button" (click)="languageService.changeLanguage('en')">
+        EN
+      </button>
+
+      <button type="button" (click)="languageService.changeLanguage('ar')">
+        AR
+      </button>
+    </div>
+
     <p-select-button
       [options]="themeService.presets"
       [ngModel]="themeService.theme$ | async"
@@ -73,7 +87,7 @@
         id="show-counter-button"
         (click)="switchWidget('counter')"
       >
-        Покажи счетчик
+        {{ 'HEADER.SHOW_COUNTER' | translate }}
       </button>
       <button
         [disabled]="currentWidget === 'date'"
@@ -81,7 +95,7 @@
         id="show-timer-button"
         (click)="switchWidget('date')"
       >
-        Покажи таймер
+        {{ 'HEADER.SHOW_TIMER' | translate }}
       </button>
     </div>
     <div class="widget-display flex jc-right">

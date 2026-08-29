@@ -5,42 +5,42 @@
   </div>
   <div class="body" appAnimatedGradient [options]="gradientOptions">
     <section>
-      <h2>Контакты</h2>
+      <h2>{{ 'USER_CARD.CONTACTS' | translate }}</h2>
       <div class="row">
-        <span>Эл. почта</span>
+        <span>{{ 'USER_CARD.EMAIL' | translate }}</span>
         <b>{{ user.email }}</b>
       </div>
       <div class="row">
-        <span>Телефон:</span>
+        <span>{{ 'USER_CARD.PHONE' | translate }}</span>
         <b appBold>{{ user.phone | phoneNumber: phoneMode }}</b>
       </div>
       <div class="row">
-        <span>Веб-сайт:</span>
-        <b>{{ user.website || 'неизвестно' }}</b>
+        <span>{{ 'USER_CARD.WEBSITE' | translate }}</span>
+        <b>{{ user.website || ('USER_CARD.UNKNOWN' | translate) }}</b>
       </div>
     </section>
     
     <section>
       <div class="address-info">
-        <h2>Адрес проживания</h2>
+        <h2>{{ 'USER_CARD.RESIDENTIAL_ADDRESS' | translate }}</h2>
         <div class="row">
-          <span>Город:</span>
+          <span>{{ 'USER_CARD.CITY' | translate }}</span>
           <b>{{ user.address.city }}</b>
         </div>
         <div class="row">
-          <span>Улица:</span>
+          <span>{{ 'USER_CARD.STREET' | translate }}</span>
           <b>{{ user.address.street }}</b>
         </div>
         <div class="row">
-          <span>Офис:</span>
-          <b>{{ user.address.suite || 'неизвестно' }}</b>
+          <span>{{ 'USER_CARD.OFFICE' | translate }}</span>
+          <b>{{ user.address.suite || ('USER_CARD.UNKNOWN' | translate) }}</b>
         </div>
         <div class="row">
-          <span>Индекс:</span>
+          <span>{{ 'USER_CARD.ZIP_CODE' | translate }}</span>
           <b>{{ user.address.zipcode }}</b>
         </div>
         <div class="row row--coordinates">
-          <span>Координаты:</span>
+          <span>{{ 'USER_CARD.COORDINATES' | translate }}</span>
           <div class="coordinates">
             <b>{{ user.address.geo.lat }}</b>
             <b>{{ user.address.geo.lng }}</b>
@@ -51,18 +51,18 @@
 
     <section>
       <div class="work-info">
-        <h2>Место работы</h2>
+        <h2>{{ 'USER_CARD.WORKPLACE' | translate }}</h2>
         <div class="row">
-          <span>Компания:</span>
+          <span>{{ 'USER_CARD.COMPANY' | translate }}</span>
           <b>{{ user.company.name }}</b>
         </div>
         <div class="row">
-          <span>Миссия:</span>
-          <i>{{ user.company.catchPhrase || 'неизвестно' }}</i>
+          <span>{{ 'USER_CARD.MISSION' | translate }}</span>
+          <i>{{ user.company.catchPhrase || ('USER_CARD.UNKNOWN' | translate) }}</i>
         </div>
         <div class="row">
-          <span>Специализация:</span>
-          <b>{{ user.company.bs || 'неизвестно' }}</b>
+          <span>{{ 'USER_CARD.SPECIALIZATION' | translate }}</span>
+          <b>{{ user.company.bs || ('USER_CARD.UNKNOWN' | translate) }}</b>
         </div>
       </div>
     </section>
@@ -70,7 +70,7 @@
       class="delete-user-button"
       id="delete-user-button"
       (click)="onDeleteClick(user.id)">
-      Удалить пользователя
+      {{ 'USER_CARD.DELETE' | translate }}
     </button>
   </div>
 </div>

@@ -1,0 +1,262 @@
+{
+  "HEADER": {
+    "HOME": "Home",
+    "USERS": "Users",
+    "POSTS": "Posts",
+    "LOGOUT": "Logout",
+    "CONSULTATION": "Consultation",
+    "LAST_LOGIN": "Last login:",
+    "SHOW_COUNTER": "Show counter",
+    "SHOW_TIMER": "Show timer",
+    "LOGO_ALT": "Mountain logo"
+  },
+
+  "LOGIN": {
+    "TITLE": "Login",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "SUBMIT": "Login",
+    "INVALID_CREDENTIALS": "Incorrect username and/or password!"
+  },
+ 
+  "USERS": {
+    "EMPTY_STATE": "No users to display"
+  },
+
+  "USERS_FILTER": {
+    "SEARCH_PLACEHOLDER": "Search by username",
+    "FOUND": "Found:",
+    "CARD_ONE": "card",
+    "CARD_FEW": "cards",
+    "CARD_MANY": "cards"
+  },
+
+  "CREATE_USER": {
+    "NAME": "Name",
+    "USERNAME": "Username",
+    "EMAIL": "Email",
+    "PHONE": "Phone",
+    "WEBSITE": "Website",
+    "ADDRESS_CITY": "City",
+    "ADDRESS_STREET": "Street",
+    "ADDRESS_SUITE": "Office",
+    "ADDRESS_ZIPCODE": "Zip code",
+    "ADDRESS_GEO_LAT": "Latitude",
+    "ADDRESS_GEO_LNG": "Longitude",
+    "COMPANY_NAME": "Company",
+    "COMPANY_CATCH_PHRASE": "Mission",
+    "COMPANY_BS": "Specialization",
+    "SUBMIT": "Create user"
+  },
+
+  "USER_CARD": {
+    "CONTACTS": "Contacts",
+    "EMAIL": "Email",
+    "PHONE": "Phone:",
+    "WEBSITE": "Website:",
+    "UNKNOWN": "unknown",
+    "RESIDENTIAL_ADDRESS": "Residential address",
+    "CITY": "City:",
+    "STREET": "Street:",
+    "OFFICE": "Office:",
+    "ZIP_CODE": "Zip code:",
+    "COORDINATES": "Coordinates:",
+    "WORKPLACE": "Workplace",
+    "COMPANY": "Company:",
+    "MISSION": "Mission:",
+    "SPECIALIZATION": "Specialization:",
+    "DELETE": "Delete user"
+  },
+
+  "POST_CREATE": {
+    "TITLE": "Create post",
+    "TITLE_LABEL": "Title",
+    "BODY_LABEL": "Post text",
+    "TAGS_LABEL": "Tags (comma separated)",
+    "VIEWS_LABEL": "Views",
+    "USER_ID_LABEL": "User ID",
+    "REACTIONS": "Reactions:",
+    "LIKES": "Likes",
+    "DISLIKES": "Dislikes",
+    "CREATE": "Create post",
+    "CANCEL": "Cancel",
+    "SUCCESS": "Post added",
+    "ERROR": "Creation error"
+  },
+
+  "POST_DETAIL": {
+    "TAGS": "Tags:",
+    "VIEWS": "Views:"
+  },
+
+  "POST_EDIT": {
+    "TITLE": "Title",
+    "TAGS": "Tags",
+    "VIEWS": "Views",
+    "CANCEL": "Cancel",
+    "SAVE": "Save"
+  },
+
+  "POSTS": {
+    "TITLE": "Posts",
+    "SHOWING": "Showing",
+    "TITLE_COLUMN": "Title",
+    "TAGS_COLUMN": "Tags",
+    "VIEWS_COLUMN": "Views",
+    "EMPTY": "Posts not found",
+    "CREATE": "Go to create post",
+    "VIEW": "View",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "EDIT_DIALOG": "Edit post",
+    "LOAD_ERROR": "Failed to load posts",
+    "UPDATED": "Post updated",
+    "UPDATE_ERROR": "Update error",
+    "DELETED": "Post successfully deleted",
+    "DELETE_ERROR": "Delete error",
+    "PAGE_REPORT": "{{first}} - {{last}} of {{total}}",
+    "INVALID_ID": "Invalid post ID",
+    "POST_NOT_FOUND": "Failed to load post",
+    "PAGE_REPORT_EMPTY": "0 - 0 of 0"
+  },
+
+  "FOOTER": {
+    "NEWS_TITLE": "latest",
+    "NEWS_SUBTITLE": "Get useful travel newsletters",
+    "EMAIL_LABEL": "Enter your email address",
+    "SUBSCRIBE": "Subscribe to news",
+    "SUBSCRIBE_AGREEMENT": "by subscribing to the news, you automatically agree to",
+    "PERSONAL_DATA_POLICY": "the personal data processing policy",
+    "AND": "and",
+    "ADVERTISING_RULES": "the advertising newsletter rules",
+    "COMPANY": "Company «{{companyName}}»",
+    "COMPANY_DESCRIPTION": "Its roots go back to a fragment of classical Latin from 45 AD, more than two thousand years ago. Richard McClintock, a professor of Latin at Hampden-Sydney College.",
+    "OUR_SERVICES": "Our services",
+    "TRAVEL_IMPORTANT": "Important for travelers",
+    "SERVICES": {
+      "SUMMER_HIKES": "Summer mountain hikes",
+      "WINTER_HIKES": "Winter mountain hikes",
+      "TEMPLES": "Visiting mountain temples",
+      "EXTREME": "Extreme tourism",
+      "AMAZON": "Hiking in the Amazon jungle",
+      "AFRICA": "Trip to Africa"
+    },
+    "IMPORTANT": {
+      "LONG_HIKE": "How to prepare for a long hike?",
+      "ESSENTIAL_ITEMS": "Essential items for a hike",
+      "INSURANCE": "Travel insurance and safety guarantees",
+      "DOCTOR": "If you are a doctor - look here"
+    },
+    "COPYRIGHT": "IP Konstantinopolsky K.K., 2023",
+    "PRIVACY_POLICY": "Personal data processing policy"
+  },
+
+  "HOME": {
+    "BANNER_TITLE": "Enjoy a walk in the mountains with like-minded people",
+    "TOUR_LOCATION": "Tour location",
+    "SELECT_FROM_LIST": "select from the list",
+    "HIKE_DATE": "Hiking date",
+    "ENTER_DATE": "enter the date",
+    "PARTICIPANTS": "Participants",
+    "FIND_PROGRAM": "Find a program",
+    "ENTER_SOMETHING": "Enter something ...",
+    "ABOUT_TRIP": "about our trip",
+    "EXPLORE_MOUNTAINS": "Explore all the mountain ranges in the world with us",
+    "LOREM_DESCRIPTION": "Its roots go back to a fragment of classical Latin from 45 BC, more than two thousand years ago. Richard McClintock, a professor of Latin at Hampden-Sydney College in Virginia, took one of the strangest words in Lorem Ipsum, \"consectetur\", and searched for it in classical Latin literature.",
+    "TOUR_PROGRAM": "Tour program",
+    "OUR_OFFER": "our offer",
+    "BEST_PROGRAMS": "The best programs for you",
+    "OFFER_DESCRIPTION": "Its roots go back to a fragment of classical Latin from 45 BC, more than two thousand years ago. Richard McClintock, a professor of Latin at the college.",
+    "PROGRAM_COST": "Program prices",
+    "ADVANTAGE_GUIDE": "Experienced guide",
+    "ADVANTAGE_GUIDE_DESCRIPTION": "The modern world requires independent approaches to implementing the appropriate conditions for development.",
+    "ADVANTAGE_SAFE": "Safe hiking",
+    "ADVANTAGE_SAFE_DESCRIPTION": "The modern world requires independent approaches to implementing the appropriate conditions for development.",
+    "ADVANTAGE_PRICES": "Loyal prices",
+    "ADVANTAGE_PRICES_DESCRIPTION": "The modern world requires independent approaches to implementing the appropriate conditions for development.",
+
+    "POPULAR_DESTINATIONS": {
+      "LABEL": "according to travelers",
+      "TITLE": "Popular destinations",
+      "RATING_BUTTON": "Destination rating",
+      "WEATHER_WARNING": "Check the weather conditions before traveling!!!",
+      "DESTINATIONS": {
+        "LAKE": {
+          "NAME": "Lake near the mountains",
+          "DESCRIPTION": "a romantic adventure"
+        },
+        "NIGHT": {
+          "NAME": "Night in the mountains",
+          "DESCRIPTION": "with friends"
+        },
+        "SPORT": {
+          "NAME": "Mountain sports",
+          "DESCRIPTION": "for those who care about themselves"
+        }
+      }
+    },
+
+    "TRAVEL_BLOG": {
+      "LABEL": "sharing impressions",
+      "TITLE": "Travel blog",
+      "READ_ARTICLE": "read article",
+      "OTHER_MATERIALS": "Other materials",
+      "ERROR": "Error!!!",
+      "ARTICLES": {
+        "ITALY": {
+          "TITLE": "Beautiful Italy, what is it really like?",
+          "INTRODUCTION": "For the modern world, the basic vector of development assumes independent ways of implementing the relevant conditions of activation."
+        },
+        "FLIGHT": {
+          "TITLE": "No more doubts! The whole world is open to you!",
+          "INTRODUCTION": "For the modern world, the basic vector of development assumes independent ways of implementing the relevant conditions of activation ... independent ways of implementation..."
+        },
+        "TRAVEL_ALONE": {
+          "TITLE": "How to prepare for traveling alone?",
+          "INTRODUCTION": "For the modern world, the basic vector of development assumes."
+        },
+        "INDIA": {
+          "TITLE": "India ... shall we fly?",
+          "INTRODUCTION": "For the modern world, the basic vector of development."
+        }
+      }
+    },
+
+    "IMPRESSIONS": {
+      "LABEL": "photo report",
+      "TITLE": "Sharing impressions",
+      "PINTEREST": "Our Pinterest",
+      "SUCCESS": "Everything is OK!!!"
+    },
+
+    "LOCATIONS": {
+      "ELBRUS_ASCENT": "Climbing Mount Elbrus",
+      "ELBRUS_RING": "Elbrus Ring",
+      "BELUKHA_HIKE": "Hike to Belukha",
+      "SHAVLIN_LAKES": "Shavlin Lakes",
+      "URAL_BAR": "Ural Bars",
+      "KHIBINY_TREKKING": "Trekking in the Khibiny Mountains",
+      "VOLCANO_VALLEY": "Valley of Volcanoes"
+    },
+
+    "GROUPS": {
+      "FOUR": "1-4 people",
+      "EIGHT": "5-8 people",
+      "TWELVE": "9-12 people",
+      "EIGHTEEN": "13-18 people",
+      "MORE": "19 people and more"
+    }
+  },
+
+  "MESSAGES": {
+    "PROGRAM_IN_DEVELOPMENT": "Information about the program is under development!!!",
+    "PRICES_REDUCED": "Prices have been reduced!!!",
+    "WEATHER_WARNING": "Please check the weather conditions before traveling!!!",
+    "ERROR": "Error!!!",
+    "ALL_OK": "Everything is OK!!!",
+    "USERS_LOAD_ERROR": "Error! Failed to load user information!",
+    "USER_DELETED": "User deleted!!!",
+    "NOT_FOUND": "Error 404 (Not Found)",
+    "REFRESH_TOKEN_MISSING": "RefreshToken is missing"
+  }
+}

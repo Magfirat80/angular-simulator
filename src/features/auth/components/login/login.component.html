@@ -1,11 +1,11 @@
 <div class="login-page flex">
   <form [formGroup]="loginForm" class="login-form flex" autocomplete="off">
-    <h2 class="login-title">Login</h2>
+    <h2 class="login-title">{{ 'LOGIN.TITLE' | translate }}</h2>
     
-    <label for="username">Username</label>
+    <label for="username">{{ 'LOGIN.USERNAME' | translate }}</label>
     <input type="text" id="username" formControlName="username" autocomplete="username" required>
 
-    <label for="password">Password</label>
+    <label for="password">{{ 'LOGIN.PASSWORD' | translate }}</label>
     <input type="password" id="password" formControlName="password" autocomplete="current-password" required>
 
     <button
@@ -13,7 +13,7 @@
       id="login-button"
       (click)="submit()"
       [disabled]="loginForm.invalid">
-      Войти
+      {{ 'LOGIN.SUBMIT' | translate }}
     </button>
   </form>
 </div>

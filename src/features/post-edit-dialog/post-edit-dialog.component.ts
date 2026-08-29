@@ -4,11 +4,12 @@ import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angula
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { IPost } from '../interfaces/IPost';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post-edit-dialog',
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, ButtonModule],
+  imports: [ReactiveFormsModule, InputTextModule, ButtonModule, TranslatePipe],
   templateUrl: './post-edit-dialog.component.html',
   styleUrl: './post-edit-dialog.component.scss',
 })

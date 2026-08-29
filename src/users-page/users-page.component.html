@@ -14,7 +14,7 @@
           (userDelete)="onDeleteUser($event)">
         </app-user-card>
       } @empty {
-        <div class="empty-state flex jc-center ai-center">Нет пользователей для отображения</div>
+        <div class="empty-state flex jc-center ai-center">{{ 'USERS.EMPTY_STATE' | translate }}</div>
       }
     </div>
   </div>

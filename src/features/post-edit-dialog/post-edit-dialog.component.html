@@ -1,18 +1,18 @@
 <form [formGroup]="postEditForm">
 
-  <label for="title">Заголовок</label>
+  <label for="title">{{ 'POST_EDIT.TITLE' | translate }}</label>
   <input
     id="title"
     pInputText
     formControlName="title">
 
-  <label for="tags">Теги</label>
+  <label for="tags">{{ 'POST_EDIT.TAGS' | translate }}</label>
   <input
     id="tags"
     pInputText
     formControlName="tags">
 
-  <label for="views">Просмотры</label>
+  <label for="views">{{ 'POST_EDIT.VIEWS' | translate }}</label>
   <input
     id="views"
     pInputText
@@ -25,14 +25,14 @@
   <button
     id="closePostBtn"
     pButton
-    label="Отмена"
+    [label]="'POST_EDIT.CANCEL' | translate"
     (click)="close()">
   </button>
 
   <button
     id="savePostBtn"
     pButton
-    label="Сохранить"
+    [label]="'POST_EDIT.SAVE' | translate"
     (click)="save()">
   </button>
 </div>

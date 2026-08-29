@@ -10,6 +10,7 @@ import { IUser } from '../interfaces/IUser';
 import { MessageService } from '../../../services/message.service';
 import { APP_CONFIG } from '../../../tokens/app-config.token';
 import { IAppConfig } from '../../../interfaces/IAppConfig';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ export class AuthService {
   private router: Router = inject(Router);
   private http: HttpClient = inject(HttpClient);
   private messageService: MessageService = inject(MessageService);
+  private translateService: TranslateService = inject(TranslateService);
 
   readonly config: IAppConfig = inject(APP_CONFIG);
 
@@ -97,8 +99,8 @@ export class AuthService {
     const oldRefreshToken: string | null = this.getToken('refreshToken');
     
     if (!oldRefreshToken) {
-      return throwError(() => new Error('RefreshToken отсутствует'));
-    };
+      return throwError(() => new Error('MESSAGES.REFRESH_TOKEN_MISSING'));
+    }
 
     return this.http.post<IAuthResponse>(
       `${ this.apiUrl }/refresh`,

@@ -3,14 +3,16 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { IUser } from '../interfaces/IUser';
 import { AppAnimatedGradientDirective } from '../directives/app-animated-gradient.directive';
 import { IGradientConfiguration } from '../interfaces/IGradientConfiguration';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-user',
-  imports: [ReactiveFormsModule, AppAnimatedGradientDirective],
+  imports: [ReactiveFormsModule, AppAnimatedGradientDirective, TranslatePipe],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss',
 })
 export class CreateUserComponent {
+  
   gradientOptions: IGradientConfiguration = {
     delay: 1000,
     colors: ['blue', 'pink', 'black'],
@@ -52,5 +54,5 @@ export class CreateUserComponent {
 
     this.userCreate.emit(user);
   }
-  
+
 }

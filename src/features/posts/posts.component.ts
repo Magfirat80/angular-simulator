@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { catchError, EMPTY, take, Observable, switchMap, tap, finalize } from 'rxjs';
 import { IPost } from '../interfaces/IPost';
@@ -14,11 +14,13 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PostService } from '../post.service';
 import { AsyncPipe } from '@angular/common';
 import { MessageService } from '../../services/message.service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [TableModule, CommonModule, ContextMenuModule, SkeletonModule, ButtonModule, DynamicDialogModule, AsyncPipe],
+  imports: [TableModule, CommonModule, ContextMenuModule, SkeletonModule, ButtonModule, DynamicDialogModule, AsyncPipe, TranslatePipe],
   providers: [DialogService],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
@@ -29,6 +31,8 @@ export class PostsComponent implements OnInit {
   private dialogService: DialogService = inject(DialogService);
   private router: Router = inject(Router);
   private messageService: MessageService = inject(MessageService);
+  private translateService: TranslateService = inject(TranslateService);
+  private destroyRef: DestroyRef = inject(DestroyRef);
   
   posts$: Observable<IPost[]> = this.postService.posts$;
   totalRecords$: Observable<number> = this.postService.totalRecords$;
@@ -39,26 +43,38 @@ export class PostsComponent implements OnInit {
   first = 0;
   selectedPost: IPost | null = null;
 
-  menuItems: MenuItem[] = [
-    {
-      label: 'Просмотр',
-      icon: 'pi pi-eye',
-      command: () => this.openPost()
-    },
-    {
-      label: 'Редактировать',
-      icon: 'pi pi-pencil',
-      command: () => this.editPost(this.selectedPost)
-    },
-    {
-      label: 'Удалить',
-      icon: 'pi pi-trash',
-      command: () => this.deletePost()
-    }
-  ];
+  menuItems: MenuItem[] = [];
   
   ngOnInit(): void {
+    this.createMenuItems();
     this.loadPosts();
+    
+    this.translateService.onLangChange.pipe(
+      tap(() => {
+        this.createMenuItems();
+      }),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe();
+  }
+
+  private createMenuItems(): void {
+    this.menuItems = [
+      {
+        label: this.translateService.instant('POSTS.VIEW'),
+        icon: 'pi pi-eye',
+        command: () => this.openPost()
+      },
+      {
+        label: this.translateService.instant('POSTS.EDIT'),
+        icon: 'pi pi-pencil',
+        command: () => this.editPost(this.selectedPost)
+      },
+      {
+        label: this.translateService.instant('POSTS.DELETE'),
+        icon: 'pi pi-trash',
+        command: () => this.deletePost()
+      }
+    ];
   }
 
   loadPosts(): void {
@@ -66,7 +82,7 @@ export class PostsComponent implements OnInit {
 
     this.postService.loadPosts(this.rows, this.first).pipe(
       catchError(() => {
-        this.messageService.showError('Не удалось загрузить посты');
+        this.messageService.showError(this.translateService.instant('POSTS.LOAD_ERROR'));
         return EMPTY;
       }),
       finalize(() => {
@@ -94,7 +110,7 @@ export class PostsComponent implements OnInit {
     if (!post) return;
 
     const ref: DynamicDialogRef<PostEditDialogComponent> | null = this.dialogService.open(PostEditDialogComponent, {
-      header: 'Редактирование поста',
+      header: this.translateService.instant('POSTS.EDIT_DIALOG'),
       width: '600px',
       modal: true,
       data: post
@@ -104,11 +120,11 @@ export class PostsComponent implements OnInit {
       take(1),
       switchMap((formData: Partial<IPost> | undefined) => {
         if (!formData) return EMPTY;
-        this.messageService.showSuccess('Пост обновлен');
+        this.messageService.showSuccess(this.translateService.instant('POSTS.UPDATED'));
         return this.postService.updatePost(post.id, formData);
       }),
       catchError(() => {
-        this.messageService.showError('Ошибка обновления');
+        this.messageService.showError(this.translateService.instant('POSTS.UPDATE_ERROR'));
         return EMPTY;
       })
     ).subscribe();
@@ -122,7 +138,7 @@ export class PostsComponent implements OnInit {
     this.postService.deletePost(postId).pipe(
       tap(() => {
         this.selectedPost = null;
-        this.messageService.showSuccess('Пост успешно удален');
+        this.messageService.showSuccess(this.translateService.instant('POSTS.DELETED'));
 
         const currentPosts: IPost[] = this.postService.getCurrentPosts();
 
@@ -132,7 +148,7 @@ export class PostsComponent implements OnInit {
         }
       }),
       catchError(() => {
-        this.messageService.showError('Ошибка удаления');
+        this.messageService.showError(this.translateService.instant('POSTS.DELETE_ERROR'));
         return EMPTY;
       })
     ).subscribe();
@@ -149,10 +165,14 @@ export class PostsComponent implements OnInit {
     const last: number = this.first + posts.length;
 
     if (total === 0) {
-      return '0 - 0 из 0';
+      return this.translateService.instant('POSTS.PAGE_REPORT_EMPTY');
     }
 
-    return `${ first } - ${ last } из ${ total }`;
+    return this.translateService.instant('POSTS.PAGE_REPORT', {
+      first,
+      last,
+      total,
+    });
   }
 
 }

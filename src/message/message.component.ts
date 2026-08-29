@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrl: './message.component.scss',
 })
 export class MessageComponent {
+  
   faCircleXmark: IconDefinition = faCircleXmark;
   faEnvelopeOpen: IconDefinition = faEnvelopeOpen;
 

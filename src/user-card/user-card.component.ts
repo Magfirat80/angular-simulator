@@ -6,14 +6,16 @@ import { AppBoldDirective } from '../directives/app-bold.directive';
 import { AppAnimatedGradientDirective } from '../directives/app-animated-gradient.directive';
 import { IGradientConfiguration } from '../interfaces/IGradientConfiguration';
 import { PhoneMode } from '../enums/PhoneMode';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-card',
-  imports: [UpperCasePipe, PhoneNumberPipe, AppBoldDirective, AppAnimatedGradientDirective],
+  imports: [UpperCasePipe, PhoneNumberPipe, AppBoldDirective, AppAnimatedGradientDirective, TranslatePipe],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss',
 })
 export class UserCardComponent {
+  
   readonly phoneMode: PhoneMode = PhoneMode.NATIONAL;
 
   gradientOptions: IGradientConfiguration = {

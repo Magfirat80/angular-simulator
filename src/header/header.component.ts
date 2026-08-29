@@ -14,6 +14,8 @@ import { Observable } from 'rxjs';
 import { IUser } from '../features/auth/interfaces/IUser';
 import { APP_CONFIG } from '../tokens/app-config.token';
 import { IAppConfig } from '../interfaces/IAppConfig';
+import { LanguageService } from '../services/language.service';
+import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -25,16 +27,20 @@ import { IAppConfig } from '../interfaces/IAppConfig';
     FontAwesomeModule,
     CommonModule,
     SelectButtonModule,
+    TranslatePipe,
+    TranslateDirective
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  
   faSun: IconDefinition = faSun;
   faMoon: IconDefinition = faMoon;
 
   themeService: ThemeService = inject(ThemeService);
   authService: AuthService = inject(AuthService);
+  languageService: LanguageService = inject(LanguageService);
 
   readonly config: IAppConfig = inject(APP_CONFIG);
 
@@ -46,9 +52,9 @@ export class HeaderComponent {
   lastLogin: Date | null = this.authService.getLastLogin();
 
   navList: INavigation[] = [
-    { id: 1, navItem: 'Главная', path: '/home' },
-    { id: 2, navItem: 'Пользователи', path: '/users' },
-    { id: 3, navItem: 'Посты', path: '/posts' },
+    { id: 1, navItem: 'HEADER.HOME', path: '/home' },
+    { id: 2, navItem: 'HEADER.USERS', path: '/users' },
+    { id: 3, navItem: 'HEADER.POSTS', path: '/posts' },
   ];
 
   constructor() {

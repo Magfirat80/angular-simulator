@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IPost } from '../interfaces/IPost';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
 })

@@ -4,6 +4,7 @@ import { Message } from '../enums/Message';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { APP_CONFIG } from '../tokens/app-config.token';
 import { IAppConfig } from '../interfaces/IAppConfig';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ import { IAppConfig } from '../interfaces/IAppConfig';
 export class MessageService {
 
   readonly config: IAppConfig = inject(APP_CONFIG);
+  private translateService: TranslateService = inject(TranslateService);
   
   private messagesSubject: BehaviorSubject<IMessage[]> = new BehaviorSubject<IMessage[]>([]);
   messages$: Observable<IMessage[]> = this.messagesSubject.asObservable();
@@ -29,20 +31,32 @@ export class MessageService {
     }, 5000);
   }
 
-  showWarn(content: string): void {
-    this.addMessage(Message.WARN, content);
+  showWarn(key: string): void {
+    this.addMessage(
+      Message.WARN,
+      this.translateService.instant(key),
+    );
   }
 
-  showError(content: string): void {
-    this.addMessage(Message.ERROR, content);
+  showError(key: string): void {
+    this.addMessage(
+      Message.ERROR,
+      this.translateService.instant(key),
+    );
   }
 
-  showSuccess(content: string): void {
-    this.addMessage(Message.SUCCESS, content);
+  showSuccess(key: string): void {
+    this.addMessage(
+      Message.SUCCESS,
+      this.translateService.instant(key),
+    );
   }
 
-  showInfo(content: string): void {
-    this.addMessage(Message.INFO, content);
+  showInfo(key: string): void {
+    this.addMessage(
+      Message.INFO,
+      this.translateService.instant(key),
+    );
   }
 
   closeMessage(message: IMessage): void {
