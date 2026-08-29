@@ -15,7 +15,7 @@ import { IUser } from '../features/auth/interfaces/IUser';
 import { APP_CONFIG } from '../tokens/app-config.token';
 import { IAppConfig } from '../interfaces/IAppConfig';
 import { LanguageService } from '../services/language.service';
-import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -27,8 +27,7 @@ import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
     FontAwesomeModule,
     CommonModule,
     SelectButtonModule,
-    TranslatePipe,
-    TranslateDirective
+    TranslatePipe
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
