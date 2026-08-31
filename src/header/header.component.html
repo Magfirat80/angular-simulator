@@ -12,15 +12,18 @@
               [routerLink]="item.path"
               routerLinkActive="navigation-link--active"
               [routerLinkActiveOptions]="{ exact: item.path === '/' }"
-              class="navigation-link"
-            >
+              class="navigation-link">
               {{ item.navItem | translate }}
             </a>
           </li>
         }
       </ul>
     </nav>
-    <button class="header-button flex jc-center ai-center" id="consultation-button">{{ 'HEADER.CONSULTATION' | translate }}</button>
+    <button
+      class="header-button flex jc-center ai-center"
+      id="consultation-button">
+      {{ 'HEADER.CONSULTATION' | translate }}
+    </button>
 
     @if (currentUser$ | async; as user) {
       <div class="user-panel flex ai-center">
@@ -46,17 +49,13 @@
     
   <div class="switcher-wrapper container fs-18">
     <div class="language-switcher">
-      <button type="button" (click)="languageService.changeLanguage('ru')">
-        RU
-      </button>
-
-      <button type="button" (click)="languageService.changeLanguage('en')">
-        EN
-      </button>
-
-      <button type="button" (click)="languageService.changeLanguage('ar')">
-        AR
-      </button>
+      @for (language of languageService.languages; track language) {
+        <button
+          type="button"
+          (click)="languageService.changeLanguage(language)">
+          {{ language.toUpperCase() }}
+        </button>
+      }
     </div>
 
     <p-select-button
@@ -67,17 +66,15 @@
       optionValue="value"
       id="preset-selector"
       class="preset-selector"
-      [unselectable]="true"
-    >
+      [unselectable]="true">
     </p-select-button>
     <p-toggleswitch
       [ngModel]="themeService.isDarkMode$ | async"
       (onChange)="themeService.toggleMode($event.checked)"
       id="dark-mode-toggle"
-      [dt]="themeService.customStyle"
-    >
+      [dt]="themeService.customStyle">
       <ng-template #handle let-checked="checked">
-        <fa-icon class="theme-icon" [icon]="!checked ? faSun : faMoon" />  
+        <fa-icon class="theme-icon" [icon]="!checked ? faSun : faMoon" />
       </ng-template>
     </p-toggleswitch>
     <div class="switcher-controls flex jc-right">
@@ -85,16 +82,14 @@
         [disabled]="currentWidget === 'counter'"
         name="show-counter-button"
         id="show-counter-button"
-        (click)="switchWidget('counter')"
-      >
+        (click)="switchWidget('counter')">
         {{ 'HEADER.SHOW_COUNTER' | translate }}
       </button>
       <button
         [disabled]="currentWidget === 'date'"
         name="show-timer-button"
         id="show-timer-button"
-        (click)="switchWidget('date')"
-      >
+        (click)="switchWidget('date')">
         {{ 'HEADER.SHOW_TIMER' | translate }}
       </button>
     </div>
@@ -107,8 +102,7 @@
               class="counter-button flex jc-center ai-center"
               name="plus-button"
               id="plus-button"
-              (click)="increaseCount()"
-            >
+              (click)="increaseCount()">
               +
             </button>
             <button
@@ -116,8 +110,7 @@
               name="minus-button"
               id="minus-button"
               [disabled]="counter < 1"
-              (click)="reduceCount()"
-            >
+              (click)="reduceCount()">
               -
             </button>
           </div>

@@ -1,36 +1,43 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from './local-storage.service';
+import { Language } from '../enums/Language';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LanguageService {
 
-  private readonly languages: string[] = ['ru', 'en', 'ar'];
-  private readonly defaultLanguage: string = 'ru';
-  private readonly languageStorageKey: string = 'language';
+  readonly languages: Language[] = [
+    Language.RU,
+    Language.EN,
+    Language.AR
+  ];
 
-  private readonly translateService: TranslateService = inject(TranslateService);
-  private readonly localStorageService: LocalStorageService = inject(LocalStorageService);
+  private defaultLanguage: Language = Language.RU;
+  private languageStorageKey: string = 'language';
+
+  private translateService: TranslateService = inject(TranslateService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   initLanguage(): void {
-    const savedLanguage: string | null = this.localStorageService.getValue<string>(this.languageStorageKey);
+    const savedLanguage: Language | null = this.localStorageService.getValue<Language>(this.languageStorageKey);
     
     if (savedLanguage && this.languages.includes(savedLanguage)) {
       this.translateService.use(savedLanguage);
       return;
     }
 
-    const browserLanguage: string = this.translateService.getBrowserLang() ?? this.defaultLanguage;
-    const language: string = this.languages.includes(browserLanguage)
+    const browserLanguage: Language = this.translateService.getBrowserLang() as Language;
+
+    const language: Language = this.languages.includes(browserLanguage)
       ? browserLanguage
       : this.defaultLanguage;
     
     this.translateService.use(language);
   }
 
-  changeLanguage(language: string): void {
+  changeLanguage(language: Language): void {
     if (!this.languages.includes(language)) {
       return;
     }
@@ -39,8 +46,8 @@ export class LanguageService {
     this.localStorageService.setValue(this.languageStorageKey, language);
   }
 
-  getCurrentLanguage(): string | null {
-    return this.translateService.getCurrentLang();
+  getCurrentLanguage(): Language | null {
+    return this.translateService.getCurrentLang() as Language | null;
   }
 
 }

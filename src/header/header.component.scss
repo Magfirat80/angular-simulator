@@ -74,6 +74,11 @@
     margin-top: 8px;
     height: 25px;
 
+    .language-switcher {
+      display: flex;
+      gap: 10px;
+    }
+
     p-toggleswitch {
       margin-right: 50px;
       display: inline-block;
