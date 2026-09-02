@@ -1,7 +1,7 @@
 <header class="header flex ai-center">
   <div class="header-content container flex">
     <div class="logo">
-      <img src="/images/company-logo.svg" alt="Логотип горы">
+      <img src="/images/company-logo.svg" [alt]="'HEADER.LOGO_ALT' | translate">
       <div class="company-name">{{ config.companyName }}</div>
     </div>
     <nav class="navigation-line flex ai-center fs-18">
@@ -12,15 +12,18 @@
               [routerLink]="item.path"
               routerLinkActive="navigation-link--active"
               [routerLinkActiveOptions]="{ exact: item.path === '/' }"
-              class="navigation-link"
-            >
-              {{ item.navItem }}
+              class="navigation-link">
+              {{ item.navItem | translate }}
             </a>
           </li>
         }
       </ul>
     </nav>
-    <button class="header-button flex jc-center ai-center" id="consultation-button">Консультация</button>
+    <button
+      class="header-button flex jc-center ai-center"
+      id="consultation-button">
+      {{ 'HEADER.CONSULTATION' | translate }}
+    </button>
 
     @if (currentUser$ | async; as user) {
       <div class="user-panel flex ai-center">
@@ -32,19 +35,29 @@
           class="user-panel-button"
           type="button"
           (click)="logout()">
-          Выйти
+          {{ 'HEADER.LOGOUT' | translate }}
         </button>
       </div>
     }
 
     @if (lastLogin; as loginDate) {
       <div class="date-last-login flex ai-center">
-        Последний вход: {{ loginDate | date }}
+        {{ 'HEADER.LAST_LOGIN' | translate }} {{ loginDate | date }}
       </div>
     }
   </div>
     
   <div class="switcher-wrapper container fs-18">
+    <div class="language-switcher">
+      @for (language of languageService.languages; track language) {
+        <button
+          type="button"
+          (click)="languageService.changeLanguage(language)">
+          {{ language.toUpperCase() }}
+        </button>
+      }
+    </div>
+
     <p-select-button
       [options]="themeService.presets"
       [ngModel]="themeService.theme$ | async"
@@ -53,17 +66,15 @@
       optionValue="value"
       id="preset-selector"
       class="preset-selector"
-      [unselectable]="true"
-    >
+      [unselectable]="true">
     </p-select-button>
     <p-toggleswitch
       [ngModel]="themeService.isDarkMode$ | async"
       (onChange)="themeService.toggleMode($event.checked)"
       id="dark-mode-toggle"
-      [dt]="themeService.customStyle"
-    >
+      [dt]="themeService.customStyle">
       <ng-template #handle let-checked="checked">
-        <fa-icon class="theme-icon" [icon]="!checked ? faSun : faMoon" />  
+        <fa-icon class="theme-icon" [icon]="!checked ? faSun : faMoon" />
       </ng-template>
     </p-toggleswitch>
     <div class="switcher-controls flex jc-right">
@@ -71,17 +82,15 @@
         [disabled]="currentWidget === 'counter'"
         name="show-counter-button"
         id="show-counter-button"
-        (click)="switchWidget('counter')"
-      >
-        Покажи счетчик
+        (click)="switchWidget('counter')">
+        {{ 'HEADER.SHOW_COUNTER' | translate }}
       </button>
       <button
         [disabled]="currentWidget === 'date'"
         name="show-timer-button"
         id="show-timer-button"
-        (click)="switchWidget('date')"
-      >
-        Покажи таймер
+        (click)="switchWidget('date')">
+        {{ 'HEADER.SHOW_TIMER' | translate }}
       </button>
     </div>
     <div class="widget-display flex jc-right">
@@ -93,8 +102,7 @@
               class="counter-button flex jc-center ai-center"
               name="plus-button"
               id="plus-button"
-              (click)="increaseCount()"
-            >
+              (click)="increaseCount()">
               +
             </button>
             <button
@@ -102,8 +110,7 @@
               name="minus-button"
               id="minus-button"
               [disabled]="counter < 1"
-              (click)="reduceCount()"
-            >
+              (click)="reduceCount()">
               -
             </button>
           </div>

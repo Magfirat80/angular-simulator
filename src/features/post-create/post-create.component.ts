@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
 import { catchError, EMPTY, tap } from 'rxjs';
 import { PostService } from '../post.service';
 import { MessageService } from '../../services/message.service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule, ButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, ButtonModule, TranslatePipe],
   templateUrl: './post-create.component.html',
   styleUrl: './post-create.component.scss',
 })
@@ -21,6 +22,7 @@ export class PostCreateComponent {
   private router: Router = inject(Router);
   private postService: PostService = inject(PostService);
   private messageService: MessageService = inject(MessageService);
+  private translateService: TranslateService = inject(TranslateService);
 
   postForm: FormGroup = this.fb.group({
     title: ['', Validators.required],
@@ -40,10 +42,14 @@ export class PostCreateComponent {
       this.postService.createPost(this.postForm.value).pipe(
         tap(() => {
           this.router.navigate(['/posts']);
-          this.messageService.showSuccess('Пост добавлен');
+          this.messageService.showSuccess(
+            this.translateService.instant('POST_CREATE.SUCCESS')
+          );
         }),
         catchError(() => {
-          this.messageService.showError('Ошибка создания');
+          this.messageService.showError(
+            this.translateService.instant('POST_CREATE.ERROR')
+          );
           return EMPTY;
         })
       ).subscribe();

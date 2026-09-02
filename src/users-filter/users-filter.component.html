@@ -2,9 +2,12 @@
   <input
     type="text"
     [formControl]="inputField"
-    placeholder="Поиск по имени пользователя"
+    [placeholder]="'USERS_FILTER.SEARCH_PLACEHOLDER' | translate"
     class="search-input"
     id="search-input"
   >
-  <span>Найдено: {{ filteredCountUsers | plural: 'карточка':'карточки':'карточек' }}</span>
+  <span>
+    {{ 'USERS_FILTER.FOUND' | translate }}
+    {{ filteredCountUsers | plural }}
+  </span>
 </div>

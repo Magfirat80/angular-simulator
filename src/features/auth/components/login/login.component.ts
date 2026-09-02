@@ -5,10 +5,11 @@ import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angula
 import { MessageService } from '../../../../services/message.service';
 import { ILoginRequest } from '../../interfaces/ILoginRequest';
 import { catchError, EMPTY, tap } from 'rxjs';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -18,6 +19,7 @@ export class LoginComponent {
   private router: Router = inject(Router);
   private messageService: MessageService = inject(MessageService);
   private formBuilder: FormBuilder = inject(FormBuilder);
+  private translateService: TranslateService = inject(TranslateService);
 
   loginForm: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
@@ -32,7 +34,9 @@ export class LoginComponent {
           return this.router.navigate(['/home']);
         }),
         catchError(() => {
-          this.messageService.showError('Неправильные логин и/или пароль!');
+          this.messageService.showError(
+            this.translateService.instant('LOGIN.INVALID_CREDENTIALS')
+          );
           return EMPTY;
         })
       ).subscribe();

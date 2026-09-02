@@ -17,14 +17,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule, FontAwesomeModule, CommonModule],
+  imports: [FormsModule, FontAwesomeModule, CommonModule, TranslatePipe],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
+  
   faThumbsUp: IconDefinition = faThumbsUp;
   faStar: IconDefinition = faStar;
   faCalendar: IconDefinition = faCalendar;
@@ -40,54 +42,54 @@ export class HomePageComponent {
   locations: ITourLocation[] = [
     {
       id: 1,
-      tourLocation: 'Восхождение на Эльбрус',
+      tourLocation: 'HOME.LOCATIONS.ELBRUS_ASCENT',
     },
     {
       id: 2,
-      tourLocation: 'Кольцо Эльбруса',
+      tourLocation: 'HOME.LOCATIONS.ELBRUS_RING',
     },
     {
       id: 3,
-      tourLocation: 'Поход к Белухе',
+      tourLocation: 'HOME.LOCATIONS.BELUKHA_HIKE',
     },
     {
       id: 4,
-      tourLocation: 'Шавлинские озёра',
+      tourLocation: 'HOME.LOCATIONS.SHAVLIN_LAKES',
     },
     {
       id: 5,
-      tourLocation: 'Уральский Барс',
+      tourLocation: 'HOME.LOCATIONS.URAL_BAR',
     },
     {
       id: 6,
-      tourLocation: 'Треккинг в Хибинах',
+      tourLocation: 'HOME.LOCATIONS.KHIBINY_TREKKING',
     },
     {
       id: 7,
-      tourLocation: 'Долина вулканов',
+      tourLocation: 'HOME.LOCATIONS.VOLCANO_VALLEY',
     },
   ];
 
   groups: IParticipantsCount[] = [
     {
       id: 1,
-      participantsCount: '1-4 человека',
+      participantsCount: 'HOME.GROUPS.FOUR',
     },
     {
       id: 2,
-      participantsCount: '5-8 человек',
+      participantsCount: 'HOME.GROUPS.EIGHT',
     },
     {
       id: 3,
-      participantsCount: '9-12 человек',
+      participantsCount: 'HOME.GROUPS.TWELVE',
     },
     {
       id: 4,
-      participantsCount: '13-18 человек',
+      participantsCount: 'HOME.GROUPS.EIGHTEEN',
     },
     {
       id: 5,
-      participantsCount: '19 человек и более',
+      participantsCount: 'HOME.GROUPS.MORE',
     },
   ];
 
@@ -95,45 +97,36 @@ export class HomePageComponent {
     {
       id: 1,
       icon: faPeopleGroup,
-      title: 'Опытный гид',
-      description:
-        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      title: 'HOME.ADVANTAGE_GUIDE',
+      description: 'HOME.ADVANTAGE_GUIDE_DESCRIPTION',
     },
     {
       id: 2,
       icon: faShield,
-      title: 'Безопасный поход',
-      description:
-        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      title: 'HOME.ADVANTAGE_SAFE',
+      description: 'HOME.ADVANTAGE_SAFE_DESCRIPTION',
     },
     {
       id: 3,
       icon: faTags,
-      title: 'Лояльные цены',
-      description:
-        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      title: 'HOME.ADVANTAGE_PRICES',
+      description: 'HOME.ADVANTAGE_PRICES_DESCRIPTION',
     },
   ];
 
   maps: IDestinationMap[] = [
     {
       estimation: '4.9',
-      name: 'Озеро возле гор',
-      description: 'романтическое приключение',
       cost: 480,
       poster: 'destination-lake',
     },
     {
       estimation: '4.5',
-      name: 'Ночь в горах',
-      description: 'в компании друзей',
       cost: 500,
       poster: 'destination-night',
     },
     {
       estimation: '5.0',
-      name: 'Спорт в горах',
-      description: 'для тех, кто заботится о себе',
       cost: 230,
       poster: 'destination-sport',
     },
@@ -143,31 +136,21 @@ export class HomePageComponent {
     {
       id: 1,
       articleIllustration: 'article-Italy',
-      title: 'Красивая Италия, какая она в реальности?',
-      introduction:
-        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       date: '01/04/2023',
     },
     {
       id: 2,
       articleIllustration: 'article-flight',
-      title: 'Долой сомнения! Весь мир открыт для вас!',
-      introduction:
-        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
       date: '01/04/2023',
     },
     {
       id: 3,
       articleIllustration: 'article-travel-alone',
-      title: 'Как подготовиться к путешествию в одиночку? ',
-      introduction: 'Для современного мира базовый вектор развития предполагает.',
       date: '01/04/2023',
     },
     {
       id: 4,
       articleIllustration: 'article-India',
-      title: 'Индия ... летим?',
-      introduction: 'Для современного мира базовый.',
       date: '01/04/2023',
     },
   ];

@@ -1,28 +1,28 @@
 <div class="post-create-page">
   <form class="form" [formGroup]="postForm">
-    <h2>Создание поста</h2>
-    <label for="title">Заголовок</label>
+    <h2>{{ 'POST_CREATE.TITLE' | translate }}</h2>
+    <label for="title">{{ 'POST_CREATE.TITLE_LABEL' | translate }}</label>
     <input
       id="title"
       pInputText
       formControlName="title"
     >
 
-    <label for="body">Текст поста</label>
+    <label for="body">{{ 'POST_CREATE.BODY_LABEL' | translate }}</label>
     <textarea
       id="body"
       rows="6"
       formControlName="body">
     </textarea>
 
-    <label for="tags">Теги (через запятую)</label>
+    <label for="tags">{{ 'POST_CREATE.TAGS_LABEL' | translate }}</label>
     <input
       id="tags"
       pInputText
       formControlName="tags"
     >
     
-    <label for="views">Просмотры</label>
+    <label for="views">{{ 'POST_CREATE.VIEWS_LABEL' | translate }}</label>
     <input
       id="views"
       pInputText
@@ -30,7 +30,7 @@
       formControlName="views"
     >
 
-    <label for="userId">User ID</label>
+    <label for="userId">{{ 'POST_CREATE.USER_ID_LABEL' | translate }}</label>
     <input
       id="userId"
       pInputText
@@ -39,15 +39,15 @@
     >
 
     <div formGroupName="reactions">
-      <span class="reactions-title">Reactions:</span>
+      <span class="reactions-title">{{ 'POST_CREATE.REACTIONS' | translate }}</span>
       <div class="reactions-block">
-        <label for="likes">Лайки</label>
+        <label for="likes">{{ 'POST_CREATE.LIKES' | translate }}</label>
         <input
         id="likes"
         type="number"
         formControlName="likes">
 
-        <label for="dislikes">Дизлайки</label>
+        <label for="dislikes">{{ 'POST_CREATE.DISLIKES' | translate }}</label>
         <input
           id="dislikes"
           type="number"
@@ -59,7 +59,7 @@
       id="createPostBtn"
       pButton
       type="submit"
-      label="Создать пост"
+      [label]="'POST_CREATE.CREATE' | translate"
       (click)="createPost()">
     </button>
 
@@ -67,7 +67,7 @@
       id="cancelBtn"
       pButton
       type="button"
-      label="Отмена"
+      [label]="'POST_CREATE.CANCEL' | translate"
       (click)="backToPosts()">
     </button>
   </form>

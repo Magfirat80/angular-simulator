@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrl: './loader.component.scss',
 })
 export class LoaderComponent {
+  
   faSpinner: IconDefinition = faSpinner;
 
   loaderService: LoaderService = inject(LoaderService);

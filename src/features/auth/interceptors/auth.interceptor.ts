@@ -4,7 +4,6 @@ import { inject } from '@angular/core';
 import { catchError, switchMap, throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (request: HttpRequest<unknown>, next: HttpHandlerFn) => {
-
   const authService: AuthService = inject(AuthService);
   const accessToken: string | null = authService.getToken('accessToken');
 
