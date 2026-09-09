@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { Color } from '../enums/Color';
+import { Color } from './shared/enums/Color';
 import './collection';
 import { FormsModule } from '@angular/forms';
-import { LocalStorageService } from '../services/local-storage.service';
+import { LocalStorageService } from './core/services/local-storage.service';
 import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from '../footer/footer.component';
-import { HeaderComponent } from '../header/header.component';
-import { MessageComponent } from '../message/message.component';
-import { LoaderComponent } from '../loader/loader.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { MessageComponent } from './shared/components/message/message.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCoffee, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 

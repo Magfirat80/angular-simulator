@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { postResolver } from '../features/post.resolver';
-import { authGuard } from '../features/auth/guards/auth.guard';
-import { adminGuard } from '../features/auth/guards/admin.guard';
+import { postResolver } from './features/posts/routing/post.resolver';
+import { authGuard } from './features/auth/guards/auth.guard';
+import { adminGuard } from './features/auth/guards/admin.guard';
 import { ParentComponent } from '../homework-28/parent/parent.component';
 import { ChangeDetectionComponent } from '../homework-28/change-detection/change-detection.component';
 import { ChangeDetectionOnPushComponent } from '../homework-28/change-detection-on-push/change-detection-on-push.component';
@@ -21,7 +21,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('../features/auth/components/login/login.component').then(m => m.LoginComponent)
+    loadComponent: () => import('./features/auth/components/login/login.component').then(m => m.LoginComponent)
   },
   {
     path: '',
@@ -31,31 +31,31 @@ export const routes: Routes = [
   {
     path: 'home',
     canActivate: [authGuard],
-    loadComponent: () => import('../home-page/home-page.component').then(m => m.HomePageComponent)
+    loadComponent: () => import('./features/home/pages/home-page/home-page.component').then(m => m.HomePageComponent)
   },
   {
     path: 'users',
     canActivate: [authGuard, adminGuard],
-    loadComponent: () => import('../users-page/users-page.component').then(m => m.UsersPageComponent)
+    loadComponent: () => import('./features/users/pages/users-page/users-page.component').then(m => m.UsersPageComponent)
   },
   {
     path: 'posts',
     canActivate: [authGuard, adminGuard],
-    loadComponent: () => import('../features/posts/posts.component').then(m => m.PostsComponent)
+    loadComponent: () => import('./features/posts/pages/posts/posts.component').then(m => m.PostsComponent)
   },
   {
     path: 'posts/create',
     canActivate: [authGuard, adminGuard],
-    loadComponent:() => import('../features/post-create/post-create.component').then(m => m.PostCreateComponent)
+    loadComponent: () => import('./features/posts/pages/post-create/post-create.component').then(m => m.PostCreateComponent)
   },
   {
     path: 'posts/:id',
     canActivate: [authGuard, adminGuard],
-    loadComponent: () => import('../features/post-detail/post-detail.component').then(m => m.PostDetailComponent),
+    loadComponent: () => import('./features/posts/pages/post-detail/post-detail.component').then(m => m.PostDetailComponent),
     resolve: { post: postResolver }
   },
   {
     path: '**',
-    loadComponent: () => import('../not-found-page/not-found-page.component').then(m => m.NotFoundPageComponent)
+    loadComponent: () => import('./pages/not-found-page/not-found-page.component') .then(m => m.NotFoundPageComponent)
   }
 ];
