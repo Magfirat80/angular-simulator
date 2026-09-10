@@ -1,4 +1,4 @@
-import { LanguageService } from '../services/language.service';
+import { LanguageService } from './core/services/language.service';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
@@ -8,16 +8,16 @@ import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import Nora from '@primeuix/themes/nora';
 import { routes } from './app.routes';
-import { Theme } from '../enums/Theme';
+import { Theme } from './core/enums/Theme';
 import { Preset } from '@primeuix/themes/types';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { loggingInterceptor } from './logging.interceptor';
-import { errorInterceptor } from './error.interceptor';
-import { authInterceptor } from '../features/auth/interceptors/auth.interceptor';
-import { AuthService } from '../features/auth/services/auth.service';
+import { loggingInterceptor } from './core/interceptors/logging.interceptor';
+import { errorInterceptor } from './core/interceptors/error.interceptor';
+import { authInterceptor } from './features/auth/interceptors/auth.interceptor';
+import { AuthService } from './features/auth/services/auth.service';
 import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
-import { APP_CONFIG } from '../tokens/app-config.token';
-import { IAppConfig } from '../interfaces/IAppConfig';
+import { APP_CONFIG } from './core/tokens/app-config.token';
+import { IAppConfig } from './core/models/IAppConfig';
 
 function applyThemeFromStorage(): Preset {
 
