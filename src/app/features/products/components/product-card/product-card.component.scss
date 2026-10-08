@@ -1,0 +1,20 @@
+.card {
+  display: block;
+  cursor: pointer;
+  height: 100%;
+}
+
+img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stock-out {
+  color: #c0392b;
+}
