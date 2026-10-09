@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, input, output, InputSignal, OutputEmitterRef } from '@angular/core';
-import { SORT_FIELD_OPTIONS, SORT_ORDER_OPTIONS } from './product-filters.constants';
 import { SortBy } from '../../enums/SortBy';
 import { Order } from '../../enums/Order';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { InputTextModule } from 'primeng/inputtext';
+import { IOption } from '../../interfaces/IOption';
 
 @Component({
   selector: 'app-product-filters',
@@ -16,8 +16,17 @@ import { InputTextModule } from 'primeng/inputtext';
 })
 export class ProductFiltersComponent {
 
-  protected readonly sortFieldOptions = SORT_FIELD_OPTIONS;
-  protected readonly sortOrderOptions = SORT_ORDER_OPTIONS;
+  protected readonly sortFieldOptions: IOption<SortBy>[] = [
+    { label: 'Название', value: SortBy.TITLE },
+    { label: 'Цена', value: SortBy.PRICE },
+    { label: 'Рейтинг', value: SortBy.RATING },
+    { label: 'Наличие', value: SortBy.STOCK },
+  ];
+
+  protected readonly sortOrderOptions: IOption<Order>[] = [
+    { label: 'По возрастанию', value: Order.ASC },
+    { label: 'По убыванию', value: Order.DESC },
+  ];
 
   search: InputSignal<string> = input.required<string>();
   category: InputSignal<string | null> = input.required<string | null>();

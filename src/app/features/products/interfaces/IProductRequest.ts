@@ -1,4 +1,4 @@
-import { IProductQueryParams } from "./IProductQueryParams";
+import { IProductQueryParams } from './IProductQueryParams';
 
 export interface IProductRequest {
   search: string;

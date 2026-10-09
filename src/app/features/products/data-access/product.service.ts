@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
+import { computed, inject, Injectable, linkedSignal, signal, Signal, WritableSignal } from '@angular/core';
 import { SortBy } from '../enums/SortBy';
 import { Order } from '../enums/Order';
 import { ProductApiService } from './product-api.service';
@@ -7,7 +7,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime, switchMap, Observable, catchError, of, finalize } from 'rxjs';
 import { IProductsResponse } from '../interfaces/IProductsResponse';
 import { IProduct } from '../interfaces/IProduct';
-import type { IProductRequest } from '../interfaces/IProductRequest';
+import { IProductRequest } from '../interfaces/IProductRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -22,11 +22,21 @@ export class ProductService {
 
   private readonly _search: WritableSignal<string> = signal<string>('');
   private readonly _selectedCategory: WritableSignal<string | null> = signal<string | null>(null);
-  private readonly _page: WritableSignal<number> = signal<number>(1);
   private readonly _pageSize: WritableSignal<number> = signal<number>(10);
   private readonly _sortField: WritableSignal<SortBy> = signal<SortBy>(SortBy.TITLE);
   private readonly _sortOrder: WritableSignal<Order> = signal<Order>(Order.ASC);
   private readonly _loading: WritableSignal<boolean> = signal<boolean>(true);
+
+  private readonly _page: WritableSignal<number> = linkedSignal<unknown, number>({
+    source: () => ({
+      search: this._search(),
+      category: this._selectedCategory(),
+      pageSize: this._pageSize(),
+      sortField: this._sortField(),
+      sortOrder: this._sortOrder()
+    }),
+    computation: () => 1
+  });
 
   readonly search: Signal<string> = this._search.asReadonly();
   readonly selectedCategory: Signal<string | null> = this._selectedCategory.asReadonly();
@@ -40,7 +50,6 @@ export class ProductService {
 
   setSearch(value: string): void {
     this._search.set(value);
-    this._page.set(1);
     if (value) {
       this._selectedCategory.set(null);
     }
@@ -48,23 +57,19 @@ export class ProductService {
 
   setCategory(value: string | null): void {
     this._selectedCategory.set(value);
-    this._page.set(1);
     this._search.set('');
   }
 
   setSortField(value: SortBy): void {
     this._sortField.set(value);
-    this._page.set(1);
   }
 
   setSortOrder(value: Order): void {
     this._sortOrder.set(value);
-    this._page.set(1);
   }
 
   setPageSize(value: number): void {
     this._pageSize.set(value);
-    this._page.set(1);
   }
 
   setPage(value: number): void {

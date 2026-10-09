@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ICartResponse } from '../interfaces/ICartResponse';
 import { ICartsResponse } from '../interfaces/ICartsResponse';
 import { ICartProductPayload } from '../interfaces/ICartProductPayload';
-import type { ICartDeletedResponse } from '../interfaces/ICartDeletedResponse';
+import { ICartDeletedResponse } from '../interfaces/ICartDeletedResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -19,21 +19,15 @@ export class CartApiService {
   }
 
   addCart(userId: number, products: ICartProductPayload[]): Observable<ICartResponse> {
-    return this.http.post<ICartResponse>(
-      `${this.apiUrl}/add`,
-      { userId, products }
-    );
+    return this.http.post<ICartResponse>(`${this.apiUrl}/add`, { userId, products });
   }
 
   updateCart(cartId: number, products: ICartProductPayload[]): Observable<ICartResponse> {
-    return this.http.put<ICartResponse>(
-      `${this.apiUrl}/${cartId}`,
-      { merge: false, products }
-    );
+    return this.http.put<ICartResponse>(`${this.apiUrl}/${cartId}`, { merge: false, products });
   }
 
   deleteCart(cartId: number): Observable<ICartDeletedResponse> {
     return this.http.delete<ICartDeletedResponse>(`${this.apiUrl}/${cartId}`);
   }
-  
+
 }

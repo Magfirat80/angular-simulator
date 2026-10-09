@@ -1,4 +1,4 @@
-import { ICartResponse } from "./ICartResponse";
+import { ICartResponse } from './ICartResponse';
 
 export interface ICartsResponse {
   carts: ICartResponse[];

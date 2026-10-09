@@ -1,4 +1,4 @@
-<p-card class="card" (click)="open.emit(product())">
+<p-card class="card" (click)="onOpen()">
   <ng-template #header>
     <img [src]="product().thumbnail" [alt]="product().title" />
   </ng-template>
@@ -21,7 +21,7 @@
     <p-button
       label="В корзину"
       [disabled]="product().stock === 0"
-      (onClick)="addToCart.emit(product()); $event.stopPropagation()"
+      (onClick)="onAddToCart($event)"
     />
   </ng-template>
 </p-card>

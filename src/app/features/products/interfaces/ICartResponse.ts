@@ -1,4 +1,4 @@
-import { ICartItem } from "./ICartItem";
+import { ICartItem } from './ICartItem';
 
 export interface ICartResponse {
   id: number;

@@ -18,4 +18,13 @@ export class ProductCardComponent {
   addToCart: OutputEmitterRef<IProduct> = output<IProduct>();
   open: OutputEmitterRef<IProduct> = output<IProduct>();
 
+  onOpen():void {
+    this.open.emit(this.product());
+  }
+
+  onAddToCart(event: MouseEvent): void {
+    event.stopPropagation();
+    this.addToCart.emit(this.product());
+  }
+
 }

@@ -54,7 +54,7 @@
   <dl class="totals">
     <dt>Подытог</dt>
     <dd>{{ cartService.subtotal() | currency }}</dd>
-    <dt>Налог ({{ taxRate | percent }})</dt>
+    <dt>Налог</dt>
     <dd>{{ cartService.tax() | currency }}</dd>
     <dt class="grand">Итого</dt>
     <dd class="grand">{{ cartService.total() | currency }}</dd>

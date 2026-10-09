@@ -10,38 +10,31 @@ import { IProductQueryParams } from '../interfaces/IProductQueryParams';
 })
 export class ProductApiService {
 
-  private http: HttpClient = inject(HttpClient);
+  private readonly http: HttpClient = inject(HttpClient);
   private readonly apiUrl: string = 'https://dummyjson.com/products';
 
   getProducts(params: IProductQueryParams): Observable<IProductsResponse> {
     return this.http.get<IProductsResponse>(this.apiUrl, { params: { ...params } });
   }
 
-  searchProducts(
-    query: string,
-    params: IProductQueryParams
-  ): Observable<IProductsResponse> {
+  searchProducts(query: string, params: IProductQueryParams): Observable<IProductsResponse> {
     return this.http.get<IProductsResponse>(`${this.apiUrl}/search`, {
-      params: {
-        q: query,
-        ...params
-      }
-    })
+      params: { q: query, ...params }
+    });
   }
 
   getProductById(id: number): Observable<IProduct> {
-    return this.http.get<IProduct>(`${this.apiUrl}/${id}`)
+    return this.http.get<IProduct>(`${this.apiUrl}/${id}`);
   }
 
   getCategories(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/category-list`)
+    return this.http.get<string[]>(`${this.apiUrl}/category-list`);
   }
 
   getProductsByCategory(category: string, params: IProductQueryParams): Observable<IProductsResponse> {
-    return this.http.get<IProductsResponse>(
-      `${this.apiUrl}/category/${category}`,
-      { params: { ...params } }
-    );
+    return this.http.get<IProductsResponse>(`${this.apiUrl}/category/${category}`, {
+      params: { ...params }
+    });
   }
 
 }

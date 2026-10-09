@@ -1,5 +1,5 @@
-import { IDimensions } from "./IDimensions";
-import { IReview } from "./IReview";
+import { IDimensions } from './IDimensions';
+import { IReview } from './IReview';
 
 export interface IProduct {
   id: number;
