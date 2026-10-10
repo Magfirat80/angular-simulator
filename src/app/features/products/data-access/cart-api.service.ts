@@ -15,19 +15,19 @@ export class CartApiService {
   private readonly apiUrl: string = 'https://dummyjson.com/carts';
 
   getUserCarts(userId: number): Observable<ICartsResponse> {
-    return this.http.get<ICartsResponse>(`${this.apiUrl}/user/${userId}`);
+    return this.http.get<ICartsResponse>(`${ this.apiUrl }/user/${ userId }`);
   }
 
   addCart(userId: number, products: ICartProductPayload[]): Observable<ICartResponse> {
-    return this.http.post<ICartResponse>(`${this.apiUrl}/add`, { userId, products });
+    return this.http.post<ICartResponse>(`${ this.apiUrl }/add`, { userId, products });
   }
 
   updateCart(cartId: number, products: ICartProductPayload[]): Observable<ICartResponse> {
-    return this.http.put<ICartResponse>(`${this.apiUrl}/${cartId}`, { merge: false, products });
+    return this.http.put<ICartResponse>(`${ this.apiUrl }/${ cartId }`, { merge: false, products });
   }
 
   deleteCart(cartId: number): Observable<ICartDeletedResponse> {
-    return this.http.delete<ICartDeletedResponse>(`${this.apiUrl}/${cartId}`);
+    return this.http.delete<ICartDeletedResponse>(`${ this.apiUrl }/${ cartId }`);
   }
 
 }

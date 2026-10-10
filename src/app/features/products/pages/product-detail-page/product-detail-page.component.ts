@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal, type WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, WritableSignal } from '@angular/core';
 import { IProduct } from '../../interfaces/IProduct';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
@@ -13,8 +13,10 @@ import { ButtonModule } from 'primeng/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailPageComponent {
-  
-  protected readonly product: IProduct = inject(ActivatedRoute).snapshot.data['product'] as IProduct;
+
+  private readonly route: ActivatedRoute = inject(ActivatedRoute);
+
+  protected readonly product: IProduct = this.route.snapshot.data['product'] as IProduct;
 
   protected readonly cartService: CartService = inject(CartService);
 

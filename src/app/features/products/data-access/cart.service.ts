@@ -114,7 +114,7 @@ export class CartService {
     this.cartApi.getUserCarts(this.userId).pipe(
       tap(({ carts }: ICartsResponse) => {
         const cart: ICartResponse | undefined = carts[0];
-        
+
         this.cartId = cart?.id ?? null;
         this._items.set(cart?.products ?? []);
       }),

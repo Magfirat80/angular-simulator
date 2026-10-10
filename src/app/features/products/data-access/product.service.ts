@@ -1,10 +1,10 @@
-import { computed, inject, Injectable, linkedSignal, signal, Signal, WritableSignal } from '@angular/core';
+import { computed, inject, Injectable, linkedSignal, signal, Signal, WritableSignal, ResourceRef } from '@angular/core';
 import { SortBy } from '../enums/SortBy';
 import { Order } from '../enums/Order';
 import { ProductApiService } from './product-api.service';
 import { IProductQueryParams } from '../interfaces/IProductQueryParams';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { debounceTime, switchMap, Observable, catchError, of, finalize } from 'rxjs';
+import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { debounceTime, Observable, catchError, of } from 'rxjs';
 import { IProductsResponse } from '../interfaces/IProductsResponse';
 import { IProduct } from '../interfaces/IProduct';
 import { IProductRequest } from '../interfaces/IProductRequest';
@@ -21,15 +21,25 @@ export class ProductService {
   };
 
   private readonly _search: WritableSignal<string> = signal<string>('');
+
+  private readonly debouncedSearchObservable: Observable<string> = toObservable(this._search).pipe(
+    debounceTime(300)
+  );
+
+  private readonly debouncedSearchSignal: Signal<string> = toSignal(this.debouncedSearchObservable, {
+    initialValue: ''
+  });
+
+  private readonly hasSearch: Signal<boolean> = computed(() => this._search() !== '');
+
   private readonly _selectedCategory: WritableSignal<string | null> = signal<string | null>(null);
   private readonly _pageSize: WritableSignal<number> = signal<number>(10);
   private readonly _sortField: WritableSignal<SortBy> = signal<SortBy>(SortBy.TITLE);
   private readonly _sortOrder: WritableSignal<Order> = signal<Order>(Order.ASC);
-  private readonly _loading: WritableSignal<boolean> = signal<boolean>(true);
 
   private readonly _page: WritableSignal<number> = linkedSignal<unknown, number>({
     source: () => ({
-      search: this._search(),
+      search: this.debouncedSearchSignal(),
       category: this._selectedCategory(),
       pageSize: this._pageSize(),
       sortField: this._sortField(),
@@ -44,7 +54,8 @@ export class ProductService {
   readonly pageSize: Signal<number> = this._pageSize.asReadonly();
   readonly sortField: Signal<SortBy> = this._sortField.asReadonly();
   readonly sortOrder: Signal<Order> = this._sortOrder.asReadonly();
-  readonly loading: Signal<boolean> = this._loading.asReadonly();
+
+  readonly loading: Signal<boolean> = computed(() => this.productsResource.isLoading());
 
   readonly skip: Signal<number> = computed(() => (this.page() - 1) * this.pageSize());
 
@@ -84,16 +95,14 @@ export class ProductService {
   }));
 
   readonly request: Signal<IProductRequest> = computed<IProductRequest>(() => ({
-    search: this._search(),
+    search: this.hasSearch() ? this.debouncedSearchSignal() : '',
     category: this._selectedCategory(),
     params: this.queryParams()
   }));
 
-  private readonly requestObservable: Observable<IProductsResponse> = toObservable(this.request).pipe(
-    debounceTime(300),
-    switchMap(({ search, category, params }) => {
-      this._loading.set(true);
-
+  private readonly productsResource: ResourceRef<IProductsResponse> = rxResource({
+    params: () => this.request(),
+    stream: ({ params: { search, category, params } }) => {
       let request$: Observable<IProductsResponse>;
 
       if (search) {
@@ -106,19 +115,22 @@ export class ProductService {
       }
 
       return request$.pipe(
-        catchError(() => of(this.emptyResponse)),
-        finalize(() => this._loading.set(false))
+        catchError(() => of(this.emptyResponse))
       );
-    })
-  );
-
-  private readonly requestSignal: Signal<IProductsResponse> = toSignal(this.requestObservable, {
-    initialValue: this.emptyResponse
+    },
+    defaultValue: this.emptyResponse
   });
 
-  readonly products: Signal<IProduct[]> = computed(() => this.requestSignal().products);
+  readonly products: Signal<IProduct[]> = computed(() => this.productsResource.value().products);
 
-  readonly total: Signal<number> = computed(() => this.requestSignal().total);
+  readonly total: Signal<number> = linkedSignal<{ loading: boolean; total: number }, number>({
+    source: () => ({
+      loading: this.productsResource.isLoading(),
+      total: this.productsResource.value().total
+    }),
+    computation: ({ loading, total }, previous) => 
+      loading && previous ? previous.value : total
+  });
 
   readonly categories: Signal<string[]> = toSignal(this.productApi.getCategories(), {
     initialValue: []

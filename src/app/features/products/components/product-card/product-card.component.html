@@ -20,6 +20,7 @@
   <ng-template #footer>
     <p-button
       label="В корзину"
+      [id]="'product-card-add-to-cart-' + product().id"
       [disabled]="product().stock === 0"
       (onClick)="onAddToCart($event)"
     />

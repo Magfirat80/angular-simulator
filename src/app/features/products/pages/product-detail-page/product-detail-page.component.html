@@ -31,18 +31,25 @@
     <p>★ {{ product.rating }} · {{ product.availabilityStatus }} ({{ product.stock }} шт.)</p>
 
     <dl class="specs">
-      <dt>Артикул</dt><dd>{{ product.sku }}</dd>
+      <dt>Артикул</dt>
+      <dd>{{ product.sku }}</dd>
       <dt>Размеры</dt>
       <dd>{{ product.dimensions.width }} × {{ product.dimensions.height }} × {{ product.dimensions.depth }}</dd>
-      <dt>Вес</dt><dd>{{ product.weight }}</dd>
-      <dt>Гарантия</dt><dd>{{ product.warrantyInformation }}</dd>
-      <dt>Доставка</dt><dd>{{ product.shippingInformation }}</dd>
-      <dt>Возврат</dt><dd>{{ product.returnPolicy }}</dd>
-      <dt>Минимальный заказ</dt><dd>{{ product.minimumOrderQuantity }}</dd>
+      <dt>Вес</dt>
+      <dd>{{ product.weight }}</dd>
+      <dt>Гарантия</dt>
+      <dd>{{ product.warrantyInformation }}</dd>
+      <dt>Доставка</dt>
+      <dd>{{ product.shippingInformation }}</dd>
+      <dt>Возврат</dt>
+      <dd>{{ product.returnPolicy }}</dd>
+      <dt>Минимальный заказ</dt>
+      <dd>{{ product.minimumOrderQuantity }}</dd>
     </dl>
 
     <p-button
       label="В корзину"
+      id="product-detail-add-to-cart"
       [disabled]="product.stock === 0"
       (onClick)="onAddToCart()"
     />
