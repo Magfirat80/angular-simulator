@@ -3,8 +3,8 @@ import { SortBy } from '../enums/SortBy';
 import { Order } from '../enums/Order';
 import { ProductApiService } from './product-api.service';
 import { IProductQueryParams } from '../interfaces/IProductQueryParams';
-import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { debounceTime, Observable, catchError, of } from 'rxjs';
+import { rxResource, toSignal } from '@angular/core/rxjs-interop';
+import { Observable, catchError, of, timer, switchMap } from 'rxjs';
 import { IProductsResponse } from '../interfaces/IProductsResponse';
 import { IProduct } from '../interfaces/IProduct';
 import { IProductRequest } from '../interfaces/IProductRequest';
@@ -21,17 +21,6 @@ export class ProductService {
   };
 
   private readonly _search: WritableSignal<string> = signal<string>('');
-
-  private readonly debouncedSearchObservable: Observable<string> = toObservable(this._search).pipe(
-    debounceTime(300)
-  );
-
-  private readonly debouncedSearchSignal: Signal<string> = toSignal(this.debouncedSearchObservable, {
-    initialValue: ''
-  });
-
-  private readonly hasSearch: Signal<boolean> = computed(() => this._search() !== '');
-
   private readonly _selectedCategory: WritableSignal<string | null> = signal<string | null>(null);
   private readonly _pageSize: WritableSignal<number> = signal<number>(10);
   private readonly _sortField: WritableSignal<SortBy> = signal<SortBy>(SortBy.TITLE);
@@ -39,7 +28,7 @@ export class ProductService {
 
   private readonly _page: WritableSignal<number> = linkedSignal<unknown, number>({
     source: () => ({
-      search: this.debouncedSearchSignal(),
+      search: this._search(),
       category: this._selectedCategory(),
       pageSize: this._pageSize(),
       sortField: this._sortField(),
@@ -95,7 +84,7 @@ export class ProductService {
   }));
 
   readonly request: Signal<IProductRequest> = computed<IProductRequest>(() => ({
-    search: this.hasSearch() ? this.debouncedSearchSignal() : '',
+    search: this._search(),
     category: this._selectedCategory(),
     params: this.queryParams()
   }));
@@ -106,7 +95,9 @@ export class ProductService {
       let request$: Observable<IProductsResponse>;
 
       if (search) {
-        request$ = this.productApi.searchProducts(search, params);
+        request$ = timer(300).pipe(
+          switchMap(() => this.productApi.searchProducts(search, params))
+        );
       }
       else if (category) {
         request$ = this.productApi.getProductsByCategory(category, params);
@@ -128,7 +119,7 @@ export class ProductService {
       loading: this.productsResource.isLoading(),
       total: this.productsResource.value().total
     }),
-    computation: ({ loading, total }, previous) => 
+    computation: ({ loading, total }, previous) =>
       loading && previous ? previous.value : total
   });
 
