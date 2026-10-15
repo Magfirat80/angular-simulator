@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  padding: 50px 24px 130px;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+}
+
+.totals {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 16px;
+  max-width: 320px;
+  margin: 16px 0 0 auto;
+
+  dd { margin: 0; text-align: right; }
+  .grand { font-weight: 700; }
+}

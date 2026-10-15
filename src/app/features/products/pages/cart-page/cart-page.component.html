@@ -1,0 +1,71 @@
+<a routerLink="/products">← К товарам</a>
+<h1>Корзина</h1>
+
+@if (cartService.items().length === 0) {
+  <p>Корзина пуста</p>
+} @else {
+  <table class="cart-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Товар</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Сумма</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of cartService.items(); track item.id) {
+        <tr>
+          <td><img [src]="item.thumbnail" [alt]="item.title" width="48" height="48" /></td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.price | currency }}</td>
+          <td>
+            <p-button
+              label="−"
+              [id]="'cart-decrease-' + item.id"
+              severity="secondary"
+              size="small"
+              (onClick)="cartService.setQuantity(item.id, item.quantity - 1)"
+            />
+              {{ item.quantity }}
+            <p-button
+              label="+"
+              [id]="'cart-increase-' + item.id"
+              severity="secondary"
+              size="small"
+              (onClick)="cartService.setQuantity(item.id, item.quantity + 1)"
+            />
+          </td>
+          <td>{{ item.price * item.quantity | currency }}</td>
+          <td>
+            <p-button
+              label="Удалить"
+              [id]="'cart-remove-' + item.id"
+              severity="danger"
+              size="small"
+              (onClick)="cartService.remove(item.id)"
+            />
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <p-button
+    label="Очистить корзину"
+    id="'cart-clear'"
+    severity="danger"
+    (onClick)="cartService.clear()"
+  />
+
+  <dl class="totals">
+    <dt>Подытог</dt>
+    <dd>{{ cartService.subtotal() | currency }}</dd>
+    <dt>Налог</dt>
+    <dd>{{ cartService.tax() | currency }}</dd>
+    <dt class="grand">Итого</dt>
+    <dd class="grand">{{ cartService.total() | currency }}</dd>
+  </dl>
+}

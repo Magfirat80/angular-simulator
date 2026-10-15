@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  padding: 50px 24px 130px;
+}
+
+.detail {
+  display: flex;
+  gap: 32px;
+  margin-top: 16px;
+
+  img {
+    width: 320px;
+    height: 320px;
+    object-fit: contain;
+  }
+}
+
+.gallery {
+  .main-image {
+    width: 320px;
+    height: 320px;
+    object-fit: contain;
+  }
+
+  .thumbs {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+
+    img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 4px;
+
+      &.active {
+        border-color: #333;
+      }
+    }
+  }
+}
+
+.discount {
+  margin-left: 8px;
+  color: #c0392b;
+  font-size: 0.9em;
+}
+
+.specs {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 16px;
+
+  dd { margin: 0; }
+}

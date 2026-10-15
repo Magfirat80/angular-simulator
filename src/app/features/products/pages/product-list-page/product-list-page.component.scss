@@ -1,0 +1,19 @@
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+:host {
+  display: block;
+  padding-top: 50px; 
+  padding-bottom: 130px;
+  padding-left: 24px;
+  padding-right: 24px
+}
+
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

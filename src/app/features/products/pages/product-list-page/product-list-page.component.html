@@ -1,0 +1,43 @@
+<a routerLink="/cart">Корзина ({{ cartService.itemsCount() }})</a>
+<app-product-filters
+  [search]="productService.search()"
+  [category]="productService.selectedCategory()"
+  [sortField]="productService.sortField()"
+  [sortOrder]="productService.sortOrder()"
+  [categories]="productService.categories()"
+  (searchChange)="productService.setSearch($event)"
+  (categoryChange)="productService.setCategory($event)"
+  (sortFieldChange)="productService.setSortField($event)"
+  (sortOrderChange)="productService.setSortOrder($event)"
+/>
+
+<div class="products-grid">
+  @if (productService.loading()) {
+    @for (item of skeletonItems(); track item) {
+      <div class="skeleton-card">
+        <p-skeleton height="180px" />
+        <p-skeleton width="80%" height="1.2rem" />
+        <p-skeleton width="50%" height="1rem" />
+        <p-skeleton width="40%" height="1rem" />
+      </div>
+    }
+  } @else {
+    @for (product of productService.products(); track product.id) {
+      <app-product-card
+        [product]="product"
+        (addToCart)="onAddToCart($event)"
+        (open)="onOpen($event)"
+      />
+    }
+  }
+</div>
+
+<p-paginator
+  [first]="productService.skip()"
+  [rows]="productService.pageSize()"
+  [totalRecords]="productService.total()"
+  [rowsPerPageOptions]="[10, 20, 30]"
+  [showCurrentPageReport]="true"
+  [currentPageReportTemplate]="pageReportTemplate"
+  (onPageChange)="onPageChange($event)"
+/>

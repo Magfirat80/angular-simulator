@@ -1,0 +1,58 @@
+<a routerLink="/products">← Назад к списку</a>
+
+<article class="detail">
+  <div class="gallery">
+    <img class="main-image" [src]="selectedImage()" [alt]="product.title" />
+
+    <div class="thumbs">
+      @for (image of product.images; track image) {
+        <img
+          [src]="image"
+          [alt]="product.title"
+          [class.active]="image === selectedImage()"
+          (click)="selectImage(image)"
+        />
+      }
+    </div>
+  </div>
+
+  <div class="info">
+    <h1>{{ product.title }}</h1>
+    @if (product.brand) {
+      <p class="brand">{{ product.brand }}</p>
+    }
+    <p class="category">{{ product.category }}</p>
+    <p class="description">{{ product.description }}</p>
+
+    <p class="price">
+      {{ product.price | currency }}
+      <span class="discount">−{{ product.discountPercentage }}%</span>
+    </p>
+    <p>★ {{ product.rating }} · {{ product.availabilityStatus }} ({{ product.stock }} шт.)</p>
+
+    <dl class="specs">
+      <dt>Артикул</dt>
+      <dd>{{ product.sku }}</dd>
+      <dt>Размеры</dt>
+      <dd>{{ product.dimensions.width }} × {{ product.dimensions.height }} × {{ product.dimensions.depth }}</dd>
+      <dt>Вес</dt>
+      <dd>{{ product.weight }}</dd>
+      <dt>Гарантия</dt>
+      <dd>{{ product.warrantyInformation }}</dd>
+      <dt>Доставка</dt>
+      <dd>{{ product.shippingInformation }}</dd>
+      <dt>Возврат</dt>
+      <dd>{{ product.returnPolicy }}</dd>
+      <dt>Минимальный заказ</dt>
+      <dd>{{ product.minimumOrderQuantity }}</dd>
+    </dl>
+
+    <p-button
+      label="В корзину"
+      id="product-detail-add-to-cart"
+      [disabled]="product.stock === 0"
+      (onClick)="onAddToCart()"
+    />
+    <a routerLink="/cart">Перейти в корзину ({{ cartService.itemsCount() }})</a>
+  </div>
+</article>
