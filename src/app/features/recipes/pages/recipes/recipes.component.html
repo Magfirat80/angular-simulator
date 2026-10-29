@@ -1,0 +1,56 @@
+@let loading = loading$ | async;
+@let error = error$ | async;
+@let recipes = recipes$ | async;
+
+<div class="recipes-page">
+  <div class="recipes-header">
+    <h2>Recipes</h2>
+    <button
+      type="button"
+      (click)="reload()"
+      [disabled]="loading"
+    >
+      Reload recipes
+    </button>
+  </div>
+
+  @if (loading) {
+    <p class="loading">Loading recipes...</p>
+  }
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  @if (!(loading) && !(error) && (recipes)?.length === 0) {
+    <p class="empty-state">Рецептов пока нет.</p>
+  }
+
+  <div class="recipes-grid">
+    @for (recipe of recipes; track recipe.id) {
+      <article class="recipe-card">
+        <img
+          class="recipe-image"
+          [src]="recipe.image"
+          [alt]="recipe.name"
+        />
+
+        <div class="recipe-content">
+          <h3>{{ recipe.name }}</h3>
+
+          <div class="recipe-info">
+            <p>Кухня: {{ recipe.cuisine }}</p>
+            <p>
+              Время приготовления:
+              {{ recipe.prepTimeMinutes + recipe.cookTimeMinutes }} мин
+            </p>
+          </div>
+
+          <p class="recipe-rating">
+            ⭐ {{ recipe.rating }} / 5
+          </p>
+        </div>
+      </article>
+    }
+  </div>
+</div>

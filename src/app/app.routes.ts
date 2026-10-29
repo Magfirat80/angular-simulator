@@ -95,6 +95,14 @@ export const routes: Routes = [
     resolve: { post: postResolver },
   },
   {
+    path: 'recipes',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/recipes/pages/recipes/recipes.component').then(
+        (m) => m.RecipesComponent,
+      ),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./pages/not-found-page/not-found-page.component').then(
