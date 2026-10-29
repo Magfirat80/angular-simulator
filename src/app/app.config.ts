@@ -18,6 +18,10 @@ import { AuthService } from './features/auth/services/auth.service';
 import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 import { APP_CONFIG } from './core/tokens/app-config.token';
 import { IAppConfig } from './core/models/IAppConfig';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { recipesReducer } from './features/recipes/data-access/recipes.reducer';
+import { RecipesEffects } from './features/recipes/data-access/recipes.effects';
 
 function applyThemeFromStorage(): Preset {
 
@@ -53,6 +57,12 @@ export const appConfig: ApplicationConfig = {
       provide: APP_CONFIG,
       useValue: applicationConfig,
     },
+
+    provideStore({
+      recipes: recipesReducer,
+    }),
+
+    provideEffects([RecipesEffects]),
     
     provideRouter(routes),
     

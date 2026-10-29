@@ -1,0 +1,52 @@
+<div class="recipes-page">
+  <div class="recipes-header">
+    <h2>Recipes</h2>
+    <button
+      type="button"
+      (click)="reload()"
+      [disabled]="loading$ | async"
+    >
+      Reload recipes
+    </button>
+  </div>
+
+  @if (loading$ | async) {
+    <p class="loading">Loading recipes...</p>
+  }
+
+  @if (error$ | async; as error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  @if (!(loading$ | async) && !(error$ | async) && (recipes$ | async)?.length === 0) {
+    <p class="empty-state">Рецептов пока нет.</p>
+  }
+
+  <div class="recipes-grid">
+    @for (r of recipes$ | async; track r.id) {
+      <article class="recipe-card">
+        <img
+          class="recipe-image"
+          [src]="r.image"
+          [alt]="r.name"
+        />
+
+        <div class="recipe-content">
+          <h3>{{ r.name }}</h3>
+
+          <div class="recipe-info">
+            <p>Кухня: {{ r.cuisine }}</p>
+            <p>
+              Время приготовления:
+              {{ r.prepTimeMinutes + r.cookTimeMinutes }} мин
+            </p>
+          </div>
+
+          <p class="recipe-rating">
+            ⭐ {{ r.rating }} / 5
+          </p>
+        </div>
+      </article>
+    }
+  </div>
+</div>
