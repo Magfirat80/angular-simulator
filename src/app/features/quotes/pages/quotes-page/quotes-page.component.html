@@ -1,0 +1,75 @@
+<div class="quotes-page">
+  <h1>Цитаты</h1>
+
+  <div class="statistics">
+    <span>Избранное: {{ quotesStore.favoritesCount() }}</span>
+    <span>Авторы: {{ quotesStore.authorsCount() }}</span>
+  </div>
+
+  <section class="random-quote">
+    <h2>Случайная цитата</h2>
+
+    <button
+      (click)="quotesStore.showRandomQuote()"
+      [disabled]="!quotesStore.quotes().length"
+    >
+      Случайная цитата
+    </button>
+
+    @if (quotesStore.randomQuote(); as quote) {
+      <blockquote>
+        <p>"{{ quote.quote }}"</p>
+        <footer>— {{ quote.author }}</footer>
+      </blockquote>
+    }
+  </section>
+
+  <div class="filters">
+    <button
+      (click)="quotesStore.setFilter('all')"
+      [class.active]="quotesStore.filter() === 'all'"
+    >
+      Все
+    </button>
+
+    <button
+      (click)="quotesStore.setFilter('favorites')"
+      [class.active]="quotesStore.filter() === 'favorites'"
+    >
+      Избранное
+    </button>
+  </div>
+
+  @if (quotesStore.loading()) {
+    <p class="state">Loading quotes...</p>
+  } @else if (quotesStore.error()) {
+    <div class="state state--error">
+      <p>Failed to load quotes</p>
+
+      <button (click)="quotesStore.loadQuotes()">Retry</button>
+    </div>
+  } @else {
+    <div class="quotes-list">
+      @for (quote of quotesStore.filteredQuotes(); track quote.id) {
+        <article class="quote-card">
+          <p class="quote-text">"{{ quote.quote }}"</p>
+
+          <p class="author">— {{ quote.author }}</p>
+
+          <button
+            [class.is-favorite]="quotesStore.favorites().some(item => item.id === quote.id)"
+            (click)="quotesStore.toggleFavorite(quote)"
+          >
+            @if (quotesStore.favorites().some(item => item.id === quote.id)) {
+              ★ Удалить из избранного
+            } @else {
+              ☆ Добавить в избранное
+            }
+          </button>
+        </article>
+      } @empty {
+        <p class="state">Нет цитат для отображения</p>
+      }
+    </div>
+  }
+</div>
