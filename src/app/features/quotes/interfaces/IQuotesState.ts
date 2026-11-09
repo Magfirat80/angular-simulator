@@ -1,6 +1,9 @@
 import { IQuote } from './IQuote';
 
-export type QuotesFilter = 'all' | 'favorites';
+export enum QuotesFilter {
+  ALL = 'all',
+  FAVORITES = 'favorites'
+}
 
 export interface IQuotesState {
   quotes: IQuote[];

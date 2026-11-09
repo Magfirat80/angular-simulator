@@ -1,35 +1,35 @@
 import { signalStore, withState, withComputed, withMethods, patchState } from '@ngrx/signals';
 import { computed, inject } from '@angular/core';
 import { IQuote } from '../interfaces/IQuote';
-import { IQuotesState, type QuotesFilter } from '../interfaces/IQuotesState';
+import { IQuotesState, QuotesFilter } from '../interfaces/IQuotesState';
 import { withLoadingFeature } from './with-loading.feature';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap, catchError, EMPTY } from 'rxjs';
 import { QuotesApiService } from './quotes-api.service';
+import { IQuotesResponse } from '../interfaces/IQuotesResponse';
 
 const initialState: IQuotesState = {
   quotes: [],
   favorites: [],
-  filter: 'all',
+  filter: QuotesFilter.ALL,
   randomQuote: null
 };
 
 export const QuotesStore = signalStore(
-  { providedIn: 'root' },
 
   withLoadingFeature(),
 
   withState(initialState),
 
   withComputed(({ quotes, favorites, filter }) => ({
-    favoritesCount: computed(() => favorites().length),
+    favoritesCount: computed<number>(() => favorites().length),
 
-    authorsCount: computed(() =>
+    authorsCount: computed<number>(() =>
       new Set(quotes().map(quote => quote.author)).size
     ),
 
-    filteredQuotes: computed(() => {
-      if (filter() === 'favorites') {
+    filteredQuotes: computed<IQuote[]>(() => {
+      if (filter() === QuotesFilter.FAVORITES) {
         return favorites();
       }
 
@@ -42,13 +42,13 @@ export const QuotesStore = signalStore(
 
     return {
       toggleFavorite(quote: IQuote): void {
-        const exists: boolean = store.favorites().some(
-          item => item.id === quote.id
+        const isFavorite: boolean = store.favorites().some(
+          (item: IQuote) => item.id === quote.id
         );
 
         patchState(store, {
-          favorites: exists
-            ? store.favorites().filter(item => item.id !== quote.id)
+          favorites: isFavorite
+            ? store.favorites().filter((item: IQuote) => item.id !== quote.id)
             : [...store.favorites(), quote]
         });
       },
@@ -81,7 +81,7 @@ export const QuotesStore = signalStore(
 
           switchMap(() =>
             quotesApi.getQuotes().pipe(
-              tap((response) => {
+              tap((response: IQuotesResponse) => {
                 patchState(store, {
                   quotes: response.quotes
                 });

@@ -6,6 +6,7 @@ import { QuotesStore } from '../../data-access/quotes.store';
   imports: [],
   templateUrl: './quotes-page.component.html',
   styleUrl: './quotes-page.component.scss',
+  providers: [QuotesStore]
 })
 export class QuotesPageComponent implements OnInit {
 
