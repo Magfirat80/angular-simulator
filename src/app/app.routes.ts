@@ -103,6 +103,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'quotes',
+    loadComponent: () =>
+      import('./features/quotes/pages/quotes-page/quotes-page.component').then(
+        (m) => m.QuotesPageComponent
+      )
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./pages/not-found-page/not-found-page.component').then(
